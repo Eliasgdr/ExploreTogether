@@ -1,3 +1,5 @@
+
+
 //Initialize the map
 let root = am5.Root.new("chartdiv");
 
@@ -7,14 +9,13 @@ let chart = root.container.children.push(
         projection: am5map.geoNaturalEarth1(),
         panX: "none",
         panY: "none",
-        wheelY: "none"
+        wheelY: "zoom"
     })
 );
 
 root.setThemes([
-  am5themes_Animated.new(root),
+    am5themes_Animated.new(root),
 ]);
-
 
 
 let polygonSeries = chart.series.push(
@@ -26,30 +27,36 @@ let polygonSeries = chart.series.push(
 
 
 polygonSeries.mapPolygons.template.setAll({
-  tooltipText: "{name}",
-  templateField: "polygonSettings",
-  interactive: true
+    tooltipText: "{name}",
+    templateField: "polygonSettings",
+    interactive: true
 });
 
 polygonSeries.set("fill", am5.color(0x262626));
 polygonSeries.set("stroke", am5.color(0xffffff));
 
 
+polygonSeries.mapPolygons.template.states.create("hover", { fillOpacity: 0.6 });
 
-polygonSeries.mapPolygons.template.states.create("hover", {
-  fill: am5.color(0x4d4d4d),
+let countriesList = [
+    "US",
+    "FR",
+    "AL",
+    "ZA",
+]
+
+polygonSeries.mapPolygons.template.events.on("click", function(ev) {
+  polygonSeries.zoomToDataItem(ev.target.dataItem);
 });
 
-polygonSeries.mapPolygons.template.events.on("")
-
-
-
-polygonSeries.data.setAll([{
-  id: "FR",
-  polygonSettings: {
-    fill: am5.color(0x0000FF),
-  }
-}]);
+for (let i = 0; i < countriesList.length; i++) {
+    polygonSeries.data.push({
+        id: countriesList[i],
+        polygonSettings: {
+            fill: am5.color(0x0000FF),
+        }
+    });
+}
 
 
 
