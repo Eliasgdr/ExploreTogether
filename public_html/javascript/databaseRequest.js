@@ -104,12 +104,12 @@ function addFriend(friendID, successCallback, errorCallback) {
         data: { friendID: friendID },
         dataType: "json",
         success: function(response) {
-            /* 
-            Format of response :
+                /* 
+                Format of response :
                 
-            $response['success'] = true/false; (true = User connected)
-            $response['message'] = "Incorrect password"; (Hold the message explaining why the user couldn' connect)
-            */
+                $response['success'] = true/false;
+                $response['message'] = "Details about what happens"
+                */
             if (successCallback && typeof successCallback === 'function') {
                 successCallback(response);
             }
@@ -129,12 +129,12 @@ function postMessage(message, threadID, successCallback, errorCallback) {
         data: {message: message, threadID: threadID},
         dataType: 'json',
         success: function(response) {
-            /* 
-            Format of response :
+                /* 
+                Format of response :
                 
-            $response['success'] = true/false; (true = User connected)
-            $response['message'] = "Incorrect password"; (Hold the message explaining why the user couldn' connect)
-            */
+                $response['success'] = true/false;
+                $response['message'] = "Details about what happens"
+                */
             if (successCallback && typeof successCallback === 'function') {
                 successCallback(response);
             }
@@ -156,12 +156,12 @@ function getMessages(threadID, successCallback, errorCallback) {
             thread_id: threadID
         },
         success: function(response) {
-            /* 
-            Format of response :
+                /* 
+                Format of response :
                 
-            $response['success'] = true/false; (true = User connected)
-            $response['message'] = "Incorrect password"; (Hold the message explaining why the user couldn' connect)
-            */
+                $response['success'] = true/false;
+                $response['message'] = "Details about what happens"
+                */
             if (successCallback && typeof successCallback === 'function') {
                 successCallback(response);
             }
@@ -183,12 +183,12 @@ function quitThread(threadID, successCallback, errorCallback) {
             threadID: threadID
         },
         success: function(response) {
-            /* 
-            Format of response :
-                        
-            $response['success'] = true/false; (true = User connected)
-            $response['message'] = "Incorrect password"; (Hold the message explaining why the user couldn' connect)
-            */
+                /* 
+                Format of response :
+                
+                $response['success'] = true/false;
+                $response['message'] = "Details about what happens"
+                */
             if (successCallback && typeof successCallback === 'function') {
                 successCallback(response);
             }
@@ -201,28 +201,31 @@ function quitThread(threadID, successCallback, errorCallback) {
     });
 }
 
-
-/*
-Under this the fonctions are not ready for production
-*/
-
-//Request the server all the Threads that the User follow. The result will be show in the container with the containerID ID
-
-
-function getThreads(containerID) {
+function getThreads(successCallback, errorCallback) {
     $.ajax({
         url: 'PHP/getThreads.php', // Path to your disconnect PHP script
         type: 'POST', // Use POST method
         dataType: 'json',
         success: function(response) {
-            // Handle success response
-            console.log(response);
-            $(containerID).html(response.html);
+                /* 
+                Format of response :
+                
+                $response['success'],       true/false;
+                $response['message'],       "Details about what happens"
+                $response['threadInfo'] = {
+                    'threadID',             "int"
+                    'lastMessage',          "Text"
+                    'lastMessageDate'       "timestamp"
+                }
+                */
+            if (successCallback && typeof successCallback === 'function') {
+                successCallback(response);
+            }
         },
         error: function(xhr, status, error) {
-            // Handle error response
-            console.error('Error:', error);
-            alert('Failed to disconnect. Please try again.');
+            if (errorCallback && typeof errorCallback === 'function') {
+                errorCallback(xhr, status, error);
+            }
         }
     });
 }

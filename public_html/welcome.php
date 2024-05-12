@@ -128,7 +128,7 @@
         <script>
         function createThreadCallBackSuccess(response){
             if (response.success) {
-                getThreads('#threadContainer');
+                getThreads(getThreadSuccessCallback, getThreadErrorCallback);
                 
             } else {
                 // Handle failure case (e.g., display error message)
@@ -252,9 +252,66 @@
             console.error('Error:', error);
             alert('Failed to disconnect. Please try again.');
         }
+
+
+        function renderThreadInfo(threadInfo, containerID) {
+            // Create a container for the thread information
+            console.log(threadInfo);
+            const container = $(containerID);
+
+            container.empty();
+
+            if (!container.length) {
+                console.error('Container element not found.');
+                return;
+            }
+
+            // Loop through each thread in the threadInfo array
+            threadInfo.forEach(thread => {
+                // Create a div element to hold the thread information
+                const threadDiv = document.createElement('div');
+                threadDiv.classList.add('thread');
+
+                // Set the thread ID as a data attribute
+                $(threadDiv).data('thread-id', thread.threadID);
+
+                // Create a paragraph element for the last message
+                const lastMessagePara = document.createElement('p');
+                lastMessagePara.textContent = `Last Message: ${thread.lastMessage}`;
+
+                // Create a paragraph element for the last message date
+                const lastMessageDatePara = document.createElement('p');
+                lastMessageDatePara.textContent = `Last Message Date: ${thread.lastMessageDate}`;
+
+                // Append the message and date paragraphs to the thread div
+                threadDiv.appendChild(lastMessagePara);
+                threadDiv.appendChild(lastMessageDatePara);
+
+                // Attach onclick event to redirect to chat.php with thread ID
+                $(threadDiv).click(function() {
+                    const threadID = $(this).data('thread-id');
+                    window.location.href = `chat.php?thread_id=${threadID}`;
+                });
+
+                // Append the thread div to the container
+                container.append(threadDiv); // Use jQuery's append method instead of native appendChild
+            });
+        }
+
+        // Call the renderThreadInfo function with the threadInfo array
+
+        function getThreadSuccessCallback(response) {
+            // Assuming response is the thread information array
+            renderThreadInfo(response['threadInfo'], "#threadContainer");
+        }
+
+        function getThreadErrorCallback(xhr, status, error) {
+            console.error('Error:', error);
+            alert('Failed to get thread information. Please try again.');
+        }
+
         $(document).ready(function() {
-            
-            getThreads('#threadContainer');
+            getThreads(getThreadSuccessCallback, getThreadErrorCallback);
 
             $('#disconnectBtn').click(function() {
                 disconnect(disconnectSuccessCallback, disconnectErrorCallback);
