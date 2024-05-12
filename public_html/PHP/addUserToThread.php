@@ -7,7 +7,7 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
-    header("Location: login.php"); // Redirect to login page if not logged in
+    echo json_encode(array('success' => false, 'message' => "User not logged in"));
     exit;
 }
 
@@ -38,18 +38,19 @@ if (isset($_POST['threadID']) && is_numeric($_POST['threadID']) && isset($_POST[
             $stmt->bindParam(':threadID', $threadID, PDO::PARAM_INT);
             $stmt->bindParam(':memberID', $memberID, PDO::PARAM_INT);
             $stmt->execute();
-            echo "User added to thread successfully.";
+            echo json_encode(array('success' => true, 'message' => "User added to thread successfully."));
         } else {
-            echo "User is already a member of the thread.";
+            echo json_encode(array('success' => false, 'message' => "User is already a member of the thread."));
         }
     } catch (PDOException $e) {
         // Log the error for debugging purposes
         error_log("Error adding user to thread: " . $e->getMessage());
         // Display a generic error message to the user
-        echo "An error occurred while processing your request. Please try again later.";
+        echo json_encode(array('success' => false, 'message' => "An error occurred while processing your request. Please try again later."));
     }
 } else {
-    // Invalid or missing thread ID or user ID, exit gracefully
+    // Invalid or missing thread ID or user ID
+    echo json_encode(array('success' => false, 'message' => "Invalid or missing thread ID or user ID."));
     exit;
 }
 ?>

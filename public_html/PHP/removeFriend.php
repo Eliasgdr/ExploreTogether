@@ -1,9 +1,6 @@
 <?php
-// Database connection parameters
-$servername = "localhost";
-$username = "id22104896_jsp";
-$password = "Test@123";
-$dbname = "id22104896_jsp";
+
+include 'databaseConnection.php';
 
 // Start the session
 session_start();
@@ -11,6 +8,14 @@ session_start();
 // Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
     header("Location: ../login.php"); // Redirect to login page if not logged in
+    exit;
+}
+
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['userID'])) {
+    echo json_encode(array('success' => false, 'message' => "User not logged in"));
     exit;
 }
 
@@ -34,18 +39,19 @@ if (isset($_POST['friendID']) && is_numeric($_POST['friendID'])) {
 
         // Check if any friendship was removed
         if ($stmt->rowCount() > 0) {
-            echo "Friend removed successfully.";
+            echo json_encode(array('success' => true, 'message' => "Friend removed successfully."));
         } else {
-            echo "Friendship does not exist.";
+            echo json_encode(array('success' => false, 'message' => "Friendship does not exist."));
         }
     } catch (PDOException $e) {
         // Log the error for debugging purposes
         error_log("Error removing friend: " . $e->getMessage());
         // Display a generic error message to the user
-        echo "An error occurred while processing your request. Please try again later.";
+        echo json_encode(array('success' => false, 'message' => "An error occurred while processing your request. Please try again later."));
     }
 } else {
     // Invalid or missing friend ID, exit gracefully
+    echo json_encode(array('success' => false, 'message' => "Invalid or missing friend ID."));
     exit;
 }
 ?>

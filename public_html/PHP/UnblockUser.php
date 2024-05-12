@@ -1,19 +1,15 @@
 <?php
-// Database connection parameters
-$servername = "localhost";
-$username = "id22104896_jsp";
-$password = "Test@123";
-$dbname = "id22104896_jsp";
 
-// Start the session
+// Database connection parameters
+include 'databaseConnection.php';
+
 session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
-    header("Location: ../login.php"); // Redirect to login page if not logged in
+    echo json_encode(array('success' => false, 'message' => "User not logged in"));
     exit;
 }
-
 
 try {
     // Create connection
@@ -34,18 +30,18 @@ try {
         $stmt = $pdo->prepare($sql);
 
         // Bind parameters
-        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':userID', $user_id, PDO::PARAM_INT);
         $stmt->bindParam(':userIDToUnblock', $userIDToUnblock, PDO::PARAM_INT);
 
         // Execute statement
         $stmt->execute();
 
-        echo "User unblocked successfully";
+        echo json_encode(array('success' => true, 'message' => "User unblocked successfully"));
     } else {
-        echo "User ID not provided";
+        echo json_encode(array('success' => false, 'message' => "User ID not provided"));
     }
 } catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    echo json_encode(array('success' => false, 'message' => "Error: " . $e->getMessage()));
 }
 
 // Close connection (not necessary for PDO, but good practice)

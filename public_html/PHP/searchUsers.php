@@ -3,12 +3,21 @@ include 'databaseConnection.php';
 
 session_start(); // Start session to use $_SESSION variable
 
+header('Content-Type: application/json');
+
+$response = array(); // Initialize an empty array for the response
+
 if (!isset($_SESSION['userID'])) {
-    header("Location: login.php"); // Redirect to login page if not logged in
+    // Redirect to login page if not logged in
+    $response = array('success' => false, 'message' => "User not logged in");
+    echo json_encode($response);
     exit;
 }
 
 if (!isset($_GET['query'])) {
+    // Exit if the query parameter is not provided
+    $response = array('success' => false, 'message' => "Query parameter is required.");
+    echo json_encode($response);
     exit;
 }
 
@@ -34,6 +43,7 @@ try {
     echo json_encode($users);
 } catch(PDOException $e) {
     // Handle database connection errors
-    error_log('Database error: ' . $e->getMessage());
+    $response = array('success' => false, 'message' => "Database error: " . $e->getMessage());
+    echo json_encode($response);
 }
 ?>
