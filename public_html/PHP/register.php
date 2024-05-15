@@ -11,9 +11,8 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
     // Return JSON response on connection failure
-    $response['success'] = false;
-    $response['message'] = "Connection failed: " . $e->getMessage();
-    echo json_encode($response);
+    http_response_code(500);
+    echo json_encode(array('success' => false, 'status_text' => "Connection failed: " . $e->getMessage(), 'status_code' => 500));
     exit;
 }
 
@@ -35,8 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($existingUser) {
             // Return JSON response for username already in use
-            $response = array("success" => false, "message" => "Username already in use.");
-            echo json_encode($response);
+            http_response_code(400);
+            echo json_encode(array('success' => false, 'status_text' => "Username already in use.", 'status_code' => 400));
             exit;
         }
 
@@ -54,19 +53,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
 
             // Return JSON response for successful registration
-            $response = array("success" => true, "message" => "User registered successfully.");
-            echo json_encode($response);
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'message' => "User registered successfully."));
             exit;
         } catch(PDOException $e) {
             // Return JSON response on database error
-            $response = array("success" => false, "message" => "Error: " . $e->getMessage());
-            echo json_encode($response);
+            http_response_code(500);
+            echo json_encode(array('success' => false, 'status_text' => "Error: " . $e->getMessage(), 'status_code' => 500));
             exit;
         }
     } else {
         // Return JSON response for missing fields
-        $response = array("success" => false, "message" => "All fields are required.");
-        echo json_encode($response);
+        http_response_code(400);
+        echo json_encode(array('success' => false, 'status_text' => "All fields are required.", 'status_code' => 400));
         exit;
     }
 }

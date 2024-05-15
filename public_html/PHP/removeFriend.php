@@ -2,20 +2,12 @@
 
 include 'databaseConnection.php';
 
-// Start the session
 session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
-    header("Location: ../login.php"); // Redirect to login page if not logged in
-    exit;
-}
-
-session_start();
-
-// Check if the user is logged in
-if (!isset($_SESSION['userID'])) {
-    echo json_encode(array('success' => false, 'message' => "User not logged in"));
+    http_response_code(401); // Unauthorized status code
+    echo json_encode(array('success' => false, 'status_text' => "User not logged in", 'status_code' => 401));
     exit;
 }
 
@@ -39,19 +31,21 @@ if (isset($_POST['friendID']) && is_numeric($_POST['friendID'])) {
 
         // Check if any friendship was removed
         if ($stmt->rowCount() > 0) {
-            echo json_encode(array('success' => true, 'message' => "Friend removed successfully."));
+            echo json_encode(array('success' => true, 'status_text' => "Friend removed successfully", 'status_code' => 200));
         } else {
-            echo json_encode(array('success' => false, 'message' => "Friendship does not exist."));
+            echo json_encode(array('success' => false, 'status_text' => "Friendship does not exist", 'status_code' => 404));
         }
     } catch (PDOException $e) {
         // Log the error for debugging purposes
         error_log("Error removing friend: " . $e->getMessage());
         // Display a generic error message to the user
-        echo json_encode(array('success' => false, 'message' => "An error occurred while processing your request. Please try again later."));
+        http_response_code(500); // Internal server error status code
+        echo json_encode(array('success' => false, 'status_text' => "Error: " . $e->getMessage(), 'status_code' => 500));
     }
 } else {
     // Invalid or missing friend ID, exit gracefully
-    echo json_encode(array('success' => false, 'message' => "Invalid or missing friend ID."));
+    http_response_code(400); // Bad request status code
+    echo json_encode(array('success' => false, 'status_text' => "Invalid or missing friend ID", 'status_code' => 400));
     exit;
 }
 ?>

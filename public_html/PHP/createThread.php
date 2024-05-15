@@ -5,13 +5,17 @@ include 'databaseConnection.php';
 // Start the session
 session_start();
 
-header('Content-Type: json');
+// Set content type to JSON
+header('Content-Type: application/json');
+
 $response = array(); // Initialize an empty array for the response
 
 // Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
-    // Redirect to login page if not logged in
-    $response = array('success' => false, 'message' => "User not logged in");
+    // Unauthorized status code
+    http_response_code(401);
+    // Response message
+    $response = array('success' => false, 'status_text' => "User not logged in");
     echo json_encode($response);
     exit;
 }
@@ -25,7 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate input (add your own validation rules as needed)
     if (empty($title) || empty($description)) {
-        $response = array('success' => false, 'message' => "Title and description are required.");
+        // Bad Request status code
+        http_response_code(400);
+        // Response message
+        $response = array('success' => false, 'status_text' => "Title and description are required.");
         echo json_encode($response);
         exit;
     } else {
@@ -45,8 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Update the users table to add the new thread ID to the chats field
             
             $stmt = $conn->prepare("INSERT INTO threadSubscriptions (userID, threadID) VALUES (:userID, :threadID)");
-            //Old version
-            //$stmt = $conn->prepare("UPDATE users SET threads = CONCAT(threads, ',', :threadID) WHERE ID = :userID");
             $stmt->bindParam(':threadID', $threadID);
             $stmt->bindParam(':userID', $userID);
             $stmt->execute();
@@ -67,20 +72,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':chatID', $threadID);
             $stmt->execute();
             
-            // Add success message to the response
-            $response = array('success' => true, 'message' => "Thread created successfully.");
+            // Success response
+            http_response_code(200); 
+            $response = array('success' => true, 'status_text' => "Thread created successfully.");
             echo json_encode($response);
             exit;
         } catch (PDOException $e) {
-            // Handle database connection errors
-            $response = array('success' => false, 'message' => "Error: " . $e->getMessage());
+            // Database error response
+            http_response_code(500); // Internal Server Error
+            $response = array('success' => false, 'status_text' => "Error: " . $e->getMessage());
             echo json_encode($response);
             exit;
         }
     }
 } else {
-    // Redirect to the welcome page if the form is not submitted
-    $response = array('success' => false, 'message' => "Error: Invalid request method");
+    // Invalid request method response
+    http_response_code(400); // Bad Request
+    $response = array('success' => false, 'status_text' => "Invalid request method");
     echo json_encode($response);
     exit;
 }

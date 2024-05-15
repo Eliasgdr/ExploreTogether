@@ -7,7 +7,8 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
-    echo json_encode(array('success' => false, 'message' => "User not logged in"));
+    http_response_code(401); // Unauthorized
+    echo json_encode(array('success' => false, 'status_text' => "User not logged in", 'status_code' => 401));
     exit;
 }
 
@@ -38,19 +39,23 @@ if (isset($_POST['threadID']) && is_numeric($_POST['threadID']) && isset($_POST[
             $stmt->bindParam(':threadID', $threadID, PDO::PARAM_INT);
             $stmt->bindParam(':memberID', $memberID, PDO::PARAM_INT);
             $stmt->execute();
-            echo json_encode(array('success' => true, 'message' => "User added to thread successfully."));
+            http_response_code(200); // OK
+            echo json_encode(array('success' => true, 'status_text' => "User added to thread successfully.", 'status_code' => 200));
         } else {
-            echo json_encode(array('success' => false, 'message' => "User is already a member of the thread."));
+            http_response_code(400); // Bad Request
+            echo json_encode(array('success' => false, 'status_text' => "User is already a member of the thread.", 'status_code' => 400));
         }
     } catch (PDOException $e) {
         // Log the error for debugging purposes
         error_log("Error adding user to thread: " . $e->getMessage());
         // Display a generic error message to the user
-        echo json_encode(array('success' => false, 'message' => "An error occurred while processing your request. Please try again later."));
+        http_response_code(500); // Internal Server Error
+        echo json_encode(array('success' => false, 'status_text' => "An error occurred while processing your request. Please try again later.", 'status_code' => 500));
     }
 } else {
     // Invalid or missing thread ID or user ID
-    echo json_encode(array('success' => false, 'message' => "Invalid or missing thread ID or user ID."));
+    http_response_code(400); // Bad Request
+    echo json_encode(array('success' => false, 'status_text' => "Invalid or missing thread ID or user ID.", 'status_code' => 400));
     exit;
 }
 ?>

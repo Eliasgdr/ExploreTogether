@@ -96,13 +96,65 @@ function postMessage(message, threadID, successCallback, errorCallback) {
     });
 }
 
-function getMessages(threadID, successCallback, errorCallback) {
+function deleteMessage(messageID, successCallback, errorCallback) {
+    $.ajax({
+        url: 'PHP/deleteMessage.php',
+        type: 'POST',
+        data: {messageID: messageID},
+        dataType: 'json',
+        success: function(response) {
+            /* 
+            Format of response :
+            
+            $response['success'] = true/false;
+            $response['message'] = "Details about what happens"
+            */
+            if (successCallback && typeof successCallback === 'function') {
+                successCallback(response);
+            }
+        },
+        error: function(xhr, status, error) {
+            if (errorCallback && typeof errorCallback === 'function') {
+                errorCallback(xhr, status, error);
+            }
+        }
+    });
+}
+
+function editMessage(messageID, newMessage, successCallback, errorCallback) {
+    $.ajax({
+        url: 'PHP/editMessage.php',
+        type: 'POST',
+        data: {messageID: messageID, newMessage: newMessage},
+        dataType: 'json',
+        success: function(response) {
+            /* 
+            Format of response :
+            
+            $response['success'] = true/false;
+            $response['message'] = "Details about what happens"
+            */
+            if (successCallback && typeof successCallback === 'function') {
+                successCallback(response);
+            }
+        },
+        error: function(xhr, status, error) {
+            if (errorCallback && typeof errorCallback === 'function') {
+                errorCallback(xhr, status, error);
+            }
+        }
+    });
+}
+
+function getMessages(threadID, successCallback, errorCallback, limit=10, offset=0) {
     $.ajax({
         url: 'PHP/getMessages.php',
         type: 'POST',
         dataType: 'json',
         data: {
-            thread_id: threadID
+            thread_id: threadID,
+            limit: limit,
+            offset: offset
         },
         success: function(response) {
                 /* 
@@ -207,7 +259,7 @@ function getThreads(successCallback, errorCallback) {
 
 function addUserToThread(threadID, userID, successCallback, errorCallback) {
     $.ajax({
-        url: 'addUserToThread.php', // Path to your PHP script for adding user to thread
+        url: 'PHP/addUserToThread.php', // Path to your PHP script for adding user to thread
         type: 'POST', // Using POST method
         dataType: 'json',
         data: { threadID: threadID, userID: userID }, // Pass threadID and userID as parameters
@@ -226,7 +278,7 @@ function addUserToThread(threadID, userID, successCallback, errorCallback) {
 
 function searchUsers(query, successCallback, errorCallback) {
     $.ajax({
-        url: 'searchUsers.php', // Path to your PHP script for searching users
+        url: 'PHP/searchUsers.php', // Path to your PHP script for searching users
         type: 'GET', // Using GET method to pass the search query as a parameter
         dataType: 'json',
         data: { query: query }, // Pass the search query as a parameter
@@ -284,7 +336,7 @@ function addFriend(friendID, successCallback, errorCallback) {
 
 function removeFriend(friendID, successCallback, errorCallback) {
     $.ajax({
-        url: 'removeFriend.php', // Path to your PHP script for removing friend
+        url: 'PHP/removeFriend.php', // Path to your PHP script for removing friend
         type: 'POST', // Using POST method
         dataType: 'json',
         data: { friendID: friendID }, // Pass friendID as parameter
@@ -304,7 +356,7 @@ function removeFriend(friendID, successCallback, errorCallback) {
 
 function blockUser(userIDToBlock, successCallback, errorCallback) {
     $.ajax({
-        url: 'blockUser.php', // Path to your PHP script for blocking user
+        url: 'PHP/blockUser.php', // Path to your PHP script for blocking user
         type: 'POST', // Using POST method
         dataType: 'json',
         data: { userIDToBlock: userIDToBlock }, // Pass userIDToBlock as parameter
@@ -323,7 +375,7 @@ function blockUser(userIDToBlock, successCallback, errorCallback) {
 
 function unblockUser(userIDToUnblock, successCallback, errorCallback) {
     $.ajax({
-        url: 'unblockUser.php', // Path to your PHP script for unblocking user
+        url: 'PHP/unblockUser.php', // Path to your PHP script for unblocking user
         type: 'POST', // Using POST method
         dataType: 'json',
         data: { userIDToUnblock: userIDToUnblock }, // Pass userIDToUnblock as parameter

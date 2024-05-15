@@ -1,6 +1,12 @@
 <?php
     session_start();
     print_r($_SESSION);
+
+    // Check if the user is logged in
+    if (!isset($_SESSION['userID'])) {
+        header("Location: login.php"); // Redirect to login page if not logged in
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -307,6 +313,7 @@
 
         function getThreadErrorCallback(xhr, status, error) {
             console.error('Error:', error);
+            console.error('Error:', xhr);
             alert('Failed to get thread information. Please try again.');
         }
 

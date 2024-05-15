@@ -5,13 +5,11 @@ include 'databaseConnection.php';
 // Start the session
 session_start();
 
-$response = array();
-
 // Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
     // Redirect to login page if not logged in
-    $response = array('success' => false, 'message' => "User not logged in");
-    echo json_encode($response);
+    http_response_code(401); // Unauthorized
+    echo json_encode(array('success' => false, 'status_text' => "User not logged in", 'status_code' => 401));
     exit;
 }
 
@@ -42,23 +40,26 @@ if (isset($_POST['friendID']) && is_numeric($_POST['friendID'])) {
             $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
             $stmt->bindParam(':friendID', $friendID, PDO::PARAM_INT);
             $stmt->execute();
-            $response = array("success" => true, "message" => "Friend added successfully.");
+            http_response_code(200); // OK
+            echo json_encode(array("success" => true, "status_text" => "Friend added successfully.", 'status_code' => 200));
+            exit;
         } else {
-            $response = array("success" => false, "message" => "Friendship already exists.");
+            http_response_code(400); // Bad Request
+            echo json_encode(array("success" => false, "status_text" => "Friendship already exists.", 'status_code' => 400));
+            exit;
         }
     } catch (PDOException $e) {
         // Log the error for debugging purposes
         error_log("Error adding friend: " . $e->getMessage());
         // Return a generic error message
-        $response = array("success" => false, "message" => "An error occurred while processing your request. Please try again later.");
+        http_response_code(500); // Internal Server Error
+        echo json_encode(array("success" => false, "status_text" => "An error occurred while processing your request. Please try again later.", 'status_code' => 500));
+        exit;
     }
-
-    echo json_encode($response);
-    exit;
 } else {
     // Invalid or missing friend ID, exit gracefully
-    $response = array('success' => false, 'message' => "Invalid or missing friend ID");
-    echo json_encode($response);
+    http_response_code(400); // Bad Request
+    echo json_encode(array('success' => false, 'status_text' => "Invalid or missing friend ID", 'status_code' => 400));
     exit;
 }
 ?>

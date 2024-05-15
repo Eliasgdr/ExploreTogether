@@ -10,7 +10,8 @@ if (!isset($_SESSION['userID'])) {
     // Set error response
     $response['success'] = false;
     $response['message'] = "User not logged in";
-    // Return JSON response
+    // Return JSON response with 401 status code (Unauthorized)
+    http_response_code(401);
     echo json_encode($response);
     exit;
 }
@@ -28,7 +29,7 @@ try {
     $stmt = $conn->prepare("SELECT * FROM threads WHERE threadID IN (SELECT threadID FROM threadSubscriptions WHERE userID = :user_id)");
     $stmt->bindParam(':user_id', $_SESSION['userID']); 
     $stmt->execute();
-    $threads = $stmt->fetchAll();
+    $threads = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Initialize array to store thread information
     $threadInfo = array();
@@ -38,17 +39,28 @@ try {
         $stmt2 = $conn->prepare("SELECT * FROM message WHERE messageID = :lastMessageID");
         $stmt2->bindParam(':lastMessageID',  $lastMessageID); 
         $stmt2->execute();
-        $message = $stmt2->fetch();
+        $message = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-        // Store thread information in an array
-        $threadData = array(
-            'threadID' => $thread['threadID'],
-            'lastMessage' => $message['body'],
-            'lastMessageDate' => $message['Date']
-            // Add other information about the thread if needed
-        );
-        // Push thread data into the thread info array
-        $threadInfo[] = $threadData;
+        // Check if message exists
+        if ($message) {
+            // Store thread information in an array
+            $threadData = array(
+                'threadID' => $thread['threadID'],
+                'lastMessage' => $message['body'],
+                'lastMessageDate' => $message['Date']
+                // Add other information about the thread if needed
+            );
+            // Push thread data into the thread info array
+            $threadInfo[] = $threadData;
+        } else {
+            // Handle case where last message does not exist
+            $threadData = array(
+                'threadID' => $thread['threadID'],
+                'lastMessage' => null,
+                'lastMessageDate' => null
+            );
+            $threadInfo[] = $threadData;
+        }
     }
 
     // Set success response
@@ -58,15 +70,18 @@ try {
     // Set success message
     $response['message'] = "Thread information retrieved successfully.";
 
+    // Return JSON response with 200 status code (OK)
+    http_response_code(200);
+    echo json_encode($response);
+    exit;
+
 } catch(PDOException $e) {
     // Set error response
     $response['success'] = false;
     $response['message'] = "Error: " . $e->getMessage();
+    // Return JSON response with 500 status code (Internal Server Error)
+    http_response_code(500);
+    echo json_encode($response);
+    exit;
 }
-
-// Return JSON response
-echo json_encode($response);
-
-// Close database connection
-$conn = null;
 ?>

@@ -7,7 +7,8 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
-    echo json_encode(array('success' => false, 'message' => "User not logged in"));
+    http_response_code(401);
+    echo json_encode(array('success' => false, 'status_text' => "User not logged in", 'status_code' => 401));
     exit;
 }
 
@@ -38,10 +39,12 @@ try {
 
         echo json_encode(array('success' => true, 'message' => "User unblocked successfully"));
     } else {
-        echo json_encode(array('success' => false, 'message' => "User ID not provided"));
+        http_response_code(400);
+        echo json_encode(array('success' => false, 'status_text' => "User ID not provided", 'status_code' => 400));
     }
 } catch(PDOException $e) {
-    echo json_encode(array('success' => false, 'message' => "Error: " . $e->getMessage()));
+    http_response_code(500);
+    echo json_encode(array('success' => false, 'status_text' => "Error: " . $e->getMessage(), 'status_code' => 500));
 }
 
 // Close connection (not necessary for PDO, but good practice)

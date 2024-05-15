@@ -9,15 +9,15 @@ $response = array(); // Initialize an empty array for the response
 
 if (!isset($_SESSION['userID'])) {
     // Redirect to login page if not logged in
-    $response = array('success' => false, 'message' => "User not logged in");
-    echo json_encode($response);
+    http_response_code(401);
+    echo json_encode(array('success' => false, 'status_text' => "User not logged in", 'status_code' => 401));
     exit;
 }
 
 if (!isset($_GET['query'])) {
     // Exit if the query parameter is not provided
-    $response = array('success' => false, 'message' => "Query parameter is required.");
-    echo json_encode($response);
+    http_response_code(400);
+    echo json_encode(array('success' => false, 'status_text' => "Query parameter is required.", 'status_code' => 400));
     exit;
 }
 
@@ -31,7 +31,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Prepare the SQL statement to search for users
-    $stmt = $conn->prepare("SELECT ID, username FROM users WHERE username LIKE :query AND ID != :userID");
+    $stmt = $conn->prepare("SELECT ID, username FROM users WHERE username LIKE :query AND ID != :userID AND ID NOT IN (SELECT blockedUserID FROM blockedusers WHERE userID = :userID) AND ID NOT IN (SELECT userID FROM blockedusers WHERE blockedUserID = :userID)");
     $stmt->bindValue(':query', "%$searchQuery%", PDO::PARAM_STR);
     $stmt->bindValue(':userID', $userID, PDO::PARAM_INT); // Bind with $userID directly
     $stmt->execute();
@@ -43,7 +43,7 @@ try {
     echo json_encode($users);
 } catch(PDOException $e) {
     // Handle database connection errors
-    $response = array('success' => false, 'message' => "Database error: " . $e->getMessage());
-    echo json_encode($response);
+    http_response_code(500);
+    echo json_encode(array('success' => false, 'status_text' => "Error: " . $e->getMessage(), 'status_code' => 500));
 }
 ?>

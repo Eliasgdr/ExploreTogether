@@ -9,8 +9,15 @@ $response = array();
 
 // Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
+    http_response_code(401); // Unauthorized
+    echo json_encode(array('success' => false, 'status_text' => "User not logged in.", 'status_code' => 401));
+    exit;
+}
+
+if (!isset($_POST['threadID']) || !ctype_digit($_POST['threadID'])) { //ctype_digit return true if the string only contains digits(The idea is to cked if the numer is a int)
     $response['success'] = false;
-    $response['message'] = "User not logged in.";
+    $response['message'] = "Thread ID is missing";
+    http_response_code(400); // Bad request status code
     echo json_encode($response);
     exit;
 }
@@ -23,15 +30,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate message content (add your own validation rules as needed)
     if (empty($message)) {
-        $response['success'] = false;
-        $response['message'] = "Message content is required.";
-        echo json_encode($response);
+        http_response_code(400); // Bad Request
+        echo json_encode(array('success' => false, 'status_text' => "Message content is required.", 'status_code' => 400));
         exit;
     } else {
         try {
             // Create a new PDO connection
             $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Check if the user has access to the thread
+            $stmt = $conn->prepare("SELECT * FROM threadsubscriptions WHERE userID = :userID AND threadID = :threadID");
+            $stmt->bindParam(':userID', $_SESSION['userID']);
+            $stmt->bindParam(':threadID', $threadID);
+            $stmt->execute();
+            $participant = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$participant) {
+                http_response_code(403); // Forbidden
+                echo json_encode(array('success' => false, 'status_text' => "You do not have access to this thread", 'status_code' => 403));
+                exit;
+            }
 
             // Insert the message into the database
             $stmt = $conn->prepare("INSERT INTO message (threadID, authorID, body, Date) VALUES (:chatID, :authorID, :body, NOW())");
@@ -48,23 +67,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
 
             // Prepare success response
-            $response['success'] = true;
-            $response['message'] = "Message posted successfully.";
-            echo json_encode($response);
+            echo json_encode(array('success' => true, 'message' => "Message posted successfully."));
             exit;
         } catch (PDOException $e) {
             // Handle database connection errors
-            $response['success'] = false;
-            $response['message'] = "Error: " . $e->getMessage();
-            echo json_encode($response);
+            http_response_code(500); // Internal Server Error
+            echo json_encode(array('success' => false, 'status_text' => "Error: " . $e->getMessage(), 'status_code' => 500));
             exit;
         }
     }
 } else {
     // Prepare response for invalid request
-    $response['success'] = false;
-    $response['message'] = "Invalid request.";
-    echo json_encode($response);
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(array('success' => false, 'status_text' => "Invalid request.", 'status_code' => 405));
     exit;
 }
 ?>

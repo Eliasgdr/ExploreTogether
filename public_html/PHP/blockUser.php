@@ -1,19 +1,15 @@
 <?php
-// Database connection parameters
-$servername = "localhost";
-$username = "id22104896_jsp";
-$password = "Test@123";
-$dbname = "id22104896_jsp";
 
-// Start the session
+include 'databaseConnection.php';
+
 session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
-    header("Location: ../login.php"); // Redirect to login page if not logged in
+    http_response_code(401); // Unauthorized
+    echo json_encode(array('success' => false, 'status_text' => "User not logged in", 'status_code' => 401));
     exit;
 }
-
 
 try {
     // Create connection
@@ -34,18 +30,21 @@ try {
         $stmt = $pdo->prepare($sql);
 
         // Bind parameters
-        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':userID', $user_id, PDO::PARAM_INT);
         $stmt->bindParam(':userIDToBlock', $userIDToBlock, PDO::PARAM_INT);
 
         // Execute statement
         $stmt->execute();
 
-        echo "User blocked successfully";
+        http_response_code(200); // OK
+        echo json_encode(array('success' => true, 'status_text' => "User blocked successfully", 'status_code' => 200));
     } else {
-        echo "User ID not provided";
+        http_response_code(400); // Bad Request
+        echo json_encode(array('success' => false, 'status_text' => "User ID not provided", 'status_code' => 400));
     }
 } catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    http_response_code(500); // Internal Server Error
+    echo json_encode(array('success' => false, 'status_text' => "Error: " . $e->getMessage(), 'status_code' => 500));
 }
 
 // Close connection (not necessary for PDO, but good practice)

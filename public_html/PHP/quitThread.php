@@ -10,10 +10,12 @@ $response = array();
 // Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
     // Set response indicating user not logged in
-    $response = array('success' => false, 'message' => "User not logged in");
+    http_response_code(401); // Unauthorized
+    echo json_encode(array('success' => false, 'status_text' => "User not logged in", 'status_code' => 401));
+    exit;
 } else {
     // Check if the thread ID is provided in the URL
-    if (isset($_POST['threadID'])) {
+    if (isset($_POST['threadID']) && ctype_digit($_POST['threadID'])) {
         // Get the user ID from the session
         $userID = $_SESSION['userID'];
         // Get the thread ID from the URL
@@ -33,17 +35,19 @@ if (!isset($_SESSION['userID'])) {
             $stmt->execute();
 
             // Set success response
-            $response = array('success' => true, 'message' => "Thread updated successfully.");
+            echo json_encode(array('success' => true, 'message' => "Thread updated successfully."));
+            exit;
         } catch (PDOException $e) {
             // Handle database connection errors
-            $response = array('success' => false, 'message' => "Database error: " . $e->getMessage());
+            http_response_code(500); // Internal Server Error
+            echo json_encode(array('success' => false, 'status_text' => "Database error: " . $e->getMessage(), 'status_code' => 500));
+            exit;
         }
     } else {
         // Set response indicating missing thread ID
-        $response = array('success' => false, 'message' => "Thread ID not provided");
+        http_response_code(400); // Bad Request
+        echo json_encode(array('success' => false, 'status_text' => "Thread ID not provided", 'status_code' => 400));
+        exit;
     }
 }
-
-// Output JSON response
-echo json_encode($response);
 ?>

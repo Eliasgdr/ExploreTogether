@@ -173,6 +173,46 @@ if (!isset($_SESSION['userID'])) {
         .navbar-btn:hover {
             background-color: #777;
         }
+
+        .message {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .message-author {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .message-time {
+            color: #666;
+        }
+
+        .message-body {
+            margin-top: 10px;
+        }
+
+        .delete-message-btn,
+        .edit-message-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .delete-message-btn:hover,
+        .edit-message-btn:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 
@@ -189,7 +229,9 @@ if (!isset($_SESSION['userID'])) {
         <p><?php echo htmlspecialchars($_GET['thread_id']); ?></p>
 
         <h3>Messages:</h3>
-        <div id="messagesContainer"></div>
+        <div id="messagesContainer" class="messages-container">
+            <!-- Messages will be appended here -->
+        </div>
         
 
         <h3>Post a Message:</h3>
@@ -227,7 +269,7 @@ if (!isset($_SESSION['userID'])) {
         }
         
         function quiThreadCallBackError(xhr, status, error) {
-            alert('Error');
+            
         }
         
         function postMessageCallBackSuccess(response) {
@@ -263,21 +305,59 @@ if (!isset($_SESSION['userID'])) {
         function renderMessages(messages) {
             // Clear existing messages
             $('#messagesContainer').empty();
-        
+
             // Iterate over each message
             messages.forEach(function(message) {
                 // Create HTML elements for each message
-                var messageHTML = '<div class="message">';
-                messageHTML += '<div class="message-header">';
-                messageHTML += '<strong class="message-author">' + message.author + '</strong>';
-                messageHTML += '<span class="message-time">' + formatMessageTime(message.time) + '</span>';
-                messageHTML += '</div>';
-                messageHTML += '<div class="message-body">' + message.body + '</div>';
-                messageHTML += '</div>';
-        
+                var messageElement = createMessageElement(message);
+                
                 // Append the message HTML to the messages container
-                $('#messagesContainer').append(messageHTML);
+                $('#messagesContainer').append(messageElement);
             });
+        }
+
+        function deleteMessageCallBackSuccess(response) {
+            getMessages(<?php echo $_GET['thread_id']; ?>, getMessageCallBackSuccess, getMessageCallBackError);
+        }
+        
+        function deleteMessageCallBackError(xhr, status, error) {
+            alert('Error');
+        }
+
+        function editMessageCallBackSuccess(response) {
+                console.log(response.message);
+        }
+        
+        function editMessageCallBackError(xhr, status, error) {
+            alert('Error');
+        }
+
+        function createMessageElement(message) {
+            // Create the message container
+            var messageContainer = $('<div class="message"></div>');
+            
+            // Create the message header
+            var header = $('<div class="message-header"></div>');
+            header.append('<strong class="message-author">' + message.author + '</strong>');
+            header.append('<span class="message-time">' + formatMessageTime(message.time) + '</span>');
+
+            // Check if the author of the message is the current user
+            if (message.authorID == <?php echo $_SESSION['userID'] ?>) {
+                // Add buttons for deleting and editing messages
+                header.append('<div class="message-actions"><button class="delete-message-btn" onclick="deleteMessage(' + message.id + ', deleteMessageCallBackSuccess, deleteMessageCallBackError)">Delete</button><button class="edit-message-btn" onclick="alert(\'WIP\')">Edit</button></div>');
+            }
+
+            // Append the header to the message container
+            messageContainer.append(header);
+            
+            // Create the message body
+            var body = $('<div class="message-body">' + message.body + '</div>');
+            
+            // Append the body to the message container
+            messageContainer.append(body);
+            
+            // Return the complete message element
+            return messageContainer;
         }
         
         // Helper function to format message time
@@ -293,7 +373,7 @@ if (!isset($_SESSION['userID'])) {
         
         function getMessageCallBackError(xhr, status, error) {
             // Alert error message
-            alert('Error');
+            console.log(xhr);
         }
         // Make AJAX request to load thread details
         $(document).ready(function() {

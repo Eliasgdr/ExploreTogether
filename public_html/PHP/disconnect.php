@@ -8,6 +8,7 @@ $_SESSION = array();
 session_destroy();
     
 // Send a response back to the client
-echo json_encode(['success' => true, 'message' => 'Disconnected successfully']);
+http_response_code(200); 
+echo json_encode(['success' => true, 'status_text' => 'Disconnected successfully', 'status_code' => 200]);
 
 ?>
