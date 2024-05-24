@@ -66,11 +66,24 @@
             background-color: #777;
         }
         section {
-            padding: 20px;
-            margin: 20px;
-            background-color: #fff;
+            display:flex;
+            flex-direction:column;
+            align-content:center;
+            justify-content:center;
+            padding: 100px;
+            margin: 2vw;
+
             border-radius: 20px;
             text-align: center;
+        }
+
+        section #content{
+            background-color: #fff;
+            margin:30%;
+            margin-top:0px;
+            margin-bottom:0px;
+
+
         }
         footer {
             background-color: #003664;
@@ -96,13 +109,20 @@
 
 <body>
     <header>
-        <h1>Travel Together</h1>
-        <p>Connecting People to Travel Together</p>
+        <table>
+            <tr><td><h1>Travel Together</h1></td>
+                <td style='text-align: right;'>return</td> <!--l'alignement à droite ne marche pas-->
+                <tr>
+                <tr><td><p>Connecting People to Travel Together</p></td>
+                <td></td>
+            </tr>
+        </table>
     </header>
     <nav>
         <a href="#">return</a>
     </nav>
     <section>
+        <div id="content">
         <h2>Welcome to Travel Together!</h2>
         <p>Find travel buddies and explore the world together.</p>
         <p>Join our community and start planning your next adventure.</p>
@@ -115,6 +135,7 @@
         </form>
         
         <p style='font-family: "Mansalva", sans-serif;'>Don't have an account? <br> <a href="registration.php">Create one</a></p>
+        </div>
     </section>
     <footer>
         &copy; 2024 Travel Together | All Rights Reserved<br>
