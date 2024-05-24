@@ -32,6 +32,11 @@
             });
         });
     </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,15 +45,17 @@
             background-color: #f4f4f4;
         }
         header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
+            margin-left: 30px;
+            color: #000000;
+            font-family: "Mansalva", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            text-align: left;
         }
         nav {
-            background-color: #555;
+            background-color: #f4f4f4;
             padding: 10px;
-            text-align: center;
+            text-align: right;
         }
         nav a {
             color: #fff;
@@ -62,13 +69,14 @@
             padding: 20px;
             margin: 20px;
             background-color: #fff;
-            border-radius: 5px;
+            border-radius: 20px;
+            text-align: center;
         }
         footer {
-            background-color: #333;
+            background-color: #003664;
             color: #fff;
             text-align: center;
-            padding: 20px;
+            padding: 40px;
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -82,7 +90,7 @@
             padding: 10px;
             margin: 5px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 20px;
         }
     </style>
 
@@ -92,10 +100,7 @@
         <p>Connecting People to Travel Together</p>
     </header>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Destinations</a>
-        <a href="#">Contact</a>
+        <a href="#">return</a>
     </nav>
     <section>
         <h2>Welcome to Travel Together!</h2>
@@ -106,10 +111,10 @@
         <form id="loginForm">
             <input type="text" id="username" name="username" placeholder="Username" required><br>
             <input type="password" id="password" name="password" placeholder="Password" required><br>
-            <input type="submit" value="Login">
+            <input type="submit" value="Start to Surf">
         </form>
         
-        <p>Don't have an account? <a href="registration.php">Create one</a></p>
+        <p style='font-family: "Mansalva", sans-serif;'>Don't have an account? <br> <a href="registration.php">Create one</a></p>
     </section>
     <footer>
         &copy; 2024 Travel Together | All Rights Reserved<br>
