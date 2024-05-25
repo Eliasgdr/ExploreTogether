@@ -47,6 +47,7 @@ header .titleButton{
 }
 
 footer{
+    
     display: flex;
     align-items: center;
     margin: -8px;
