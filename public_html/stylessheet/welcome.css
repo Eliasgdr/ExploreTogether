@@ -1,0 +1,102 @@
+@import url('global.css');
+
+
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.thread-container .thread .threadProfile .imageProfile:hover {
+    animation: rotate 1s linear infinite; 
+}
+
+
+
+.thread-container{
+    margin-top: 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.thread-container .thread{
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    height: 40vw;
+    width: 40vw;
+    display: grid;
+    grid-template-rows:5% 10% 5% 55% 15% 5% ;
+    margin-bottom: -1px;
+}
+
+
+.thread-container .thread .threadProfile{
+    display: grid;
+    grid-template-columns:5% 10% 5% 75% 5% ;
+    grid-template-rows:100% ;
+    grid-row-start: 2;
+}
+
+.thread-container .thread .threadProfile .imageProfile{
+    grid-column-start: 2;
+    grid-row-start: 1;
+
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.thread-container .thread .threadProfile .username{
+    font-family: "Mansalva", sans-serif;
+    display: flex;
+    align-self: center;
+    grid-row-start: 1;
+    grid-column-start: 4;
+    font-size: 2vw;
+
+}
+
+
+.thread-container .thread .threadProfile .imageTread{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    grid-row-start: 4;
+    object-fit: cover;
+}
+
+
+.thread-container .thread .imageTread{
+    
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    grid-row-start: 4;
+    object-fit: cover;
+
+}
+
+
+.thread-container .thread .message{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    grid-row-start: 5;
+}
+
+.thread-container .thread .date{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    grid-row-start: 6;
+}
+

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    print_r($_SESSION);
+    //print_r($_SESSION);
 
     // Check if the user is logged in
     if (!isset($_SESSION['userID'])) {
@@ -16,91 +16,16 @@
     <title>Welcome to Travel Together</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="javascript/databaseRequest.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-        }
-        h1 {
-            margin: 0;
-        }
-        .container {
-            padding: 20px;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        .thread {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        #searchContainer {
-            position: relative;
-        }
-        #suggestions {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1;
-        }
-        #suggestions ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        #suggestions li {
-            padding: 10px;
-            cursor: pointer;
-        }
-        #suggestions li:hover {
-            background-color: #ddd;
-        }
-        
-         /* Add your CSS styles here */
-        .thread-container {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-        .thread {
-            margin-bottom: 10px;
-        }
-    </style>
+    <link href="./stylessheet/welcome.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
     <header>
-        <h1>Welcome to Travel Together</h1>
+        <div class="title">Explore Together</div>
+        <div class="titleButton">Messages</div>
     </header>
     <div class="container">
-        <h2>Welcome, User!</h2>
-        <p>You have successfully logged in to Travel Together.</p>
-        <p>Start planning your next adventure now!</p>
-
-        <h3>Threads You Are Following:</h3>
+        
         <div class="thread-container" id="threadContainer"></div>
         
         
@@ -226,15 +151,42 @@
 
                 // Create a paragraph element for the last message
                 const lastMessagePara = document.createElement('p');
+                lastMessagePara.classList.add('message');
                 lastMessagePara.textContent = `Last Message: ${thread.lastMessage}`;
 
                 // Create a paragraph element for the last message date
                 const lastMessageDatePara = document.createElement('p');
-                lastMessageDatePara.textContent = `Last Message Date: ${thread.lastMessageDate}`;
+                lastMessageDatePara.classList.add('date');
+                lastMessageDatePara.textContent = `Date: ${thread.lastMessageDate}`;
+
+                const lastMessageImgTread = document.createElement('img');
+                lastMessageImgTread.classList.add('imageTread');
+                lastMessageImgTread.src = './images/landscape.jpg'; 
+
+                //Profile pics and name
+
+                const threadProfileDiv = document.createElement('div');
+                threadProfileDiv.classList.add('threadProfile');
+
+                const lastMessageImgProfile = document.createElement('img');
+                lastMessageImgProfile.classList.add('imageProfile');
+                lastMessageImgProfile.src = './images/Png.png'; 
+                
+                const lastMessageUserProfile = document.createElement('p');
+                lastMessageUserProfile.classList.add('username');
+                lastMessageUserProfile.textContent = `Username`;
+                threadProfileDiv.appendChild(lastMessageUserProfile);
+                threadProfileDiv.appendChild(lastMessageImgProfile);
+                
 
                 // Append the message and date paragraphs to the thread div
+                threadDiv.appendChild(threadProfileDiv);
+
+                threadDiv.appendChild(lastMessageImgTread);
                 threadDiv.appendChild(lastMessagePara);
                 threadDiv.appendChild(lastMessageDatePara);
+
+                
 
                 // Attach onclick event to redirect to chat.php with thread ID
                 $(threadDiv).click(function() {
