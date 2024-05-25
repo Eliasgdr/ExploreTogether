@@ -1,0 +1,112 @@
+@import "./global.css";
+
+.content{
+    margin: -8px;
+    margin-top: 8px;
+    
+    background-color: var(--whiteColor);
+}
+
+.content .card{
+    font-family: "Numans", sans-serif;
+
+    border-color:var(--blackColor);
+    border-width: 0.2vw;
+    border-style: solid;
+    border-radius: 2vw;
+
+    display: grid;
+
+    margin: 10vh;
+
+    padding-right: 80vw;
+
+    grid-template-columns: 7vw 45vw 5vw 30vw 10vw;
+    grid-template-rows: 5vh auto auto 5vh;
+}
+
+.content .card .cardPicture{
+    margin-top: 25px;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    
+    grid-column-end: 5;
+    grid-row-start: 2;
+
+    width: 20vw;
+    height: 40vh;
+    border-radius: 5%;
+    
+    background-image: url("../images/shaw.jpeg");
+    background-size: cover; 
+    background-position: center; 
+
+}
+
+.content .card .cardInfo{
+    grid-column-start: 2;
+}
+
+.content .card .cardInfo hr{
+    margin: -1vw;
+    height: 0.001vw;
+}
+
+.content .card .cardInfo .nameInfo{
+    display: flex;
+    justify-content: space-between;
+
+    grid-row-start: 1;
+}
+
+.content .card .cardInfo .nameInfo h3{
+    font-size: 1.5vw;
+}
+
+.content .card .cardInfo .userInfo{
+    grid-row-start: 2;
+}
+
+.content .card .cardInfo .userInfo .userDescript {
+    padding: auto;
+    max-width: 45vw;
+    font-size: 0.75vw;
+    
+}
+
+.content .card .cardInfo .userInfo .userDescript p{
+    margin-top: -1vw;
+}
+
+.content .card .cardInfo .userInfo h5{
+    font-size: 1vw;
+}
+
+
+
+.content .card .cardInfo .userInfo .mainCountry {
+    position: absolute;
+    margin-left:30vw ;
+    margin-top:-2.5vw ;
+
+    background-image: url("../images/buffer.png");
+    height: 7.5vw;
+    width: 7.5vw;
+    
+
+    rotate: 20deg;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover; 
+    background-position: center; 
+}
+
+.content .card .cardInfo .userInfo .mainCountry #country{
+    margin-bottom: 0.5vw;
+    font-size: 0.7vw;
+    font-family: "Special Elite", system-ui;
+
+}
