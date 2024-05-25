@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 12 mai 2024 à 22:53
+-- Généré le : sam. 25 mai 2024 à 14:05
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -356,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   PRIMARY KEY (`messageID`),
   KEY `authorID` (`authorID`),
   KEY `threadID` (`threadID`)
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `message`
@@ -399,7 +399,6 @@ INSERT INTO `message` (`messageID`, `Date`, `body`, `authorID`, `threadID`) VALU
 (74, '2024-05-10 18:58:46', 'hehehehejheakzjhekjaeb', 5, 25),
 (75, '2024-05-10 19:12:15', 'Hi, I just created a new Thread named ae', 5, 26),
 (76, '2024-05-10 19:13:13', 'Hi, I just created a new Thread named rr', 5, 27),
-(77, '2024-05-10 19:14:12', 'Hi, I just created a new Thread named test', 5, 28),
 (78, '2024-05-10 22:08:36', 'hi', 5, 8),
 (79, '2024-05-10 22:08:44', 'yeah wow', 5, 8),
 (80, '2024-05-10 22:09:55', 'hi', 5, 8),
@@ -427,7 +426,6 @@ INSERT INTO `message` (`messageID`, `Date`, `body`, `authorID`, `threadID`) VALU
 (102, '2024-05-10 22:57:10', 'hehehe', 5, 8),
 (103, '2024-05-10 22:57:27', 'te', 5, 8),
 (104, '2024-05-10 22:59:32', 'hehe', 5, 8),
-(105, '2024-05-11 09:14:42', 'Hi, I just created a new Thread named tr', 5, 29),
 (106, '2024-05-11 09:44:47', 'Hi, I just created a new Thread named test', 5, 30),
 (107, '2024-05-12 20:50:18', 'Hi, I just created a new Thread named test', 5, 31),
 (108, '2024-05-12 21:14:17', 'hi', 5, 25),
@@ -444,7 +442,22 @@ INSERT INTO `message` (`messageID`, `Date`, `body`, `authorID`, `threadID`) VALU
 (119, '2024-05-12 21:56:33', 'hi', 5, 25),
 (120, '2024-05-12 22:12:42', 'Hi, I just created a new Thread named t', 5, 36),
 (121, '2024-05-12 22:12:49', 'hi', 5, 36),
-(122, '2024-05-12 22:13:37', 'hi', 10, 36);
+(122, '2024-05-12 22:13:37', 'hi', 10, 36),
+(123, '2024-05-13 21:43:12', 'test', 5, 26),
+(124, '2024-05-13 22:21:54', 'er', 5, 26),
+(125, '2024-05-13 22:22:13', 'test', 5, 26),
+(126, '2024-05-14 13:13:51', 'Hi, I just created a new Thread named test', 5, 37),
+(128, '2024-05-14 13:14:37', 'test', 5, 27),
+(130, '2024-05-14 21:52:31', 'hi', 5, 36),
+(131, '2024-05-14 21:57:43', 'hi', 5, 36),
+(132, '2024-05-14 21:57:49', 'hie', 5, 36),
+(133, '2024-05-14 22:35:01', 'Hi, I just created a new Thread named tr', 5, 38),
+(134, '2024-05-14 22:35:06', 'Hi, I just created a new Thread named tr', 5, 39),
+(137, '2024-05-15 20:03:09', 'test', 5, 32),
+(138, '2024-05-15 20:03:20', 'Hi, I just created a new Thread named test', 5, 40),
+(139, '2024-05-15 20:03:25', 'test', 5, 40),
+(141, '2024-05-15 20:05:29', 'hi', 5, 29),
+(142, '2024-05-16 22:09:45', 'test', 5, 29);
 
 -- --------------------------------------------------------
 
@@ -495,7 +508,7 @@ CREATE TABLE IF NOT EXISTS `threads` (
   PRIMARY KEY (`threadID`),
   KEY `owner` (`ownerID`),
   KEY `lastMessage` (`lastMessageID`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `threads`
@@ -514,17 +527,21 @@ INSERT INTO `threads` (`threadID`, `lastMessageID`, `title`, `description`, `isD
 (23, 69, 'ar', 'ar', 0, NULL),
 (24, 70, 'ae', 'ae', 0, NULL),
 (25, 119, 'halo', 'german', 0, NULL),
-(26, 75, 'ae', 'ae', 0, NULL),
-(27, 76, 'rr', 'rr', 0, NULL),
-(28, 77, 'test', 'test', 0, NULL),
-(29, 105, 'tr', 'tr', 0, NULL),
+(26, 125, 'ae', 'ae', 0, NULL),
+(27, 128, 'rr', 'rr', 0, NULL),
+(28, NULL, 'test', 'test', 0, NULL),
+(29, 142, 'tr', 'tr', 0, NULL),
 (30, 106, 'test', 'test', 0, NULL),
 (31, 107, 'test', 'test', 0, NULL),
-(32, 109, 'te', 'te', 0, NULL),
+(32, 137, 'te', 'te', 0, NULL),
 (33, 110, 'test', 'test', 0, NULL),
 (34, 111, 'testt', 'testt', 0, NULL),
 (35, 112, 'hy', 'hy', 0, NULL),
-(36, 122, 't', 't', 0, NULL);
+(36, 132, 't', 't', 0, NULL),
+(37, NULL, 'test', 'test', 0, NULL),
+(38, 133, 'tr', 'tr', 0, NULL),
+(39, 134, 'tr', 'tr', 0, NULL),
+(40, 139, 'test', 'test', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -540,7 +557,7 @@ CREATE TABLE IF NOT EXISTS `threadsubscriptions` (
   PRIMARY KEY (`threadSubscriptionID`),
   KEY `userID` (`userID`),
   KEY `threadID` (`threadID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `threadsubscriptions`
@@ -548,10 +565,6 @@ CREATE TABLE IF NOT EXISTS `threadsubscriptions` (
 
 INSERT INTO `threadsubscriptions` (`threadSubscriptionID`, `userID`, `threadID`) VALUES
 (1, 10, 16),
-(5, 5, 25),
-(6, 5, 26),
-(7, 5, 27),
-(8, 5, 28),
 (9, 5, 29),
 (11, 5, 31),
 (12, 5, 32),
@@ -559,7 +572,32 @@ INSERT INTO `threadsubscriptions` (`threadSubscriptionID`, `userID`, `threadID`)
 (14, 5, 34),
 (15, 5, 35),
 (16, 5, 36),
-(17, 10, 36);
+(17, 10, 36),
+(19, 32, 27),
+(20, 32, 28),
+(21, 5, 38),
+(22, 5, 39),
+(23, 5, 40);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `travelitem`
+--
+
+DROP TABLE IF EXISTS `travelitem`;
+CREATE TABLE IF NOT EXISTS `travelitem` (
+  `travelID` int NOT NULL AUTO_INCREMENT,
+  `ownerID` int NOT NULL,
+  `lieu` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `dateStart` date NOT NULL,
+  `dateEnd` date NOT NULL,
+  `threadID` int NOT NULL,
+  `descripton` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `countryID` int NOT NULL,
+  PRIMARY KEY (`travelID`),
+  KEY `ownerID` (`ownerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -575,43 +613,56 @@ CREATE TABLE IF NOT EXISTS `users` (
   `birthdate` date NOT NULL,
   `password` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
   `registrationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `threads` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `profileImage` longblob NOT NULL,
+  `description` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`ID`, `username`, `gender`, `birthdate`, `password`, `registrationDate`, `threads`) VALUES
-(5, 'test', 'M', '0020-02-20', '$2y$10$6P/U0CbFg9LQ7k4LSAddEet2D7N7sSwJXslH3EC2y9eBd634QI7f.', '2024-05-02 00:00:00', ',15,16,17'),
-(7, 'D', 'M', '2020-02-20', '$2y$10$BwSjlb9F33n7HA7Wg5byGe5VU.7J2ysPgmPPtwkghDtgsgPJ4rpfW', '2024-05-02 00:00:00', ''),
-(8, 'John Wick', 'F', '1978-04-01', '$2y$10$It6iujIe7d.m7z/Pgl3v4eUNhzvVjpQCsfaT0kloQTVrFRYL8hWFm', '2024-05-03 00:00:00', ''),
-(9, 'Toto', 'M', '2001-01-01', '$2y$10$tlstgkkQQeaXs4rX3ht3SeUWeh.gMjzhoWCG8y64mM.jd9DtyTOpS', '2024-05-03 00:00:00', NULL),
-(10, 'test2', 'M', '2020-02-20', '$2y$10$72xJya76jD5p9rRt7KM25uHf7bsKWI6V.C3M25b/YyifIRIS5shMG', '2024-05-03 00:00:00', '1,2,5,6,7,8'),
-(11, 'test3', 'M', '0200-02-20', '$2y$10$Mxemorws7aW0E2ZeoFP3D.vqKKE7zr4LtjI743h/.7bIpuai.gk/W', '2024-05-10 00:00:00', NULL),
-(12, 't', 'M', '0002-02-20', '$2y$10$v2be6JNti/g2CrJiJjX0Cupqq5dNoMByL.NODjq7EV.rcBu77Yq5u', '2024-05-10 00:00:00', NULL),
-(13, 'e', 'M', '0010-10-10', '$2y$10$5kyO9/mW1gReE3G8SibDOeCr/xyfWVs3GOcefdbuOhEYCQqIRwEEi', '2024-05-10 00:00:00', NULL),
-(14, '', 'M', '0025-02-10', '$2y$10$iYPjhhlqeF7kGg8Igb9CeOLrDob3GruyaolhuXhZcliDJdEcZhEbC', '2024-05-10 00:00:00', NULL),
-(15, '', 'F', '0010-10-10', '$2y$10$vNznhAjxHyDvJ9DZA3tSbeAx16bUnbHxeWZEjqIBF/a3DGMSLfhmO', '2024-05-10 00:00:00', NULL),
-(16, '', 'O', '0101-10-10', '$2y$10$PCys4Ep0SOz0E0X2GW6une53.MGt1BGsvNtTlVVZm7rlsRCzIk0/e', '2024-05-10 00:00:00', NULL),
-(17, '', 'O', '0001-01-01', '$2y$10$x6BVesnY6SXDO0SnueLhUu.NdW0W8Sm6cZZ7etIBrv6hRpvEv8SwW', '2024-05-10 00:00:00', NULL),
-(18, '', 'O', '0001-01-01', '$2y$10$XxJbe8pW.jFRTfo30DDsiu6yJajaeyJE2K6X1aTKn5WRmIOd7csUS', '2024-05-10 00:00:00', NULL),
-(19, '', 'O', '0001-01-01', '$2y$10$kCtQWigMBGJbZRW68b6vv.8TjxzHVC/Eo8K6GQwjBg9jhoCAuedrm', '2024-05-10 00:00:00', NULL),
-(20, '', 'O', '0001-01-01', '$2y$10$5qY4j1M1PHePmtPphuACEOZ8vjDUnV9j6iZSy88oIYhnWr8uEM1Dy', '2024-05-10 00:00:00', NULL),
-(21, '', 'O', '0001-01-01', '$2y$10$EX/V7tNmnvxzs/45Ib.N4uatAl91.q5snTY.di.oLG/j2AISl3sg.', '2024-05-10 00:00:00', NULL),
-(22, '', 'O', '0001-01-01', '$2y$10$5ZwFK072JHIa4mzt.l.8lOPoHh.AEUqvAmhjBJdvPniPSHmUnpT6i', '2024-05-10 00:00:00', NULL),
-(23, '', 'O', '0001-01-01', '$2y$10$rZUXuKEKBNK2Z9EzTPIMdesSFCx/oBPKkTg6JKD8cdgHnQ0mX5Wbq', '2024-05-10 00:00:00', NULL),
-(24, '', 'O', '0001-01-01', '$2y$10$zEe97fsSwpbLVHj8j61OYuyz2482VuE658u.UekR2up4a2M5N/vLy', '2024-05-10 00:00:00', NULL),
-(25, '', 'O', '0001-01-01', '$2y$10$ZoQPYywobGnbX3AbJo267eiyrXtT1EnAJTHi34X.bW/N2fAFKDBLO', '2024-05-10 00:00:00', NULL),
-(26, '', 'O', '0001-01-01', '$2y$10$XBjjoyeocxkKl/DqORfkWepRvMiZv4NMKYLtXh6w6BNrBi6ukySjW', '2024-05-10 00:00:00', NULL),
-(27, 'ae', 'F', '0010-10-10', '$2y$10$n2A7dxHI0b6IxltdmgchzOXBXfsPUzq3.hFXm34ea5kVTnomSR4Iq', '2024-05-10 00:00:00', NULL),
-(28, 'erezrze', 'F', '0100-10-10', '$2y$10$fRo8c2/..YrnBhYWZCPfOuuyplTPnnJJMmy1.Z/Aia65oy3CW3DVW', '2024-05-10 00:00:00', NULL),
-(29, 'ERZ', 'F', '0010-10-10', '$2y$10$ctCu05dk0Vl1Y8V1VF.5beUphfkUZ1NX5V1jnXvNX3izBA0YYyYaW', '2024-05-10 00:00:00', NULL),
-(30, 'test4', 'M', '1010-10-10', '$2y$10$411LoGFlwmX3LLtl9udZluCupaINY3U6zZ6voCoi6NfBxMel1CW4S', '2024-05-10 00:00:00', NULL),
-(31, 'test6', 'O', '0001-10-10', '$2y$10$2Z3.cwB.QVcJEf3RJ1EY2.ngNPJDOLH8BBaTtfzoZcDBzgfayofku', '2024-05-10 00:00:00', NULL),
-(32, 'test5', 'M', '0010-10-10', '$2y$10$fgnQTQRWTr5IGS.eVckf5.gRCkf/hawQZ.ZZOzAV8HnDaW2X4ehpK', '2024-05-10 00:00:00', NULL),
-(33, 'test7', 'M', '0010-10-10', '$2y$10$UeyPylH4psQGGkr0G7/wx.wWn32lLfc6GperCwhzxNswFGdWtKSMW', '2024-05-10 00:00:00', NULL);
+INSERT INTO `users` (`ID`, `username`, `gender`, `birthdate`, `password`, `registrationDate`, `profileImage`, `description`) VALUES
+(5, 'test', 'M', '0020-02-20', '$2y$10$6P/U0CbFg9LQ7k4LSAddEet2D7N7sSwJXslH3EC2y9eBd634QI7f.', '2024-05-02 00:00:00', '', ''),
+(7, 'D', 'M', '2020-02-20', '$2y$10$BwSjlb9F33n7HA7Wg5byGe5VU.7J2ysPgmPPtwkghDtgsgPJ4rpfW', '2024-05-02 00:00:00', '', ''),
+(8, 'John Wick', 'F', '1978-04-01', '$2y$10$It6iujIe7d.m7z/Pgl3v4eUNhzvVjpQCsfaT0kloQTVrFRYL8hWFm', '2024-05-03 00:00:00', '', ''),
+(9, 'Toto', 'M', '2001-01-01', '$2y$10$tlstgkkQQeaXs4rX3ht3SeUWeh.gMjzhoWCG8y64mM.jd9DtyTOpS', '2024-05-03 00:00:00', '', ''),
+(10, 'test2', 'M', '2020-02-20', '$2y$10$72xJya76jD5p9rRt7KM25uHf7bsKWI6V.C3M25b/YyifIRIS5shMG', '2024-05-03 00:00:00', '', ''),
+(11, 'test3', 'M', '0200-02-20', '$2y$10$Mxemorws7aW0E2ZeoFP3D.vqKKE7zr4LtjI743h/.7bIpuai.gk/W', '2024-05-10 00:00:00', '', ''),
+(12, 't', 'M', '0002-02-20', '$2y$10$v2be6JNti/g2CrJiJjX0Cupqq5dNoMByL.NODjq7EV.rcBu77Yq5u', '2024-05-10 00:00:00', '', ''),
+(13, 'e', 'M', '0010-10-10', '$2y$10$5kyO9/mW1gReE3G8SibDOeCr/xyfWVs3GOcefdbuOhEYCQqIRwEEi', '2024-05-10 00:00:00', '', ''),
+(14, '', 'M', '0025-02-10', '$2y$10$iYPjhhlqeF7kGg8Igb9CeOLrDob3GruyaolhuXhZcliDJdEcZhEbC', '2024-05-10 00:00:00', '', ''),
+(15, '', 'F', '0010-10-10', '$2y$10$vNznhAjxHyDvJ9DZA3tSbeAx16bUnbHxeWZEjqIBF/a3DGMSLfhmO', '2024-05-10 00:00:00', '', ''),
+(16, '', 'O', '0101-10-10', '$2y$10$PCys4Ep0SOz0E0X2GW6une53.MGt1BGsvNtTlVVZm7rlsRCzIk0/e', '2024-05-10 00:00:00', '', ''),
+(17, '', 'O', '0001-01-01', '$2y$10$x6BVesnY6SXDO0SnueLhUu.NdW0W8Sm6cZZ7etIBrv6hRpvEv8SwW', '2024-05-10 00:00:00', '', ''),
+(18, '', 'O', '0001-01-01', '$2y$10$XxJbe8pW.jFRTfo30DDsiu6yJajaeyJE2K6X1aTKn5WRmIOd7csUS', '2024-05-10 00:00:00', '', ''),
+(19, '', 'O', '0001-01-01', '$2y$10$kCtQWigMBGJbZRW68b6vv.8TjxzHVC/Eo8K6GQwjBg9jhoCAuedrm', '2024-05-10 00:00:00', '', ''),
+(20, '', 'O', '0001-01-01', '$2y$10$5qY4j1M1PHePmtPphuACEOZ8vjDUnV9j6iZSy88oIYhnWr8uEM1Dy', '2024-05-10 00:00:00', '', ''),
+(21, '', 'O', '0001-01-01', '$2y$10$EX/V7tNmnvxzs/45Ib.N4uatAl91.q5snTY.di.oLG/j2AISl3sg.', '2024-05-10 00:00:00', '', ''),
+(22, '', 'O', '0001-01-01', '$2y$10$5ZwFK072JHIa4mzt.l.8lOPoHh.AEUqvAmhjBJdvPniPSHmUnpT6i', '2024-05-10 00:00:00', '', ''),
+(23, '', 'O', '0001-01-01', '$2y$10$rZUXuKEKBNK2Z9EzTPIMdesSFCx/oBPKkTg6JKD8cdgHnQ0mX5Wbq', '2024-05-10 00:00:00', '', ''),
+(24, '', 'O', '0001-01-01', '$2y$10$zEe97fsSwpbLVHj8j61OYuyz2482VuE658u.UekR2up4a2M5N/vLy', '2024-05-10 00:00:00', '', ''),
+(25, '', 'O', '0001-01-01', '$2y$10$ZoQPYywobGnbX3AbJo267eiyrXtT1EnAJTHi34X.bW/N2fAFKDBLO', '2024-05-10 00:00:00', '', ''),
+(26, '', 'O', '0001-01-01', '$2y$10$XBjjoyeocxkKl/DqORfkWepRvMiZv4NMKYLtXh6w6BNrBi6ukySjW', '2024-05-10 00:00:00', '', ''),
+(27, 'ae', 'F', '0010-10-10', '$2y$10$n2A7dxHI0b6IxltdmgchzOXBXfsPUzq3.hFXm34ea5kVTnomSR4Iq', '2024-05-10 00:00:00', '', ''),
+(28, 'erezrze', 'F', '0100-10-10', '$2y$10$fRo8c2/..YrnBhYWZCPfOuuyplTPnnJJMmy1.Z/Aia65oy3CW3DVW', '2024-05-10 00:00:00', '', ''),
+(29, 'ERZ', 'F', '0010-10-10', '$2y$10$ctCu05dk0Vl1Y8V1VF.5beUphfkUZ1NX5V1jnXvNX3izBA0YYyYaW', '2024-05-10 00:00:00', '', ''),
+(30, 'test4', 'M', '1010-10-10', '$2y$10$411LoGFlwmX3LLtl9udZluCupaINY3U6zZ6voCoi6NfBxMel1CW4S', '2024-05-10 00:00:00', '', ''),
+(31, 'test6', 'O', '0001-10-10', '$2y$10$2Z3.cwB.QVcJEf3RJ1EY2.ngNPJDOLH8BBaTtfzoZcDBzgfayofku', '2024-05-10 00:00:00', '', ''),
+(32, 'test5', 'M', '0010-10-10', '$2y$10$fgnQTQRWTr5IGS.eVckf5.gRCkf/hawQZ.ZZOzAV8HnDaW2X4ehpK', '2024-05-10 00:00:00', '', ''),
+(33, 'test7', 'M', '0010-10-10', '$2y$10$UeyPylH4psQGGkr0G7/wx.wWn32lLfc6GperCwhzxNswFGdWtKSMW', '2024-05-10 00:00:00', '', ''),
+(34, 'testuser', '', '1990-01-01', '$2y$10$YMDh8NALSbjQ7El/utyT4eTkMAxg.pGauRUr6s3ke0CVmTGmwi55i', '2024-05-17 18:36:18', '', ''),
+(35, 'testuser', 'M', '1990-01-01', '$2y$10$wJadTzRz5H9XsxB09j8/Y.j7T2Bnw9.oTSwCxBFb6gjrgwVCPAuDG', '2024-05-17 18:40:51', '', ''),
+(36, 'testuser', 'M', '1990-01-01', '$2y$10$r7b31Ae8bKmHw85OzG.0wevqsxQJy51bgxOypLC6EjxV9/ErXTbyi', '2024-05-17 18:42:28', '', ''),
+(37, 'testuser', 'M', '1990-01-01', '$2y$10$NXDq6tNcCN0zK9RUuJPZ2.BdChpWXbQ6YHBd0R5A/dSmSfZo/ap06', '2024-05-17 18:43:20', '', ''),
+(38, 'testuser', 'M', '1990-01-01', '$2y$10$hdinBfWyH1aAnLkmg1vRl.MgZTGo2B0lH0jqqAJkkKphVzL6SzR1G', '2024-05-17 18:43:26', '', ''),
+(39, 'testuser', 'M', '1990-01-01', '$2y$10$ZQtXF4mfvQ.YGgyTQDRi2uV6GpyZPSv.uwRMsN7jbyXvn28bMUKyq', '2024-05-17 18:45:47', '', ''),
+(40, 'testuser', 'M', '1990-01-01', '$2y$10$7iDdBXzLY10s4CR00rXVn.U6KWrAbbI/k4pH.AlgLJEXesvhZmQ3.', '2024-05-17 18:46:26', '', ''),
+(41, 'testuser', 'M', '1990-01-01', '$2y$10$8RC5hRay6vlamus2c95jMe.LXTb5pmHUY7OqSoxnOEz7LhclAP646', '2024-05-17 18:47:10', '', ''),
+(42, 'testuser', 'M', '1990-01-01', '$2y$10$usux/DgmDJa7U2o484qTd.oSkSPW.y0wpuulqUjto6T2AMguipOna', '2024-05-17 18:48:08', '', ''),
+(43, 'testuser', 'M', '1990-01-01', '$2y$10$AcjusjVAuAQAqiIHk/Lm1uQdSdShLODMmmE5nLDzyG3QYSDJ4Oehm', '2024-05-17 18:49:20', '', ''),
+(44, 'testuser', 'M', '1990-01-01', '$2y$10$JuFvu4TJFuGVH1ZINK0ZB.6vO.eaaAIsSycn9TUZUYty5aojD8kN.', '2024-05-17 18:52:02', '', ''),
+(45, 'testuser', 'M', '1990-01-01', '$2y$10$2qO9ySL0X683/2iL5CD5BOULy1.xaeBDqvy0rUGS7mtE0jvg5yIJi', '2024-05-17 18:56:05', '', '');
 
 -- --------------------------------------------------------
 
@@ -696,6 +747,12 @@ ALTER TABLE `threads`
 ALTER TABLE `threadsubscriptions`
   ADD CONSTRAINT `threadSubscriptions_ibfk_1` FOREIGN KEY (`threadID`) REFERENCES `threads` (`threadID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `travelitem`
+--
+ALTER TABLE `travelitem`
+  ADD CONSTRAINT `ownerID` FOREIGN KEY (`ownerID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `uservisitedcountries`
