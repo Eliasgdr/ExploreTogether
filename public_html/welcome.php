@@ -170,84 +170,27 @@
             alert('Error'); // Display a generic error message
         }
         
-        function searchUsers(query) {
-            // Encode the search query to ensure it's properly formatted for URL
-            var encodedQuery = encodeURIComponent(query);
-            
+        function searchUsersA(query) {
+            // Encode the search query to ensure it's properly formatted for URL            
             // Construct the URL with the search query parameter
-            var url = 'PHP/searchUsers.php?query=' + encodedQuery; // Update the path here
-            
-            // Create a new XMLHttpRequest object
-            var xhr = new XMLHttpRequest();
-            
-            // Configure the AJAX request
-            xhr.open('GET', url, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        // Check if response is not empty
-                        if (xhr.responseText.trim() !== "") {
-                            // Handle the response here
-                            var response = JSON.parse(xhr.responseText);
-                            console.log(response);
-                            showSuggestions(response); // Display suggestions based on response
-                        } else {
-                            console.log("Empty response received.");
-                        }
-                    } else {
-                        console.log("Error: " + xhr.status + " - " + xhr.statusText);
-                    }
+            searchUsers(query, function(response) {
+                if (response.success) {
+                    console.log(response.data);
+                } else {
+                    console.error("Error: " + response.status_text);
                 }
-            };
-            
-            // Send the AJAX request
-            xhr.send();
-        }
-
-        
-        function showSuggestions(suggestions) {
-            var suggestionsContainer = document.getElementById('suggestions');
-            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-        
-            if (suggestions.length > 0) {
-                suggestionsContainer.style.display = 'block';
-                var ul = document.createElement('ul');
-                suggestions.forEach(function(suggestion) {
-                    var li = document.createElement('li');
-                    var username = suggestion.username;
-                    li.textContent = username;
-                    var addButton = document.createElement('button');
-                    addButton.textContent = 'Add';
-                    addButton.addEventListener('click', function() {
-                        event.preventDefault(); // Prevent the default form submission behavior
-                        addFriend(suggestion.ID, addFriendCallBackSuccess, addFriendCallBackError); // Call function to add friend with the username
-                    });
-                    li.appendChild(addButton);
-                    ul.appendChild(li);
-                });
-                suggestionsContainer.appendChild(ul);
-            } else {
-                suggestionsContainer.style.display = 'none';
-            }
+            }, function(xhr, status, error) {
+                console.error("AJAX Error: " + status + " - " + error);
+                console.error(xhr);
+            });
         }
         
         document.getElementById('query').addEventListener('input', function(event) {
             var query = event.target.value;
             if (query.length >= 2) {
-                searchUsers(query); // Call the searchUsers function with the query
+                searchUsersA(query); // Call the searchUsers function with the query
             } else {
                 hideSuggestions();
-            }
-        });
-        
-        function hideSuggestions() {
-            document.getElementById('suggestions').style.display = 'none';
-        }
-        
-        // Hide suggestions when clicking outside the search box
-        window.addEventListener('click', function(event) {
-            if (!document.getElementById('searchContainer').contains(event.target)) {
-                document.getElementById('suggestions').style.display = 'none';
             }
         });
         

@@ -1,49 +1,82 @@
 <?php
+// Database connection parameters
 include 'databaseConnection.php';
 
-session_start(); // Start session to use $_SESSION variable
+// Start the session
+session_start();
 
-header('Content-Type: application/json');
-
-$response = array(); // Initialize an empty array for the response
-
+// Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
-    // Redirect to login page if not logged in
-    http_response_code(401);
+    // Return unauthorized response if not logged in
+    http_response_code(401); // Unauthorized
     echo json_encode(array('success' => false, 'status_text' => "User not logged in", 'status_code' => 401));
     exit;
 }
 
-if (!isset($_GET['query'])) {
-    // Exit if the query parameter is not provided
-    http_response_code(400);
-    echo json_encode(array('success' => false, 'status_text' => "Query parameter is required.", 'status_code' => 400));
-    exit;
-}
-
-try {
+// Check if search query is provided in the request
+if (isset($_GET['query'])) {
     // Get the search query from the request parameters
     $searchQuery = $_GET['query'];
     $userID = (int)$_SESSION['userID'];
 
-    // Create a new PDO connection
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    try {
+        // Create a new PDO connection
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Prepare the SQL statement to search for users
-    $stmt = $conn->prepare("SELECT ID, username FROM users WHERE username LIKE :query AND ID != :userID AND ID NOT IN (SELECT blockedUserID FROM blockedusers WHERE userID = :userID) AND ID NOT IN (SELECT userID FROM blockedusers WHERE blockedUserID = :userID)");
-    $stmt->bindValue(':query', "%$searchQuery%", PDO::PARAM_STR);
-    $stmt->bindValue(':userID', $userID, PDO::PARAM_INT); // Bind with $userID directly
-    $stmt->execute();
+        // Prepare the SQL statement to search for users
+        $stmt = $conn->prepare("
+            SELECT ID, username, description, profileImage
+            FROM users
+            WHERE username LIKE :query
+              AND ID != :userID
+              AND ID NOT IN (
+                  SELECT blockedUserID FROM blockedusers WHERE userID = :userID
+              )
+              AND ID NOT IN (
+                  SELECT userID FROM blockedusers WHERE blockedUserID = :userID
+              )
+        ");
+        $stmt->bindValue(':query', "%$searchQuery%", PDO::PARAM_STR);
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->execute();
 
-    // Fetch the search results
-    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // Fetch the search results
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Output the search results in JSON format
-    echo json_encode($users);
-} catch(PDOException $e) {
-    // Handle database connection errors
-    http_response_code(500);
-    echo json_encode(array('success' => false, 'status_text' => "Error: " . $e->getMessage(), 'status_code' => 500));
+        // Prepare the response data
+        $response = array(
+            "success" => true,
+            "status_code" => 200,
+            "data" => array()
+        );
+
+        foreach ($users as $user) {
+            $response['data'][] = array(
+                "ID" => $user['ID'],
+                "username" => $user['username'],
+                "description" => $user['description'],
+                "profileImage" => base64_encode($user['profileImage'])
+            );
+        }
+
+        // Return the search results in JSON format
+        http_response_code(200); // OK
+        echo json_encode($response);
+        exit;
+
+    } catch (PDOException $e) {
+        // Log the error for debugging purposes
+        //console.log("Error searching users: " . $e->getMessage());
+        // Return a generic error message
+        http_response_code(500); // Internal Server Error
+        echo json_encode(array("success" => false, "status_text" => "An error occurred while processing your request. Please try again later. " . $e->getMessage(), 'status_code' => 500));
+        exit;
+    }
+} else {
+    // Invalid or missing search query, exit gracefully
+    http_response_code(400); // Bad Request
+    echo json_encode(array('success' => false, 'status_text' => "Invalid or missing search query", 'status_code' => 400));
+    exit;
 }
 ?>

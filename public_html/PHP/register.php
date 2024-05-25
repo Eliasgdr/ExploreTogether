@@ -32,12 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $existingUser = $stmt->fetch();
 
-        if ($existingUser) {
+        /*if ($existingUser) {
             // Return JSON response for username already in use
             http_response_code(400);
             echo json_encode(array('success' => false, 'status_text' => "Username already in use.", 'status_code' => 400));
             exit;
-        }
+        }*/
 
         // Continue with user registration
         // Hash the password before storing it in the database
