@@ -434,7 +434,7 @@ function getPublicInfo(userID, successCallback, errorCallback) {
 function updateProfile(username, description, profileImage, successCallback, errorCallback) {
 
     $.ajax({
-        url: 'updateProfile.php', // Path to your PHP script for updating profile
+        url: 'PHP/updateProfile.php', // Path to your PHP script for updating profile
         type: 'POST', // Using POST method
         dataType: 'json',
         data: {username:username, description:description, profileImage:profileImage}, // Pass data object containing user data
@@ -571,3 +571,4 @@ function isAdmin(successCallback, errorCallback) {
             }
     });
 }
+

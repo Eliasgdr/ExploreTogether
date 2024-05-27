@@ -1,17 +1,23 @@
 <?php
-function isAdmin(int $userID, PDO $pdo) {
+
+function isEmailBanned($email, $conn) {
     try {
-        // Check if the user has admin access
-        $stmt = $pdo->prepare("SELECT isAdmin FROM users WHERE userID = :userID");
-        $stmt->bindParam(':userID', $_SESSION['userID'], PDO::PARAM_INT);
+        // Prepare SQL statement to check if the email is banned
+        $stmt = $conn->prepare("SELECT COUNT(*) AS count FROM bannedemail WHERE email = :email");
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result) {
-            return (bool)$result['isAdmin'];
+        // Check if the count is greater than 0, meaning the email is banned
+        if ($result['count'] > 0) {
+            return true;
+        } else {
+            return false;
         }
-    } catch (Exception $e) {
-        return false;
+    } catch (PDOException $e) {
+        // Handle database connection errors
+        error_log("Error checking if email is banned: " . $e->getMessage());
+        return false; // Return false on error
     }
 }
 ?>
