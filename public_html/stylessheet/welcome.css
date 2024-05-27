@@ -12,10 +12,14 @@
 }
 
 .thread-container .thread .threadProfile .imageProfile:hover {
-    animation: rotate 1s linear infinite; 
+    animation: rotate 1s linear infinite reverse; 
 }
 
-
+.containerMessage{
+    display: grid;
+    grid-template-columns: 2.5% 65% 7.5% 25% 5%;
+    margin-left:-4vw ;
+}
 
 .thread-container{
     margin-top: 5vw;
@@ -23,6 +27,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    grid-column: 2;
 }
 
 .thread-container .thread{
@@ -62,7 +67,6 @@
     grid-row-start: 1;
     grid-column-start: 4;
     font-size: 2vw;
-
 }
 
 
@@ -91,12 +95,158 @@
     align-self: center;
     justify-content: center;
     grid-row-start: 5;
+    font-size: 1vw;
 }
+
 
 .thread-container .thread .date{
     display: flex;
     align-self: center;
     justify-content: center;
     grid-row-start: 6;
+    font-size: 0.75vw;
 }
 
+
+
+.createThreadContainer{
+
+    background-color: white;
+    position: fixed;
+    margin-left: 65%;
+    margin-top: 5vw;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+
+    height: 32.5vw;
+    width: 32.5vw;
+    display: grid;
+    grid-template-columns:5% 90% 5% ;
+    grid-template-rows:5% 45% 45% 5% ;
+    margin-bottom: -1px;
+}
+
+.createThreadContainer #createThreadForm{
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.createThreadContainer #searchContainer{
+    grid-column: 2;
+    grid-row: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+
+
+
+:root {
+    --blue: #0071FF;
+    --light-blue: #B6DBF6;
+    --dark-blue: #005DD1;
+    --grey: #f2f2f2;
+}
+
+.imageContainer {
+    max-width: 400px;
+    width: 100%;
+    background: #fff;
+    padding: 30px;
+    border-radius: 30px;
+    margin: auto;
+    text-align: center;
+}
+
+.img-area {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background: var(--grey);
+    margin-bottom: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img-area .icon {
+    font-size: 100px;
+}
+
+.img-area h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.img-area p {
+    color: #999;
+}
+
+.img-area p span {
+    font-weight: 600;
+}
+
+.img-area img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 100;
+}
+
+.img-area::before {
+    content: attr(data-img);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: all .3s ease;
+    z-index: 200;
+}
+
+.img-area.active:hover::before {
+    opacity: 1;
+}
+
+.select-image {
+    display: block;
+    width: 100%;
+    padding: 16px 0;
+    border-radius: 15px;
+    background: var(--blue);
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.select-image:hover {
+    background: var(--dark-blue);
+}
