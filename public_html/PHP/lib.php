@@ -1,5 +1,5 @@
 <?php
-function bool isAdmin(userID, pdo) {
+function isAdmin(int $userID, PDO $pdo) {
     try {
         // Check if the user has admin access
         $stmt = $pdo->prepare("SELECT isAdmin FROM users WHERE userID = :userID");
@@ -10,9 +10,8 @@ function bool isAdmin(userID, pdo) {
         if ($result) {
             return (bool)$result['isAdmin'];
         }
-    } catch () {
-        return 0;
+    } catch (Exception $e) {
+        return false;
     }
-
 }
 ?>
