@@ -70,20 +70,20 @@
             flex-direction:column;
             align-content:center;
             justify-content:center;
+            background-color: red;
             padding: 100px;
             margin: 2vw;
-
             border-radius: 20px;
             text-align: center;
         }
 
         section #content{
-            background-color: #fff;
+            background-color: white;
             margin:30%;
             margin-top:0px;
             margin-bottom:0px;
-
-
+            margin-bottom:10px;
+            border-radius: 20px;
         }
         footer {
             background-color: #003664;
