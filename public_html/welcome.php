@@ -128,7 +128,7 @@
             if (query.length >= 2) {
                 searchUsersA(query); // Call the searchUsers function with the query
             } else {
-                hideSuggestions();
+                //hideSuggestions();
             }
         });
         
@@ -138,6 +138,21 @@
         function disconnectErrorCallback(xhr, status, error) {
             console.error('Error:', error);
             alert('Failed to disconnect. Please try again.');
+        }
+
+        function getPublicInfosuccessCallback(response, threadDiv) {
+            // This function will be called if the request is successful
+            console.log("Public info retrieved successfully:", response);
+            // Update the username in the threadDiv
+            const usernameElement = threadDiv.querySelector('.username');
+            if (usernameElement) {
+                usernameElement.textContent = response.data['name'];
+            }
+}
+
+        function getPublicInfoerrorCallback() {
+            // This function will be called if the request encounters an error
+            console.error("Error retrieving public info.");
         }
 
 
@@ -155,6 +170,17 @@
 
             // Loop through each thread in the threadInfo array
             threadInfo.forEach(thread => {
+
+                if (thread['ownerID'] !== null) {
+                    getPublicInfo(thread['ownerID'], 
+                        function(response) {
+                            // Success callback function to update username
+                            getPublicInfosuccessCallback(response, threadDiv);
+                        }, 
+                        getPublicInfoerrorCallback
+                    );
+                }
+
                 // Create a div element to hold the thread information
                 const threadDiv = document.createElement('div');
                 threadDiv.classList.add('thread');
@@ -222,8 +248,8 @@
         }
 
         function getThreadErrorCallback(xhr, status, error) {
-            console.error('Error:', error);
-            console.error('Error:', xhr);
+            console.log('Error:', error);
+            console.log('Error:', xhr);
             alert('Failed to get thread information. Please try again.');
         }
 

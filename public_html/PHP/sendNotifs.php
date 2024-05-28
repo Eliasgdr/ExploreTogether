@@ -3,6 +3,7 @@
 /*
 Notif code : 1 -> message
              2 -> friend request
+             3 -> join thread request
 
 
 */

@@ -47,7 +47,9 @@ try {
             $threadData = array(
                 'threadID' => $thread['threadID'],
                 'lastMessage' => $message['body'],
-                'lastMessageDate' => $message['Date']
+                'lastMessageDate' => $message['Date'],
+                'lastAuthorID' => $message['authorID'],
+                'ownerID' => $thread['ownerID'],
                 // Add other information about the thread if needed
             );
             // Push thread data into the thread info array
@@ -57,7 +59,9 @@ try {
             $threadData = array(
                 'threadID' => $thread['threadID'],
                 'lastMessage' => null,
-                'lastMessageDate' => null
+                'lastMessageDate' => null,
+                'lastAuthorID' => null,
+                'ownerID' => $thread['ownerID'],
             );
             $threadInfo[] = $threadData;
         }

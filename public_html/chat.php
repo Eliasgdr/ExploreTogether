@@ -232,80 +232,22 @@ if (!isset($_SESSION['userID'])) {
                 }
             });
         }
-     
     
-
-
-        function searchUsers(query) {
-            // Encode the search query to ensure it's properly formatted for URL
-            var encodedQuery = encodeURIComponent(query);
-            
-            // Construct the URL with the search query parameter
-            var url = 'PHP/searchUsers.php?query=' + encodedQuery; // Update the path here
-            
-            // Create a new XMLHttpRequest object
-            var xhr = new XMLHttpRequest();
-            
-            // Configure the AJAX request
-            xhr.open('GET', url, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        // Check if response is not empty
-                        if (xhr.responseText.trim() !== "") {
-                            // Handle the response here
-                            var response = JSON.parse(xhr.responseText);
-                            console.log(response);
-                            showSuggestions(response); // Display suggestions based on response
-                        } else {
-                            console.log("Empty response received.");
-                        }
-                    } else {
-                        console.log("Error: " + xhr.status + " - " + xhr.statusText);
-                    }
-                }
-            };
-            
-            // Send the AJAX request
-            xhr.send();
+        
+        function searchUsersCallBackSuccess(response) {
+            console.log(response);
         }
         
-        function showSuggestions(suggestions) {
-            var suggestionsContainer = document.getElementById('userSuggestions');
-            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-        
-            if (suggestions.length > 0) {
-                suggestionsContainer.style.display = 'block';
-                var ul = document.createElement('ul');
-                suggestions.forEach(function(suggestion) {
-                    var li = document.createElement('li');
-                    var username = suggestion.username;
-                    li.textContent = username;
-                    var addButton = document.createElement('button');
-                    addButton.textContent = 'Add to thread';
-                    addButton.addEventListener('click', function() {
-                        event.preventDefault(); // Prevent the default form submission behavior
-                        addToThread(suggestion.ID, <?php echo $_GET['thread_id']; ?>);
-                    });
-                    li.appendChild(addButton);
-                    ul.appendChild(li);
-                });
-                suggestionsContainer.appendChild(ul);
-            } else {
-                suggestionsContainer.style.display = 'none';
-            }
+        function searchUsersCallBackError(xhr, status, error) {
+            // Alert error message
+            console.log(xhr);
         }
-
-        function hideSuggestions() {
-            document.getElementById('userSuggestions').style.display = 'none';
-        }
-        
         document.getElementById('usernameInput').addEventListener('input', function(event) {
             var query = event.target.value;
             if (query.length >= 2) {
-                searchUsers(query); // Call the searchUsers function with the query
+                searchUsers(query, searchUsersCallBackSuccess, searchUsersCallBackError); // Call the searchUsers function with the query
             } else {
-                hideSuggestions();
+                //hideSuggestions();
             }
         });
     </script>

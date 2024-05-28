@@ -671,6 +671,13 @@ function seenNotif(notifID, successCallback, errorCallback) {
 }
 
 function sendNotif(userID, content, link, notifCode, successCallback, errorCallback) {
+        /*
+    Notif code : 1 -> message
+                2 -> friend request
+                3 -> join thread request
+
+
+    */
     $.ajax({
             url: "PHP/getNotifs.php", // Path to your login PHP script
             type: "POST", // Use POST method
