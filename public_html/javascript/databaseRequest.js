@@ -572,3 +572,126 @@ function isAdmin(successCallback, errorCallback) {
     });
 }
 
+function deleteAccount(successCallback, errorCallback) {
+    $.ajax({
+            url: "PHP/deleteAccount.php", // Path to your login PHP script
+            type: "POST", // Use POST method
+            dataType: "json",
+            success: function(response){
+                /* 
+                Format of response :
+                
+                $response['success'] = true/false; (true = User connected)
+                $response['message'] = "Incorrect password"; (Hold the message explaining why the user couldn' connect)
+                */
+                if (successCallback && typeof successCallback === 'function') {
+                    successCallback(response);
+                }
+            },
+            error: function(xhr, status, error){
+                if (errorCallback && typeof errorCallback === 'function') {
+                    errorCallback(xhr, status, error);
+                }
+            }
+    });
+}
+
+function deleteNotif(notifIDToDelete, successCallback, errorCallback) {
+    $.ajax({
+            url: "PHP/deleteNotif.php", // Path to your login PHP script
+            type: "POST", // Use POST method
+            dataType: "json",
+            data: {notifIDToDelete: notifIDToDelete},
+            success: function(response){
+                /* 
+                Format of response :
+                
+                $response['success'] = true/false; (true = User connected)
+                $response['message'] = "Incorrect password"; (Hold the message explaining why the user couldn' connect)
+                */
+                if (successCallback && typeof successCallback === 'function') {
+                    successCallback(response);
+                }
+            },
+            error: function(xhr, status, error){
+                if (errorCallback && typeof errorCallback === 'function') {
+                    errorCallback(xhr, status, error);
+                }
+            }
+    });
+}
+
+function getNotifs(successCallback, errorCallback) {
+    $.ajax({
+            url: "PHP/getNotifs.php", // Path to your login PHP script
+            type: "POST", // Use POST method
+            dataType: "json",
+            success: function(response){
+                /* 
+                Format of response :
+                
+                $response['success'] = true/false; (true = User connected)
+                $response['message'] = "Incorrect password"; (Hold the message explaining why the user couldn' connect)
+                */
+                if (successCallback && typeof successCallback === 'function') {
+                    successCallback(response);
+                }
+            },
+            error: function(xhr, status, error){
+                if (errorCallback && typeof errorCallback === 'function') {
+                    errorCallback(xhr, status, error);
+                }
+            }
+    });
+}
+
+function seenNotif(notifID, successCallback, errorCallback) {
+    $.ajax({
+            url: "PHP/getNotifs.php", // Path to your login PHP script
+            type: "POST", // Use POST method
+            dataType: "json",
+            data : {notifID: notifID},
+            success: function(response){
+                /* 
+                Format of response :
+                
+                $response['success'] = true/false; (true = User connected)
+                $response['message'] = "Incorrect password"; (Hold the message explaining why the user couldn' connect)
+                */
+                if (successCallback && typeof successCallback === 'function') {
+                    successCallback(response);
+                }
+            },
+            error: function(xhr, status, error){
+                if (errorCallback && typeof errorCallback === 'function') {
+                    errorCallback(xhr, status, error);
+                }
+            }
+    });
+}
+
+function sendNotif(userID, content, link, notifCode, successCallback, errorCallback) {
+    $.ajax({
+            url: "PHP/getNotifs.php", // Path to your login PHP script
+            type: "POST", // Use POST method
+            dataType: "json",
+            data : {userID:userID, content: content, link:link, notifCode:notifCode},
+            success: function(response){
+                /* 
+                Format of response :
+                
+                $response['success'] = true/false; (true = User connected)
+                $response['message'] = "Incorrect password"; (Hold the message explaining why the user couldn' connect)
+                */
+                if (successCallback && typeof successCallback === 'function') {
+                    successCallback(response);
+                }
+            },
+            error: function(xhr, status, error){
+                if (errorCallback && typeof errorCallback === 'function') {
+                    errorCallback(xhr, status, error);
+                }
+            }
+    });
+}
+
