@@ -16,246 +16,76 @@ if (!isset($_SESSION['userID'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="javascript/databaseRequest.js"></script>
+    <link href="./stylessheet/chat.css" rel="stylesheet" type="text/css">
+
     <title>Thread Discussion</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        .navbar a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-        }
-
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        h1,
-        h2,
-        h3 {
-            margin-top: 0;
-        }
-
-        .message {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .message strong {
-            font-weight: bold;
-        }
-
-        .message .time {
-            color: #888;
-            font-size: 12px;
-        }
-
-        .search-container {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .search-container input[type=text] {
-            padding: 10px;
-            width: 70%;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-right: 10px;
-        }
-
-        .search-container input[type=submit] {
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: none;
-            background-color: #333;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        #userSuggestions {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: calc(70% + 10px);
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            z-index: 1;
-        }
-
-        #userSuggestions ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        #userSuggestions li {
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        #userSuggestions li:hover {
-            background-color: #f2f2f2;
-        }
-        
-        .message {
-            margin-bottom: 20px;
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            padding: 15px;
-        }
-        
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 5px;
-        }
-        
-        .message-author {
-            font-weight: bold;
-        }
-        
-        .message-time {
-            font-size: 12px;
-            color: #777;
-        }
-        
-        .message-body {
-            line-height: 1.5;
-        }
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-            padding: 10px;
-        }
-        
-        .navbar-btn {
-            background-color: #555;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        
-        .navbar-btn:hover {
-            background-color: #777;
-        }
-
-        .message {
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .message-author {
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .message-time {
-            color: #666;
-        }
-
-        .message-body {
-            margin-top: 10px;
-        }
-
-        .delete-message-btn,
-        .edit-message-btn {
-            background-color: #dc3545;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            margin-left: 5px;
-            cursor: pointer;
-        }
-
-        .delete-message-btn:hover,
-        .edit-message-btn:hover {
-            background-color: #c82333;
-        }
-    </style>
+    
 </head>
 
 <body>
-    <div class="navbar">
-        <button class="navbar-btn" onclick="window.location.href='welcome.php'">Return to Welcome Page</button>
-        <button class="navbar-btn" onclick="quitThread(<?php echo $_GET['thread_id']?>, quiThreadCallBackSuccess, quiThreadCallBackError)">Leave Chat</button>
-    </div>
-    <div class="container">
-        <h1>Thread Discussion</h1>
-
-        <?php if (true or $thread && $messages) : ?>
-        <h2><?php echo htmlspecialchars($_GET['thread_id']); ?></h2>
-        <p><?php echo htmlspecialchars($_GET['thread_id']); ?></p>
-
-        <h3>Messages:</h3>
-        <div id="messagesContainer" class="messages-container">
-            <!-- Messages will be appended here -->
+    <header>
+        <div class="title">Explore Together</div>
+    
+        <div class="navbar">
+            <button class="navbar-btn" onclick="window.location.href='welcome.php'">Return to Welcome Page</button>
+            <button class="navbar-btn" onclick="quitThread(<?php echo $_GET['thread_id']?>, quiThreadCallBackSuccess, quiThreadCallBackError)">Leave Chat</button>
         </div>
-        
-
-        <h3>Post a Message:</h3>
-        <form id="messageForm">
-            <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
-            <input type="hidden" id="threadID" name="thread_id" value="<?php echo $_GET['thread_id']; ?>">
-            <input  type="submit" value="Post Message">
-        </form>
-
+    </header>
+    <div class="container">
+        <div class="thread">
+            <div class="threadProfile">
+                <img src="./images/Png.png" alt="" class="imageProfile">
+                <p class="username">awdawd</p>
+            </div>
 
 
+            <!-- Elias integre les message pour les thread -->
+            <img src="./images/landscape.jpg" alt="" class="imageTread">
+            <p class="message">ici on mets la description gu message donc elias il faut aue tu integre ca Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ratione est maiores aperiam officiis suscipit! Veniam, nemo? Ut non ad, nihil voluptatum mollitia quam molestiae provident! Dolores a optio atque consequuntur earum autem magnam possimus quam aut impedit facere laudantium, repellendus sit repudiandae? Aliquid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.
+
+            </p>
+        </div>
 
 
-        <h3>Add User to Thread:</h3>
-        <form id="addUserForm" class="search-container">
-            <input type="text" id="usernameInput" name="username" placeholder="Enter username" required>
-            <input type="hidden" name="threadID" value="<?php echo $_GET['thread_id']; ?>">
-            <input type="submit" value="Add User">
-            <div id="userSuggestions"></div>
-        </form>
-        <?php else : ?>
-        <p>No thread or messages found.</p>
-        <?php endif; ?>
+
+        <div class="threadComment">
+            <?php if (true or $thread && $messages) : ?>
+                <!--<h2><?php echo htmlspecialchars($_GET['thread_id']); ?></h2>-->
+                <!-- <p><?php echo htmlspecialchars($_GET['thread_id']); ?></p>-->
+
+            <h3>Messages:</h3>
+            <div id="messagesContainer" class="messages-container">
+                <!-- Messages will be appended here -->
+            </div>
+            
+
+            <h3>Post a Message:</h3>
+            <form id="messageForm">
+                <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
+                <input type="hidden" id="threadID" name="thread_id" value="<?php echo $_GET['thread_id']; ?>">
+                <input  type="submit" value="Post Message">
+            </form>
+
+
+
+
+
+            <h3>Add User to Thread:</h3>
+            <form id="addUserForm" class="search-container">
+                <input type="text" id="usernameInput" name="username" placeholder="Enter username" required>
+                <input type="hidden" name="threadID" value="<?php echo $_GET['thread_id']; ?>">
+                <input type="submit" value="Add User">
+                <div id="userSuggestions"></div>
+            </form>
+            <?php else : ?>
+            <p>No thread or messages found.</p>
+            <?php endif; ?>
+        </div>
     </div>
+
+    <footer>
+        &copy; 2024 Travel Together | All Rights Reserved
+    </footer>
 
     <script>
     

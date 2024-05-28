@@ -53,6 +53,8 @@ footer{
     display: flex;
     align-items: center;
     margin: -8px;
+    margin-top:10vw;
+
     font-size: 1vw;
 
     padding-top: 1vw;

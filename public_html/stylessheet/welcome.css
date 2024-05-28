@@ -70,13 +70,7 @@
 }
 
 
-.thread-container .thread .threadProfile .imageTread{
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    grid-row-start: 4;
-    object-fit: cover;
-}
+
 
 
 .thread-container .thread .imageTread{
@@ -250,3 +244,4 @@
 .select-image:hover {
     background: var(--dark-blue);
 }
+
