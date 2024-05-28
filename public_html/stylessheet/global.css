@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Mansalva&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Numans&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Numans&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css');
+
 
 :root{
 
@@ -8,7 +11,6 @@
     --greyColor:rgba(0, 0, 0, 0.233);
     --whiteColor:white;
     --blackColor:black;
-
 }
 
 header{
@@ -47,9 +49,12 @@ header .titleButton{
 }
 
 footer{
+    
     display: flex;
     align-items: center;
     margin: -8px;
+    margin-top:10vw;
+
     font-size: 1vw;
 
     padding-top: 1vw;
@@ -59,3 +64,8 @@ footer{
     color: var(--whiteColor);
 
 }
+
+
+
+
+
