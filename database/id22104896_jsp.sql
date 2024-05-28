@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 26 mai 2024 à 22:48
+-- Généré le : mar. 28 mai 2024 à 20:45
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -22,6 +22,19 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `id22104896_jsp` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci;
 USE `id22104896_jsp`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `bannedemail`
+--
+
+DROP TABLE IF EXISTS `bannedemail`;
+CREATE TABLE IF NOT EXISTS `bannedemail` (
+  `emaillD` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
+  PRIMARY KEY (`emaillD`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -356,125 +369,23 @@ CREATE TABLE IF NOT EXISTS `message` (
   PRIMARY KEY (`messageID`),
   KEY `authorID` (`authorID`),
   KEY `threadID` (`threadID`)
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `message`
 --
 
 INSERT INTO `message` (`messageID`, `Date`, `body`, `authorID`, `threadID`) VALUES
-(20, '2024-05-03 22:44:05', 'Hi, I just created a new Thread named ae', 10, 8),
-(21, '2024-05-03 22:44:24', 'wow', 10, 8),
-(23, '2024-05-03 22:54:32', 'Hi, I just created a new Thread named yt', 10, 9),
-(24, '2024-05-03 22:55:01', 'test', 10, 9),
-(45, '2024-05-08 21:31:23', 'Hi, I just created a new Thread named t', 5, 16),
-(46, '2024-05-09 22:51:49', 'Hi, I just created a new Thread named rzr', 5, 17),
-(47, '2024-05-09 22:52:02', 'rzrer', 5, 17),
-(48, '2024-05-09 22:52:05', 'ezrdsdgsdg', 5, 17),
-(49, '2024-05-10 10:39:37', 'aa', 5, 16),
-(50, '2024-05-10 10:39:39', 'aa', 5, 16),
-(51, '2024-05-10 10:49:38', 'ere', 5, 16),
-(52, '2024-05-10 11:36:52', 'tretretre', 5, 16),
-(53, '2024-05-10 11:36:58', 'h', 5, 16),
-(54, '2024-05-10 11:50:48', 'ar', 5, 16),
-(55, '2024-05-10 11:52:00', 'rere', 5, 16),
-(56, '2024-05-10 11:52:12', 'rere', 5, 16),
-(57, '2024-05-10 11:52:14', 'rerer', 5, 16),
-(58, '2024-05-10 11:52:17', 'trtrt', 5, 16),
-(59, '2024-05-10 12:00:13', 'rte', 5, 16),
-(60, '2024-05-10 12:02:09', 'test', 5, 16),
-(61, '2024-05-10 12:02:17', 'hello in here', 5, 16),
-(62, '2024-05-10 12:02:50', 'hihihih', 5, 16),
-(63, '2024-05-10 12:04:02', 'hi', 5, 16),
-(64, '2024-05-10 12:04:05', 'hi', 5, 16),
-(65, '2024-05-10 12:04:07', 'hi', 5, 16),
-(66, '2024-05-10 12:04:09', 'hi', 5, 16),
-(67, '2024-05-10 15:03:55', 'tzt', 5, 16),
-(68, '2024-05-10 15:03:58', 'tztztzt', 5, 16),
-(69, '2024-05-10 18:32:37', 'Hi, I just created a new Thread named ar', 5, 23),
-(70, '2024-05-10 18:35:16', 'Hi, I just created a new Thread named ae', 5, 24),
-(71, '2024-05-10 18:58:31', 'Hi, I just created a new Thread named halo', 5, 25),
-(72, '2024-05-10 18:58:37', 'hehehehe', 5, 25),
-(73, '2024-05-10 18:58:45', 'hehehehejheakzjhekjaeb', 5, 25),
-(74, '2024-05-10 18:58:46', 'hehehehejheakzjhekjaeb', 5, 25),
-(75, '2024-05-10 19:12:15', 'Hi, I just created a new Thread named ae', 5, 26),
-(76, '2024-05-10 19:13:13', 'Hi, I just created a new Thread named rr', 5, 27),
-(78, '2024-05-10 22:08:36', 'hi', 5, 8),
-(79, '2024-05-10 22:08:44', 'yeah wow', 5, 8),
-(80, '2024-05-10 22:09:55', 'hi', 5, 8),
-(81, '2024-05-10 22:10:02', 'how are u', 5, 8),
-(82, '2024-05-10 22:10:11', 'fine and u ?', 5, 8),
-(83, '2024-05-10 22:12:52', 'test', 5, 8),
-(84, '2024-05-10 22:12:59', 'does it work ?', 5, 8),
-(85, '2024-05-10 22:24:29', 'zr', 5, 8),
-(86, '2024-05-10 22:24:32', 'zrzr', 5, 8),
-(87, '2024-05-10 22:24:35', 'test', 5, 8),
-(88, '2024-05-10 22:29:19', 'test', 5, 8),
-(89, '2024-05-10 22:38:02', 're', 5, 8),
-(90, '2024-05-10 22:38:04', 're', 5, 8),
-(91, '2024-05-10 22:38:06', 'ze', 5, 8),
-(92, '2024-05-10 22:40:08', 're', 5, 8),
-(93, '2024-05-10 22:40:10', 're', 5, 8),
-(94, '2024-05-10 22:51:30', 'za', 5, 8),
-(95, '2024-05-10 22:51:32', 'za', 5, 8),
-(96, '2024-05-10 22:51:37', 'aze', 5, 8),
-(97, '2024-05-10 22:52:08', 'er', 5, 8),
-(98, '2024-05-10 22:52:34', 'test', 5, 8),
-(99, '2024-05-10 22:52:37', 'test', 5, 8),
-(100, '2024-05-10 22:55:42', 'hi', 5, 8),
-(101, '2024-05-10 22:55:47', 'hello', 5, 8),
-(102, '2024-05-10 22:57:10', 'hehehe', 5, 8),
-(103, '2024-05-10 22:57:27', 'te', 5, 8),
-(104, '2024-05-10 22:59:32', 'hehe', 5, 8),
-(106, '2024-05-11 09:44:47', 'Hi, I just created a new Thread named test', 5, 30),
-(107, '2024-05-12 20:50:18', 'Hi, I just created a new Thread named test', 5, 31),
-(108, '2024-05-12 21:14:17', 'hi', 5, 25),
-(109, '2024-05-12 21:15:12', 'Hi, I just created a new Thread named te', 5, 32),
-(110, '2024-05-12 21:16:08', 'Hi, I just created a new Thread named test', 5, 33),
-(111, '2024-05-12 21:16:50', 'Hi, I just created a new Thread named testt', 5, 34),
-(112, '2024-05-12 21:17:56', 'Hi, I just created a new Thread named hy', 5, 35),
-(113, '2024-05-12 21:56:30', 'hi', 5, 25),
-(114, '2024-05-12 21:56:31', 'hi', 5, 25),
-(115, '2024-05-12 21:56:32', 'hi', 5, 25),
-(116, '2024-05-12 21:56:32', 'hi', 5, 25),
-(117, '2024-05-12 21:56:32', 'hi', 5, 25),
-(118, '2024-05-12 21:56:33', 'hi', 5, 25),
-(119, '2024-05-12 21:56:33', 'hi', 5, 25),
-(120, '2024-05-12 22:12:42', 'Hi, I just created a new Thread named t', 5, 36),
-(121, '2024-05-12 22:12:49', 'hi', 5, 36),
-(122, '2024-05-12 22:13:37', 'hi', 10, 36),
-(123, '2024-05-13 21:43:12', 'test', 5, 26),
-(124, '2024-05-13 22:21:54', 'er', 5, 26),
-(125, '2024-05-13 22:22:13', 'test', 5, 26),
-(126, '2024-05-14 13:13:51', 'Hi, I just created a new Thread named test', 5, 37),
-(128, '2024-05-14 13:14:37', 'test', 5, 27),
-(130, '2024-05-14 21:52:31', 'hi', 5, 36),
-(131, '2024-05-14 21:57:43', 'hi', 5, 36),
-(132, '2024-05-14 21:57:49', 'hie', 5, 36),
-(133, '2024-05-14 22:35:01', 'Hi, I just created a new Thread named tr', 5, 38),
-(134, '2024-05-14 22:35:06', 'Hi, I just created a new Thread named tr', 5, 39),
-(137, '2024-05-15 20:03:09', 'test', 5, 32),
-(138, '2024-05-15 20:03:20', 'Hi, I just created a new Thread named test', 5, 40),
-(139, '2024-05-15 20:03:25', 'test', 5, 40),
-(141, '2024-05-15 20:05:29', 'hi', 5, 29),
-(142, '2024-05-16 22:09:45', 'test', 5, 29),
-(143, '2024-05-26 22:46:22', 'Hi, I just created a new Thread named test', 5, 41);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `moderators`
---
-
-DROP TABLE IF EXISTS `moderators`;
-CREATE TABLE IF NOT EXISTS `moderators` (
-  `moderationID` int NOT NULL AUTO_INCREMENT,
-  `userID` int DEFAULT NULL,
-  `threadID` int DEFAULT NULL,
-  PRIMARY KEY (`moderationID`),
-  KEY `userID_index` (`userID`),
-  KEY `threadID_index` (`threadID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+(143, '2024-05-26 22:46:22', 'Hi, I just created a new Thread named test', 5, 41),
+(159, '2024-05-28 18:23:21', 'Hi, I just created a new Thread named test', 5, 52),
+(160, '2024-05-28 18:23:29', 'hi', 5, 52),
+(161, '2024-05-28 20:19:54', 'test', 5, 41),
+(163, '2024-05-28 20:20:31', 'test', 5, 41),
+(167, '2024-05-28 20:22:25', 'hi', 5, 41),
+(168, '2024-05-28 20:28:57', 'Hi, I just created a new Thread named test', 10, 57),
+(169, '2024-05-28 20:40:59', 'Hi, I just created a new Thread named test', 10, 58),
+(170, '2024-05-28 20:41:11', 'hi', 10, 56),
+(171, '2024-05-28 20:42:11', 'Hi, I just created a new Thread named test', 30, 59);
 
 -- --------------------------------------------------------
 
@@ -486,10 +397,36 @@ DROP TABLE IF EXISTS `notifs`;
 CREATE TABLE IF NOT EXISTS `notifs` (
   `notifID` int NOT NULL AUTO_INCREMENT,
   `userID` int DEFAULT NULL,
+  `senderID` int DEFAULT NULL,
   `content` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
   `link` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `notifCode` int NOT NULL,
+  `isSeen` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`notifID`),
-  KEY `user` (`userID`)
+  KEY `user` (`userID`),
+  KEY `senderID` (`senderID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reports`
+--
+
+DROP TABLE IF EXISTS `reports`;
+CREATE TABLE IF NOT EXISTS `reports` (
+  `reportID` int NOT NULL AUTO_INCREMENT,
+  `fromUserID` int DEFAULT NULL,
+  `aboutUserID` int DEFAULT NULL,
+  `threadID` int DEFAULT NULL,
+  `messageID` int DEFAULT NULL,
+  `content` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `isDone` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`reportID`),
+  UNIQUE KEY `messageID` (`messageID`),
+  UNIQUE KEY `threadID` (`threadID`),
+  UNIQUE KEY `aboutUserID` (`aboutUserID`),
+  UNIQUE KEY `from` (`fromUserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
@@ -510,41 +447,19 @@ CREATE TABLE IF NOT EXISTS `threads` (
   PRIMARY KEY (`threadID`),
   KEY `owner` (`ownerID`),
   KEY `lastMessage` (`lastMessageID`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `threads`
 --
 
 INSERT INTO `threads` (`threadID`, `lastMessageID`, `title`, `description`, `isDM`, `ownerID`, `isPublic`) VALUES
-(8, 104, 'ae', 'ae', 0, NULL, 0),
-(9, 24, 'yt', 'yt', 0, NULL, 0),
-(16, 68, 't', 't', 0, NULL, 0),
-(17, 48, 'rzr', 'zrzr', 0, NULL, 0),
-(18, NULL, 'ar', 'ar', 0, NULL, 0),
-(19, NULL, 'ar', 'ar', 0, NULL, 0),
-(20, NULL, 'ar', 'ar', 0, NULL, 0),
-(21, NULL, 'ar', 'ar', 0, NULL, 0),
-(22, NULL, 'ar', 'ar', 0, NULL, 0),
-(23, 69, 'ar', 'ar', 0, NULL, 0),
-(24, 70, 'ae', 'ae', 0, NULL, 0),
-(25, 119, 'halo', 'german', 0, NULL, 0),
-(26, 125, 'ae', 'ae', 0, NULL, 0),
-(27, 128, 'rr', 'rr', 0, NULL, 0),
-(28, NULL, 'test', 'test', 0, NULL, 0),
-(29, 142, 'tr', 'tr', 0, NULL, 0),
-(30, 106, 'test', 'test', 0, NULL, 0),
-(31, 107, 'test', 'test', 0, NULL, 0),
-(32, 137, 'te', 'te', 0, NULL, 0),
-(33, 110, 'test', 'test', 0, NULL, 0),
-(34, 111, 'testt', 'testt', 0, NULL, 0),
-(35, 112, 'hy', 'hy', 0, NULL, 0),
-(36, 132, 't', 't', 0, NULL, 0),
-(37, NULL, 'test', 'test', 0, NULL, 0),
-(38, 133, 'tr', 'tr', 0, NULL, 0),
-(39, 134, 'tr', 'tr', 0, NULL, 0),
-(40, 139, 'test', 'test', 0, NULL, 0),
-(41, 143, 'test', 'test', 0, 5, 0);
+(41, 167, 'test', 'test', 0, 5, 0),
+(52, 160, 'test', 'test', 0, 5, 0),
+(56, 170, 'test', 'test', 0, 10, 0),
+(57, 168, 'test', 'test', 0, 10, 0),
+(58, 169, 'test', 'test', 0, 10, 0),
+(59, 171, 'test', 'test', 0, 30, 0);
 
 -- --------------------------------------------------------
 
@@ -560,28 +475,19 @@ CREATE TABLE IF NOT EXISTS `threadsubscriptions` (
   PRIMARY KEY (`threadSubscriptionID`),
   KEY `userID` (`userID`),
   KEY `threadID` (`threadID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `threadsubscriptions`
 --
 
 INSERT INTO `threadsubscriptions` (`threadSubscriptionID`, `userID`, `threadID`) VALUES
-(1, 10, 16),
-(9, 5, 29),
-(11, 5, 31),
-(12, 5, 32),
-(13, 5, 33),
-(14, 5, 34),
-(15, 5, 35),
-(16, 5, 36),
-(17, 10, 36),
-(19, 32, 27),
-(20, 32, 28),
-(21, 5, 38),
-(22, 5, 39),
-(23, 5, 40),
-(24, 5, 41);
+(24, 5, 41),
+(35, 5, 52),
+(39, 10, 56),
+(40, 10, 57),
+(41, 10, 58),
+(42, 30, 59);
 
 -- --------------------------------------------------------
 
@@ -601,6 +507,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `description` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
   `isAdmin` tinyint(1) NOT NULL DEFAULT '0',
   `isPrenium` tinyint(1) NOT NULL DEFAULT '0',
+  `email` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
@@ -608,47 +515,47 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`ID`, `username`, `gender`, `birthdate`, `password`, `registrationDate`, `profileImage`, `description`, `isAdmin`, `isPrenium`) VALUES
-(5, 'test', 'M', '0020-02-20', '$2y$10$6P/U0CbFg9LQ7k4LSAddEet2D7N7sSwJXslH3EC2y9eBd634QI7f.', '2024-05-02 00:00:00', '', '', 0, 0),
-(7, 'D', 'M', '2020-02-20', '$2y$10$BwSjlb9F33n7HA7Wg5byGe5VU.7J2ysPgmPPtwkghDtgsgPJ4rpfW', '2024-05-02 00:00:00', '', '', 0, 0),
-(8, 'John Wick', 'F', '1978-04-01', '$2y$10$It6iujIe7d.m7z/Pgl3v4eUNhzvVjpQCsfaT0kloQTVrFRYL8hWFm', '2024-05-03 00:00:00', '', '', 0, 0),
-(9, 'Toto', 'M', '2001-01-01', '$2y$10$tlstgkkQQeaXs4rX3ht3SeUWeh.gMjzhoWCG8y64mM.jd9DtyTOpS', '2024-05-03 00:00:00', '', '', 0, 0),
-(10, 'test2', 'M', '2020-02-20', '$2y$10$72xJya76jD5p9rRt7KM25uHf7bsKWI6V.C3M25b/YyifIRIS5shMG', '2024-05-03 00:00:00', '', '', 0, 0),
-(11, 'test3', 'M', '0200-02-20', '$2y$10$Mxemorws7aW0E2ZeoFP3D.vqKKE7zr4LtjI743h/.7bIpuai.gk/W', '2024-05-10 00:00:00', '', '', 0, 0),
-(12, 't', 'M', '0002-02-20', '$2y$10$v2be6JNti/g2CrJiJjX0Cupqq5dNoMByL.NODjq7EV.rcBu77Yq5u', '2024-05-10 00:00:00', '', '', 0, 0),
-(13, 'e', 'M', '0010-10-10', '$2y$10$5kyO9/mW1gReE3G8SibDOeCr/xyfWVs3GOcefdbuOhEYCQqIRwEEi', '2024-05-10 00:00:00', '', '', 0, 0),
-(14, '', 'M', '0025-02-10', '$2y$10$iYPjhhlqeF7kGg8Igb9CeOLrDob3GruyaolhuXhZcliDJdEcZhEbC', '2024-05-10 00:00:00', '', '', 0, 0),
-(15, '', 'F', '0010-10-10', '$2y$10$vNznhAjxHyDvJ9DZA3tSbeAx16bUnbHxeWZEjqIBF/a3DGMSLfhmO', '2024-05-10 00:00:00', '', '', 0, 0),
-(16, '', 'O', '0101-10-10', '$2y$10$PCys4Ep0SOz0E0X2GW6une53.MGt1BGsvNtTlVVZm7rlsRCzIk0/e', '2024-05-10 00:00:00', '', '', 0, 0),
-(17, '', 'O', '0001-01-01', '$2y$10$x6BVesnY6SXDO0SnueLhUu.NdW0W8Sm6cZZ7etIBrv6hRpvEv8SwW', '2024-05-10 00:00:00', '', '', 0, 0),
-(18, '', 'O', '0001-01-01', '$2y$10$XxJbe8pW.jFRTfo30DDsiu6yJajaeyJE2K6X1aTKn5WRmIOd7csUS', '2024-05-10 00:00:00', '', '', 0, 0),
-(19, '', 'O', '0001-01-01', '$2y$10$kCtQWigMBGJbZRW68b6vv.8TjxzHVC/Eo8K6GQwjBg9jhoCAuedrm', '2024-05-10 00:00:00', '', '', 0, 0),
-(20, '', 'O', '0001-01-01', '$2y$10$5qY4j1M1PHePmtPphuACEOZ8vjDUnV9j6iZSy88oIYhnWr8uEM1Dy', '2024-05-10 00:00:00', '', '', 0, 0),
-(21, '', 'O', '0001-01-01', '$2y$10$EX/V7tNmnvxzs/45Ib.N4uatAl91.q5snTY.di.oLG/j2AISl3sg.', '2024-05-10 00:00:00', '', '', 0, 0),
-(22, '', 'O', '0001-01-01', '$2y$10$5ZwFK072JHIa4mzt.l.8lOPoHh.AEUqvAmhjBJdvPniPSHmUnpT6i', '2024-05-10 00:00:00', '', '', 0, 0),
-(23, '', 'O', '0001-01-01', '$2y$10$rZUXuKEKBNK2Z9EzTPIMdesSFCx/oBPKkTg6JKD8cdgHnQ0mX5Wbq', '2024-05-10 00:00:00', '', '', 0, 0),
-(24, '', 'O', '0001-01-01', '$2y$10$zEe97fsSwpbLVHj8j61OYuyz2482VuE658u.UekR2up4a2M5N/vLy', '2024-05-10 00:00:00', '', '', 0, 0),
-(25, '', 'O', '0001-01-01', '$2y$10$ZoQPYywobGnbX3AbJo267eiyrXtT1EnAJTHi34X.bW/N2fAFKDBLO', '2024-05-10 00:00:00', '', '', 0, 0),
-(26, '', 'O', '0001-01-01', '$2y$10$XBjjoyeocxkKl/DqORfkWepRvMiZv4NMKYLtXh6w6BNrBi6ukySjW', '2024-05-10 00:00:00', '', '', 0, 0),
-(27, 'ae', 'F', '0010-10-10', '$2y$10$n2A7dxHI0b6IxltdmgchzOXBXfsPUzq3.hFXm34ea5kVTnomSR4Iq', '2024-05-10 00:00:00', '', '', 0, 0),
-(28, 'erezrze', 'F', '0100-10-10', '$2y$10$fRo8c2/..YrnBhYWZCPfOuuyplTPnnJJMmy1.Z/Aia65oy3CW3DVW', '2024-05-10 00:00:00', '', '', 0, 0),
-(29, 'ERZ', 'F', '0010-10-10', '$2y$10$ctCu05dk0Vl1Y8V1VF.5beUphfkUZ1NX5V1jnXvNX3izBA0YYyYaW', '2024-05-10 00:00:00', '', '', 0, 0),
-(30, 'test4', 'M', '1010-10-10', '$2y$10$411LoGFlwmX3LLtl9udZluCupaINY3U6zZ6voCoi6NfBxMel1CW4S', '2024-05-10 00:00:00', '', '', 0, 0),
-(31, 'test6', 'O', '0001-10-10', '$2y$10$2Z3.cwB.QVcJEf3RJ1EY2.ngNPJDOLH8BBaTtfzoZcDBzgfayofku', '2024-05-10 00:00:00', '', '', 0, 0),
-(32, 'test5', 'M', '0010-10-10', '$2y$10$fgnQTQRWTr5IGS.eVckf5.gRCkf/hawQZ.ZZOzAV8HnDaW2X4ehpK', '2024-05-10 00:00:00', '', '', 0, 0),
-(33, 'test7', 'M', '0010-10-10', '$2y$10$UeyPylH4psQGGkr0G7/wx.wWn32lLfc6GperCwhzxNswFGdWtKSMW', '2024-05-10 00:00:00', '', '', 0, 0),
-(34, 'testuser', '', '1990-01-01', '$2y$10$YMDh8NALSbjQ7El/utyT4eTkMAxg.pGauRUr6s3ke0CVmTGmwi55i', '2024-05-17 18:36:18', '', '', 0, 0),
-(35, 'testuser', 'M', '1990-01-01', '$2y$10$wJadTzRz5H9XsxB09j8/Y.j7T2Bnw9.oTSwCxBFb6gjrgwVCPAuDG', '2024-05-17 18:40:51', '', '', 0, 0),
-(36, 'testuser', 'M', '1990-01-01', '$2y$10$r7b31Ae8bKmHw85OzG.0wevqsxQJy51bgxOypLC6EjxV9/ErXTbyi', '2024-05-17 18:42:28', '', '', 0, 0),
-(37, 'testuser', 'M', '1990-01-01', '$2y$10$NXDq6tNcCN0zK9RUuJPZ2.BdChpWXbQ6YHBd0R5A/dSmSfZo/ap06', '2024-05-17 18:43:20', '', '', 0, 0),
-(38, 'testuser', 'M', '1990-01-01', '$2y$10$hdinBfWyH1aAnLkmg1vRl.MgZTGo2B0lH0jqqAJkkKphVzL6SzR1G', '2024-05-17 18:43:26', '', '', 0, 0),
-(39, 'testuser', 'M', '1990-01-01', '$2y$10$ZQtXF4mfvQ.YGgyTQDRi2uV6GpyZPSv.uwRMsN7jbyXvn28bMUKyq', '2024-05-17 18:45:47', '', '', 0, 0),
-(40, 'testuser', 'M', '1990-01-01', '$2y$10$7iDdBXzLY10s4CR00rXVn.U6KWrAbbI/k4pH.AlgLJEXesvhZmQ3.', '2024-05-17 18:46:26', '', '', 0, 0),
-(41, 'testuser', 'M', '1990-01-01', '$2y$10$8RC5hRay6vlamus2c95jMe.LXTb5pmHUY7OqSoxnOEz7LhclAP646', '2024-05-17 18:47:10', '', '', 0, 0),
-(42, 'testuser', 'M', '1990-01-01', '$2y$10$usux/DgmDJa7U2o484qTd.oSkSPW.y0wpuulqUjto6T2AMguipOna', '2024-05-17 18:48:08', '', '', 0, 0),
-(43, 'testuser', 'M', '1990-01-01', '$2y$10$AcjusjVAuAQAqiIHk/Lm1uQdSdShLODMmmE5nLDzyG3QYSDJ4Oehm', '2024-05-17 18:49:20', '', '', 0, 0),
-(44, 'testuser', 'M', '1990-01-01', '$2y$10$JuFvu4TJFuGVH1ZINK0ZB.6vO.eaaAIsSycn9TUZUYty5aojD8kN.', '2024-05-17 18:52:02', '', '', 0, 0),
-(45, 'testuser', 'M', '1990-01-01', '$2y$10$2qO9ySL0X683/2iL5CD5BOULy1.xaeBDqvy0rUGS7mtE0jvg5yIJi', '2024-05-17 18:56:05', '', '', 0, 0);
+INSERT INTO `users` (`ID`, `username`, `gender`, `birthdate`, `password`, `registrationDate`, `profileImage`, `description`, `isAdmin`, `isPrenium`, `email`) VALUES
+(5, 'test', 'M', '0020-02-20', '$2y$10$6P/U0CbFg9LQ7k4LSAddEet2D7N7sSwJXslH3EC2y9eBd634QI7f.', '2024-05-02 00:00:00', '', '', 0, 0, ''),
+(7, 'D', 'M', '2020-02-20', '$2y$10$BwSjlb9F33n7HA7Wg5byGe5VU.7J2ysPgmPPtwkghDtgsgPJ4rpfW', '2024-05-02 00:00:00', '', '', 0, 0, ''),
+(8, 'John Wick', 'F', '1978-04-01', '$2y$10$It6iujIe7d.m7z/Pgl3v4eUNhzvVjpQCsfaT0kloQTVrFRYL8hWFm', '2024-05-03 00:00:00', '', '', 0, 0, ''),
+(9, 'Toto', 'M', '2001-01-01', '$2y$10$tlstgkkQQeaXs4rX3ht3SeUWeh.gMjzhoWCG8y64mM.jd9DtyTOpS', '2024-05-03 00:00:00', '', '', 0, 0, ''),
+(10, 'test2', 'M', '2020-02-20', '$2y$10$72xJya76jD5p9rRt7KM25uHf7bsKWI6V.C3M25b/YyifIRIS5shMG', '2024-05-03 00:00:00', '', '', 0, 0, ''),
+(11, 'test3', 'M', '0200-02-20', '$2y$10$Mxemorws7aW0E2ZeoFP3D.vqKKE7zr4LtjI743h/.7bIpuai.gk/W', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(12, 't', 'M', '0002-02-20', '$2y$10$v2be6JNti/g2CrJiJjX0Cupqq5dNoMByL.NODjq7EV.rcBu77Yq5u', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(13, 'e', 'M', '0010-10-10', '$2y$10$5kyO9/mW1gReE3G8SibDOeCr/xyfWVs3GOcefdbuOhEYCQqIRwEEi', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(14, '', 'M', '0025-02-10', '$2y$10$iYPjhhlqeF7kGg8Igb9CeOLrDob3GruyaolhuXhZcliDJdEcZhEbC', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(15, '', 'F', '0010-10-10', '$2y$10$vNznhAjxHyDvJ9DZA3tSbeAx16bUnbHxeWZEjqIBF/a3DGMSLfhmO', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(16, '', 'O', '0101-10-10', '$2y$10$PCys4Ep0SOz0E0X2GW6une53.MGt1BGsvNtTlVVZm7rlsRCzIk0/e', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(17, '', 'O', '0001-01-01', '$2y$10$x6BVesnY6SXDO0SnueLhUu.NdW0W8Sm6cZZ7etIBrv6hRpvEv8SwW', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(18, '', 'O', '0001-01-01', '$2y$10$XxJbe8pW.jFRTfo30DDsiu6yJajaeyJE2K6X1aTKn5WRmIOd7csUS', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(19, '', 'O', '0001-01-01', '$2y$10$kCtQWigMBGJbZRW68b6vv.8TjxzHVC/Eo8K6GQwjBg9jhoCAuedrm', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(20, '', 'O', '0001-01-01', '$2y$10$5qY4j1M1PHePmtPphuACEOZ8vjDUnV9j6iZSy88oIYhnWr8uEM1Dy', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(21, '', 'O', '0001-01-01', '$2y$10$EX/V7tNmnvxzs/45Ib.N4uatAl91.q5snTY.di.oLG/j2AISl3sg.', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(22, '', 'O', '0001-01-01', '$2y$10$5ZwFK072JHIa4mzt.l.8lOPoHh.AEUqvAmhjBJdvPniPSHmUnpT6i', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(23, '', 'O', '0001-01-01', '$2y$10$rZUXuKEKBNK2Z9EzTPIMdesSFCx/oBPKkTg6JKD8cdgHnQ0mX5Wbq', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(24, '', 'O', '0001-01-01', '$2y$10$zEe97fsSwpbLVHj8j61OYuyz2482VuE658u.UekR2up4a2M5N/vLy', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(25, '', 'O', '0001-01-01', '$2y$10$ZoQPYywobGnbX3AbJo267eiyrXtT1EnAJTHi34X.bW/N2fAFKDBLO', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(26, '', 'O', '0001-01-01', '$2y$10$XBjjoyeocxkKl/DqORfkWepRvMiZv4NMKYLtXh6w6BNrBi6ukySjW', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(27, 'ae', 'F', '0010-10-10', '$2y$10$n2A7dxHI0b6IxltdmgchzOXBXfsPUzq3.hFXm34ea5kVTnomSR4Iq', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(28, 'erezrze', 'F', '0100-10-10', '$2y$10$fRo8c2/..YrnBhYWZCPfOuuyplTPnnJJMmy1.Z/Aia65oy3CW3DVW', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(29, 'ERZ', 'F', '0010-10-10', '$2y$10$ctCu05dk0Vl1Y8V1VF.5beUphfkUZ1NX5V1jnXvNX3izBA0YYyYaW', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(30, 'test4', 'M', '1010-10-10', '$2y$10$411LoGFlwmX3LLtl9udZluCupaINY3U6zZ6voCoi6NfBxMel1CW4S', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(31, 'test6', 'O', '0001-10-10', '$2y$10$2Z3.cwB.QVcJEf3RJ1EY2.ngNPJDOLH8BBaTtfzoZcDBzgfayofku', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(32, 'test5', 'M', '0010-10-10', '$2y$10$fgnQTQRWTr5IGS.eVckf5.gRCkf/hawQZ.ZZOzAV8HnDaW2X4ehpK', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(33, 'test7', 'M', '0010-10-10', '$2y$10$UeyPylH4psQGGkr0G7/wx.wWn32lLfc6GperCwhzxNswFGdWtKSMW', '2024-05-10 00:00:00', '', '', 0, 0, ''),
+(34, 'testuser', '', '1990-01-01', '$2y$10$YMDh8NALSbjQ7El/utyT4eTkMAxg.pGauRUr6s3ke0CVmTGmwi55i', '2024-05-17 18:36:18', '', '', 0, 0, ''),
+(35, 'testuser', 'M', '1990-01-01', '$2y$10$wJadTzRz5H9XsxB09j8/Y.j7T2Bnw9.oTSwCxBFb6gjrgwVCPAuDG', '2024-05-17 18:40:51', '', '', 0, 0, ''),
+(36, 'testuser', 'M', '1990-01-01', '$2y$10$r7b31Ae8bKmHw85OzG.0wevqsxQJy51bgxOypLC6EjxV9/ErXTbyi', '2024-05-17 18:42:28', '', '', 0, 0, ''),
+(37, 'testuser', 'M', '1990-01-01', '$2y$10$NXDq6tNcCN0zK9RUuJPZ2.BdChpWXbQ6YHBd0R5A/dSmSfZo/ap06', '2024-05-17 18:43:20', '', '', 0, 0, ''),
+(38, 'testuser', 'M', '1990-01-01', '$2y$10$hdinBfWyH1aAnLkmg1vRl.MgZTGo2B0lH0jqqAJkkKphVzL6SzR1G', '2024-05-17 18:43:26', '', '', 0, 0, ''),
+(39, 'testuser', 'M', '1990-01-01', '$2y$10$ZQtXF4mfvQ.YGgyTQDRi2uV6GpyZPSv.uwRMsN7jbyXvn28bMUKyq', '2024-05-17 18:45:47', '', '', 0, 0, ''),
+(40, 'testuser', 'M', '1990-01-01', '$2y$10$7iDdBXzLY10s4CR00rXVn.U6KWrAbbI/k4pH.AlgLJEXesvhZmQ3.', '2024-05-17 18:46:26', '', '', 0, 0, ''),
+(41, 'testuser', 'M', '1990-01-01', '$2y$10$8RC5hRay6vlamus2c95jMe.LXTb5pmHUY7OqSoxnOEz7LhclAP646', '2024-05-17 18:47:10', '', '', 0, 0, ''),
+(42, 'testuser', 'M', '1990-01-01', '$2y$10$usux/DgmDJa7U2o484qTd.oSkSPW.y0wpuulqUjto6T2AMguipOna', '2024-05-17 18:48:08', '', '', 0, 0, ''),
+(43, 'testuser', 'M', '1990-01-01', '$2y$10$AcjusjVAuAQAqiIHk/Lm1uQdSdShLODMmmE5nLDzyG3QYSDJ4Oehm', '2024-05-17 18:49:20', '', '', 0, 0, ''),
+(44, 'testuser', 'M', '1990-01-01', '$2y$10$JuFvu4TJFuGVH1ZINK0ZB.6vO.eaaAIsSycn9TUZUYty5aojD8kN.', '2024-05-17 18:52:02', '', '', 0, 0, ''),
+(45, 'testuser', 'M', '1990-01-01', '$2y$10$2qO9ySL0X683/2iL5CD5BOULy1.xaeBDqvy0rUGS7mtE0jvg5yIJi', '2024-05-17 18:56:05', '', '', 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -708,17 +615,20 @@ ALTER TABLE `message`
   ADD CONSTRAINT `threadID` FOREIGN KEY (`threadID`) REFERENCES `threads` (`threadID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `moderators`
---
-ALTER TABLE `moderators`
-  ADD CONSTRAINT `moderators_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `moderators_ibfk_2` FOREIGN KEY (`threadID`) REFERENCES `threads` (`threadID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Contraintes pour la table `notifs`
 --
 ALTER TABLE `notifs`
+  ADD CONSTRAINT `notifs_ibfk_1` FOREIGN KEY (`senderID`) REFERENCES `users` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `reports`
+--
+ALTER TABLE `reports`
+  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`fromUserID`) REFERENCES `users` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`aboutUserID`) REFERENCES `users` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `reports_ibfk_3` FOREIGN KEY (`threadID`) REFERENCES `threads` (`threadID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `reports_ibfk_4` FOREIGN KEY (`messageID`) REFERENCES `message` (`messageID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `threads`
