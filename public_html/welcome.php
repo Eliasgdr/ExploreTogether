@@ -22,7 +22,7 @@
 <body>
     <header>
         <div class="title">Explore Together</div>
-        <div class="titleButton">Messages</div>
+        <button class="titleButton"><a href="messages.php">Messages</a></button>
     </header>
     <div class="container">
         

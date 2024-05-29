@@ -1,0 +1,152 @@
+@import "./global.css";
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    color: #1DA1F2;
+    margin-top: 0;
+}
+
+.messages-container {
+    margin-top: 20px;
+}
+
+.message {
+    display: inline-block;
+    max-width: 70%;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    clear: both;
+    position: relative;
+    font-size: 14px;
+}
+
+.message.sent {
+    min-width: 10%;
+    float: right;
+    background-color: #1DA1F2;
+    color: #333;
+}
+
+.message.received {
+    float: left;
+    background-color: #E5E5EA;
+    color: #333;
+}
+
+.message .message-content {
+    margin: 0;
+}
+
+.message .time {
+    color: #888;
+    font-size: 12px;
+    position: absolute;
+    bottom: -15px;
+    right: 10px;
+}
+
+.message .message-author {
+    font-weight: bold;
+    display: block;
+}
+
+.search-container {
+    margin-top: 20px;
+    position: relative;
+}
+
+.search-container input[type=text] {
+    padding: 10px;
+    width: 70%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.search-container input[type=submit] {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #1DA1F2;
+    color: #fff;
+    cursor: pointer;
+}
+
+#userSuggestions {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: calc(70% + 10px);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+#userSuggestions ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#userSuggestions li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+}
+
+#userSuggestions li:hover {
+    background-color: #f2f2f2;
+}
+
+form {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 14px;
+    resize: none;
+}
+
+input[type=submit] {
+    background-color: #1DA1F2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+input[type=submit]:hover {
+    background-color: #0d95e8;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
