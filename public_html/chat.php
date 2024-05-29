@@ -35,7 +35,7 @@ if (!isset($_SESSION['userID'])) {
         <div class="thread">
             <div class="threadProfile">
                 <img src="./images/Png.png" alt="" class="imageProfile">
-                <p class="username">awdawd</p>
+                <p id="threadOwnerName" class="username">awdawd</p>
             </div>
 
 
@@ -105,7 +105,7 @@ if (!isset($_SESSION['userID'])) {
         function postMessageCallBackSuccess(response) {
             if (response.success) {
                 //alert(response.message);
-                getMessages(<?php echo $_GET['thread_id']; ?>, getMessageCallBackSuccess, getMessageCallBackError);
+                getThread(<?php echo $_GET['thread_id']; ?>, getThreadCallBackSuccess, getThreadCallBackError);
                 $("#message").val('');
             } else {
                 alert(response.message);
@@ -147,7 +147,7 @@ if (!isset($_SESSION['userID'])) {
         }
 
         function deleteMessageCallBackSuccess(response) {
-            getMessages(<?php echo $_GET['thread_id']; ?>, getMessageCallBackSuccess, getMessageCallBackError);
+            getThread(<?php echo $_GET['thread_id']; ?>, getThreadCallBackSuccess, getThreadCallBackError);
         }
         
         function deleteMessageCallBackError(xhr, status, error) {
@@ -168,13 +168,13 @@ if (!isset($_SESSION['userID'])) {
             
             // Create the message header
             var header = $('<div class="message-header"></div>');
-            header.append('<strong class="message-author">' + message.author + '</strong>');
-            header.append('<span class="message-time">' + formatMessageTime(message.time) + '</span>');
+            header.append('<strong class="message-author">' + message.authorUsername + '</strong>');
+            header.append('<span class="message-time">' + formatMessageTime(message.Date) + '</span>');
 
             // Check if the author of the message is the current user
             if (message.authorID == <?php echo $_SESSION['userID'] ?>) {
                 // Add buttons for deleting and editing messages
-                header.append('<div class="message-actions"><button class="delete-message-btn" onclick="deleteMessage(' + message.id + ', deleteMessageCallBackSuccess, deleteMessageCallBackError)">Delete</button><button class="edit-message-btn" onclick="alert(\'WIP\')">Edit</button></div>');
+                header.append('<div class="message-actions"><button class="delete-message-btn" onclick="deleteMessage(' + message.messageID + ', deleteMessageCallBackSuccess, deleteMessageCallBackError)">Delete</button><button class="edit-message-btn" onclick="alert(\'WIP\')">Edit</button></div>');
             }
 
             // Append the header to the message container
@@ -205,9 +205,22 @@ if (!isset($_SESSION['userID'])) {
             // Alert error message
             console.log(xhr);
         }
+
+        function getThreadCallBackSuccess(response) {
+            renderMessages(response['threadInfo']['messages']);
+            $('#threadOwnerName').text(response['threadInfo']['ownerUsername']);
+            console.log(response);
+        }
+        
+        function getThreadCallBackError(xhr, status, error) {
+            // Alert error message
+            console.log(xhr);
+        }
+
         // Make AJAX request to load thread details
         $(document).ready(function() {
-            getMessages(<?php echo $_GET['thread_id']; ?>, getMessageCallBackSuccess, getMessageCallBackError);
+            //getMessages(<?php echo $_GET['thread_id']; ?>, getMessageCallBackSuccess, getMessageCallBackError);
+            getThread(<?php echo $_GET['thread_id']; ?>, getThreadCallBackSuccess, getThreadCallBackError);
             
         });
     
