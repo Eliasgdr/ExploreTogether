@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Mansalva&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Numans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Numans&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css');
+
+
+:root{
+
+    --mainColor: rgba(0, 54, 100, 1);
+    --greyColor:rgba(0, 0, 0, 0.233);
+    --whiteColor:white;
+    --blackColor:black;
+}
+
+header{
+    display: grid;
+    grid-template-columns: 5% 33% 33% 10% 10% 5%;
+
+    margin: -8px;
+
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    background-color: var(--mainColor);
+    font-family: "Mansalva", sans-serif;
+    color: var(--whiteColor);
+}
+
+header .title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column-start: 2;
+    
+    font-size: 2vw;
+    
+    background-color: var(--mainColor);
+}
+header .titleButton{
+    grid-column-start: 5;
+
+    display: flex;
+    border-radius: 1vw;
+    font-size: 1.75vw;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--greyColor);
+}
+
+footer{
+    
+    display: flex;
+    align-items: center;
+    margin: -8px;
+    margin-top:10vw;
+
+    font-size: 1vw;
+
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    justify-content: center;
+    background-color: var(--mainColor);
+    color: var(--whiteColor);
+
+}
+
+
+
+
+

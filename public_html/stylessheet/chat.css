@@ -1,0 +1,124 @@
+@import url('global.css');
+
+.container{
+    margin-top: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+footer{
+    margin-top:5vw;
+}
+
+
+
+.container .thread{
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    height: 40vw;
+    width: 40vw;
+    display: grid;
+    grid-template-rows:5% 10% 5% 55% 2.5% 17.5%;
+    margin-bottom: -1px;
+}
+
+
+.container .thread .threadProfile{
+    display: grid;
+    grid-template-columns:5% 10% 5% 75% 5% ;
+    grid-template-rows:100% ;
+    grid-row-start: 2;
+}
+
+.container .thread .threadProfile .imageProfile{
+    grid-column-start: 2;
+    grid-row-start: 1;
+
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.container .thread .threadProfile .username{
+    font-family: "Mansalva", sans-serif;
+    display: flex;
+    align-self: center;
+    grid-row-start: 1;
+    grid-column-start: 4;
+    font-size: 2vw;
+}
+
+
+
+.container .thread .imageTread{
+
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    grid-row-start: 4;
+    object-fit: cover;
+
+}
+
+
+.container .thread .message{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    grid-row-start: 6;
+    font-size: 1vw;
+    margin: 2vw;
+}
+
+
+
+.threadComment{
+    border-width: 1px;
+    border-color: black;
+    border-top-color: rgb(255, 255, 255);
+    border-style: solid;
+    width: 40vw;
+
+
+    margin-bottom: -1px;
+}
+
+.threadComment .messages-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+    background-color: blueviolet;
+}
+
+.threadComment .messages-container .message{
+    width: 30vw;
+    background-color: blue;
+}
+.threadComment .messages-container .message .message-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
+    padding: 1vw;
+}
+
+.threadComment .messages-container .message .message-body{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: white;
+
+    padding: 1vw;
+}
+
+
+.message-header .message-author .message-time .message-actions .delete-message-btn .edit-message-btn,
+
+.message-body.message-author .message-time .message-actions

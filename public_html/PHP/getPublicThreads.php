@@ -25,19 +25,20 @@ try {
     // Set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Retrieve threads user is following from the database
-    $stmt = $conn->prepare("SELECT * FROM threads WHERE threadID IN (SELECT threadID FROM threadSubscriptions WHERE userID = :user_id)");
-    $stmt->bindParam(':user_id', $_SESSION['userID']); 
+    // Retrieve threads user is following and are public from the database
+    $stmt = $conn->prepare("SELECT * FROM threads WHERE threadID IN (SELECT threadID FROM threadSubscriptions WHERE userID = :user_id) AND isPublic = 1");
+    $stmt->bindParam(':user_id', $_SESSION['userID'], PDO::PARAM_INT); 
     $stmt->execute();
     $threads = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Initialize array to store thread information
     $threadInfo = array();
+
     // Store thread information
     foreach ($threads as $thread) {
         $lastMessageID = $thread['lastMessageID'];
         $stmt2 = $conn->prepare("SELECT * FROM message WHERE messageID = :lastMessageID");
-        $stmt2->bindParam(':lastMessageID',  $lastMessageID); 
+        $stmt2->bindParam(':lastMessageID', $lastMessageID, PDO::PARAM_INT); 
         $stmt2->execute();
         $message = $stmt2->fetch(PDO::FETCH_ASSOC);
 
@@ -47,24 +48,19 @@ try {
             $threadData = array(
                 'threadID' => $thread['threadID'],
                 'lastMessage' => $message['body'],
-                'lastMessageDate' => $message['Date'],
-                'lastAuthorID' => $message['authorID'],
-                'ownerID' => $thread['ownerID'],
+                'lastMessageDate' => $message['Date']
                 // Add other information about the thread if needed
             );
-            // Push thread data into the thread info array
-            $threadInfo[] = $threadData;
         } else {
             // Handle case where last message does not exist
             $threadData = array(
                 'threadID' => $thread['threadID'],
                 'lastMessage' => null,
-                'lastMessageDate' => null,
-                'lastAuthorID' => null,
-                'ownerID' => $thread['ownerID'],
+                'lastMessageDate' => null
             );
-            $threadInfo[] = $threadData;
         }
+        // Push thread data into the thread info array
+        $threadInfo[] = $threadData;
     }
 
     // Set success response

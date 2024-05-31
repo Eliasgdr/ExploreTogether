@@ -1,6 +1,6 @@
 <?php
     session_start();
-    print_r($_SESSION);
+    //print_r($_SESSION);
 
     // Check if the user is logged in
     if (!isset($_SESSION['userID'])) {
@@ -16,117 +16,53 @@
     <title>Welcome to Travel Together</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="javascript/databaseRequest.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-        }
-        h1 {
-            margin: 0;
-        }
-        .container {
-            padding: 20px;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        .thread {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        #searchContainer {
-            position: relative;
-        }
-        #suggestions {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1;
-        }
-        #suggestions ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        #suggestions li {
-            padding: 10px;
-            cursor: pointer;
-        }
-        #suggestions li:hover {
-            background-color: #ddd;
-        }
-        
-         /* Add your CSS styles here */
-        .thread-container {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-        .thread {
-            margin-bottom: 10px;
-        }
-    </style>
+    <script src="javascript/jsButton.js"></script>
 
+    <link href="./stylessheet/welcome.css" rel="stylesheet" type="text/css">
+    <audio id="hoverAudio" src="./audio/pedro.mp3"></audio>
 </head>
 <body>
     <header>
-        <h1>Welcome to Travel Together</h1>
+        <div class="title">Explore Together</div>
+        <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
     </header>
-    <div class="container">
-        <h2>Welcome, User!</h2>
-        <p>You have successfully logged in to Travel Together.</p>
-        <p>Start planning your next adventure now!</p>
 
-        <h3>Threads You Are Following:</h3>
+
+    <div class="containerMessage">
         <div class="thread-container" id="threadContainer"></div>
-        
-        
-        <h3>Create a New Thread:</h3>
-        <form id="createThreadForm" method="post">
-            <label for="title">Thread Title:</label><br>
-            <input type="text" id="title" name="title" required><br><br>
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
-            <input type="submit" value="Create Thread">
-        </form>
-        
-        <div id="searchContainer">
-            <h3>Search Users:</h3>
-            <form id="searchUsersForm">
-                <label for="search">Search:</label>
-                <input type="text" id="query" name="query" placeholder="Enter username">
-                <div id="suggestions"></div>
+        <div class="createThreadContainer">
+
+            <form id="createThreadForm" method="post" enctype="multipart/form-data">
+                <h3>Create a New Thread:</h3>
+                <label for="title">Thread Title:</label><br>
+                <input type="text" id="title" name="title" required><br><br>
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+                <div class="imageContainer">
+                    <input type="file" id="file" accept="image/*" hidden>
+                    <div class="img-area" data-img="">
+                        <i class='bx bxs-cloud-upload icon'></i>
+                        <h3>Upload Image</h3>
+                        <p>Image size must be less than <span>2MB</span></p>
+                    </div>
+                    <button class="select-image">Select Image</button>
+                </div>
+                <input type="submit" value="Create Thread">
             </form>
+
+            <div id="searchContainer">
+                <h3>Search Users:</h3>
+                <form id="searchUsersForm">
+                    <label for="search">Search:</label>
+                    <input type="text" id="query" name="query" placeholder="Enter username">
+                    <div id="suggestions"></div>
+                </form>
+            </div>
         </div>
-        
         <div>
             <h3>Disconnect:</h3>
             <button id="disconnectBtn">Disconnect</button>
         </div>
-        
     </div>
     <footer>
         &copy; 2024 Travel Together | All Rights Reserved
@@ -170,84 +106,27 @@
             alert('Error'); // Display a generic error message
         }
         
-        function searchUsers(query) {
-            // Encode the search query to ensure it's properly formatted for URL
-            var encodedQuery = encodeURIComponent(query);
-            
+        function searchUsersA(query) {
+            // Encode the search query to ensure it's properly formatted for URL            
             // Construct the URL with the search query parameter
-            var url = 'PHP/searchUsers.php?query=' + encodedQuery; // Update the path here
-            
-            // Create a new XMLHttpRequest object
-            var xhr = new XMLHttpRequest();
-            
-            // Configure the AJAX request
-            xhr.open('GET', url, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        // Check if response is not empty
-                        if (xhr.responseText.trim() !== "") {
-                            // Handle the response here
-                            var response = JSON.parse(xhr.responseText);
-                            console.log(response);
-                            showSuggestions(response); // Display suggestions based on response
-                        } else {
-                            console.log("Empty response received.");
-                        }
-                    } else {
-                        console.log("Error: " + xhr.status + " - " + xhr.statusText);
-                    }
+            searchUsers(query, function(response) {
+                if (response.success) {
+                    console.log(response.data);
+                } else {
+                    console.error("Error: " + response.status_text);
                 }
-            };
-            
-            // Send the AJAX request
-            xhr.send();
-        }
-
-        
-        function showSuggestions(suggestions) {
-            var suggestionsContainer = document.getElementById('suggestions');
-            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-        
-            if (suggestions.length > 0) {
-                suggestionsContainer.style.display = 'block';
-                var ul = document.createElement('ul');
-                suggestions.forEach(function(suggestion) {
-                    var li = document.createElement('li');
-                    var username = suggestion.username;
-                    li.textContent = username;
-                    var addButton = document.createElement('button');
-                    addButton.textContent = 'Add';
-                    addButton.addEventListener('click', function() {
-                        event.preventDefault(); // Prevent the default form submission behavior
-                        addFriend(suggestion.ID, addFriendCallBackSuccess, addFriendCallBackError); // Call function to add friend with the username
-                    });
-                    li.appendChild(addButton);
-                    ul.appendChild(li);
-                });
-                suggestionsContainer.appendChild(ul);
-            } else {
-                suggestionsContainer.style.display = 'none';
-            }
+            }, function(xhr, status, error) {
+                console.error("AJAX Error: " + status + " - " + error);
+                console.error(xhr);
+            });
         }
         
         document.getElementById('query').addEventListener('input', function(event) {
             var query = event.target.value;
             if (query.length >= 2) {
-                searchUsers(query); // Call the searchUsers function with the query
+                searchUsersA(query); // Call the searchUsers function with the query
             } else {
                 hideSuggestions();
-            }
-        });
-        
-        function hideSuggestions() {
-            document.getElementById('suggestions').style.display = 'none';
-        }
-        
-        // Hide suggestions when clicking outside the search box
-        window.addEventListener('click', function(event) {
-            if (!document.getElementById('searchContainer').contains(event.target)) {
-                document.getElementById('suggestions').style.display = 'none';
             }
         });
         
@@ -257,6 +136,21 @@
         function disconnectErrorCallback(xhr, status, error) {
             console.error('Error:', error);
             alert('Failed to disconnect. Please try again.');
+        }
+
+        function getPublicInfosuccessCallback(response, threadDiv) {
+            // This function will be called if the request is successful
+            console.log("Public info retrieved successfully:", response);
+            // Update the username in the threadDiv
+            const usernameElement = threadDiv.querySelector('.username');
+            if (usernameElement) {
+                usernameElement.textContent = response.data['name'];
+            }
+}
+
+        function getPublicInfoerrorCallback() {
+            // This function will be called if the request encounters an error
+            console.error("Error retrieving public info.");
         }
 
 
@@ -274,6 +168,17 @@
 
             // Loop through each thread in the threadInfo array
             threadInfo.forEach(thread => {
+
+                if (thread['ownerID'] !== null) {
+                    getPublicInfo(thread['ownerID'],
+                        function(response) {
+                            // Success callback function to update username
+                            getPublicInfosuccessCallback(response, threadDiv);
+                        },
+                        getPublicInfoerrorCallback
+                    );
+                }
+
                 // Create a div element to hold the thread information
                 const threadDiv = document.createElement('div');
                 threadDiv.classList.add('thread');
@@ -283,15 +188,44 @@
 
                 // Create a paragraph element for the last message
                 const lastMessagePara = document.createElement('p');
+                lastMessagePara.classList.add('message');
                 lastMessagePara.textContent = `Last Message: ${thread.lastMessage}`;
 
                 // Create a paragraph element for the last message date
                 const lastMessageDatePara = document.createElement('p');
-                lastMessageDatePara.textContent = `Last Message Date: ${thread.lastMessageDate}`;
+                lastMessageDatePara.classList.add('date');
+                lastMessageDatePara.textContent = `Date: ${thread.lastMessageDate}`;
+
+                const lastMessageImgTread = document.createElement('img');
+                lastMessageImgTread.classList.add('imageTread');
+                lastMessageImgTread.src = './images/landscape.jpg'; 
+
+                //Profile pics and name
+
+                const threadProfileDiv = document.createElement('div');
+                threadProfileDiv.classList.add('threadProfile');
+
+                const lastMessageImgProfile = document.createElement('img');
+                lastMessageImgProfile.classList.add('imageProfile');
+                lastMessageImgProfile.setAttribute("id", "imageProfile");
+                lastMessageImgProfile.src = './images/Png.png';
+                
+
+                const lastMessageUserProfile = document.createElement('p');
+                lastMessageUserProfile.classList.add('username');
+                lastMessageUserProfile.textContent = `Username`;
+                threadProfileDiv.appendChild(lastMessageUserProfile);
+                threadProfileDiv.appendChild(lastMessageImgProfile);
+                
 
                 // Append the message and date paragraphs to the thread div
+                threadDiv.appendChild(threadProfileDiv);
+
+                threadDiv.appendChild(lastMessageImgTread);
                 threadDiv.appendChild(lastMessagePara);
                 threadDiv.appendChild(lastMessageDatePara);
+
+                
 
                 // Attach onclick event to redirect to chat.php with thread ID
                 $(threadDiv).click(function() {
@@ -312,8 +246,8 @@
         }
 
         function getThreadErrorCallback(xhr, status, error) {
-            console.error('Error:', error);
-            console.error('Error:', xhr);
+            console.log('Error:', error);
+            console.log('Error:', xhr);
             alert('Failed to get thread information. Please try again.');
         }
 

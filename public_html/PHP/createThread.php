@@ -42,9 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Insert the new thread into the database
-            $stmt = $conn->prepare("INSERT INTO threads (title, description, lastMessageID) VALUES (:title, :description, NULL)");
+            $stmt = $conn->prepare("INSERT INTO threads (title, description, lastMessageID, ownerID) VALUES (:title, :description, NULL, :ownerID)");
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':ownerID', $userID);
             $stmt->execute();
             
             $threadID = $conn->lastInsertId();
