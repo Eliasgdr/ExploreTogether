@@ -56,6 +56,9 @@ if (!isset($_SESSION['userID'])) {
         <p>No thread or messages found.</p>
         <?php endif; ?>
     </div>
+<footer>
+        &copy; 2024 Travel Together | All Rights Reserved
+    </footer>
 
      <script>
         $(document).ready(function() {

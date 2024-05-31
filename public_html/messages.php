@@ -1,3 +1,4 @@
+```php
 <?php
 // messages.php
 
@@ -65,43 +66,33 @@ try {
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="./stylessheet/messages.css" rel="stylesheet" type="text/css">
     <title>Message Threads</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .thread {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .thread h2 {
-            margin: 0;
-        }
-        .thread p {
-            margin: 5px 0;
-        }
-        .thread a {
-            text-decoration: none;
-            color: blue;
-        }
-    </style>
 </head>
 <body>
-
-<h1>Your Message Threads</h1>
-
-<?php if (!empty($threadInfo)): ?>
-    <?php foreach ($threadInfo as $thread): ?>
-        <div class="thread">
-            <h2><a href="chat.php?thread_id=<?php echo htmlspecialchars($thread['threadID']); ?>">Thread ID: <?php echo htmlspecialchars($thread['threadID']); ?></a></h2>
-            <p><strong>Last Message:</strong> <?php echo htmlspecialchars($thread['lastMessage']); ?></p>
-            <p><strong>Date:</strong> <?php echo htmlspecialchars($thread['lastMessageDate']); ?></p>
+    <header>
+        <div class="title">Explore Together</div>
+        <button class="titleButton"><a href="welcome.php">Retour</a></button>
+    </header>
+    <div class="container">
+        <h1>Your Message Threads</h1>
+        <div class="thread-container">
+            <?php if (!empty($threadInfo)): ?>
+                <?php foreach ($threadInfo as $thread): ?>
+                    <div class="thread">
+                        <h2><a href="chat.php?thread_id=<?php echo htmlspecialchars($thread['threadID']); ?>">Thread ID: <?php echo htmlspecialchars($thread['threadID']); ?></a></h2>
+                        <p><strong>Last Message:</strong> <?php echo htmlspecialchars($thread['lastMessage']); ?></p>
+                        <p><strong>Date:</strong> <?php echo htmlspecialchars($thread['lastMessageDate']); ?></p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>You are not part of any threads.</p>
+            <?php endif; ?>
         </div>
-    <?php endforeach; ?>
-<?php else: ?>
-    <p>You are not part of any threads.</p>
-<?php endif; ?>
-
+    </div>
+    <footer>
+        &copy; 2024 Travel Together | All Rights Reserved
+    </footer>
 </body>
 </html>
+```

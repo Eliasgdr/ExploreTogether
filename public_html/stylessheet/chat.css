@@ -7,7 +7,6 @@ body {
     background-color: #f0f0f0;
 }
 
-
 .container {
     max-width: 800px;
     margin: 20px auto;
@@ -30,7 +29,7 @@ h1, h2, h3 {
     display: inline-block;
     max-width: 70%;
     margin-bottom: 10px;
-    padding: 10px 15px;
+    padding: 10px 15px 20px; /* Adjusted padding to include space for time */
     border-radius: 20px;
     clear: both;
     position: relative;
@@ -41,7 +40,7 @@ h1, h2, h3 {
     min-width: 10%;
     float: right;
     background-color: #1DA1F2;
-    color: #333;
+    color: #fff; /* Changed to white for better contrast on blue */
 }
 
 .message.received {
@@ -58,7 +57,7 @@ h1, h2, h3 {
     color: #888;
     font-size: 12px;
     position: absolute;
-    bottom: -15px;
+    bottom: 5px; /* Adjusted to ensure it stays inside the bubble */
     right: 10px;
 }
 
