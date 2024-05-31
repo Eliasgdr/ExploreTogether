@@ -6,7 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="javascript/databaseRequest.js"></script>
     <title>Travel Together - Create Account</title>
-    <style>
+    <!--<style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -64,7 +64,171 @@
         <input type="date" id="birthdate" name="birthdate" required><br>
         <input type="password" id="password" name="password" placeholder="Password" required><br>
         <input type="submit" value="Create Account">
-    </form>
+    </form>-->
+
+
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    header {
+        padding: 20px;
+        background-color: #fff;
+    }
+    header h1 {
+        margin-left: 30px;
+        color: #000000;
+        font-family: "Mansalva", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        text-align: left;
+    }
+    main {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f8f9fa;
+    }
+    .form-container {
+        background-color: #fff;
+        padding: 20px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 0px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 500px;
+    }
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    tr {
+        text-align: right;
+    }
+    .lala {
+        text-align: left;
+        height: 45px;
+    }
+    label {
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+    input {
+        margin-bottom: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        font-size: 14px;
+    }
+    select {
+        margin-bottom: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        font-size: 14px;
+    }
+    p{
+        text-align: center;
+        margin-top: 10px;
+        font-size: 16px;
+        font-family: "Mansalva", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+    p a {
+        color: #007bff;
+        font-family: "Mansalva", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        /*text-decoration: none;*/
+    }
+    p a:hover {
+        text-decoration: underline;
+    }
+    footer {
+        background-color: #003366;
+        height: 30px;
+    }
+
+    input[type="submit"] {
+        width: 110px;
+        padding: 10px;
+        margin: auto;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        box-sizing: border-box;
+    }
+    input[type="submit"] {
+        background-color: #333;
+        color: #fff;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #555;
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Explore <br> Together</h1>
+    </header>
+    <main>
+        <div class="form-container">
+            <h2>Create your account</h2>
+            <form id="registrationForm">
+                <table>
+                    <tr>
+                        <td><label for="full-name">Your full name:</label></td>
+                        <td class="lala"><input type="text" id="username" name="username" required></td>
+                    <tr>
+                        <td><label for="gender">Your gender:</label></td>
+                        <td class="lala"><select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                                <option value="O">Other</option>
+                            </select><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="birthday">Your birthday:</label></td>
+                        <td class="lala"><input type="date" id="birthdate" name="birthdate" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Password:</label></td>
+                        <td class="lala"><input type="password" id="password" name="password" required></td>
+                    </tr>
+                </table>
+
+                <input type="submit" value="Start to Surf">
+            </form>
+            <p>Already have an account ?<br>
+            <a href="login.php">Log in</a></p>
+        </div>
+    </main>
+    <footer></footer>
+
+
+
+
     <script>
     
         function registrationSuccessCallback(response) {

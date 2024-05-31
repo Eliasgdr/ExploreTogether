@@ -33,8 +33,6 @@
         });
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
 
     <style>
@@ -67,29 +65,29 @@
         }
         section {
             display:flex;
+            justify-content: space-around;
+            align-items: center;
             flex-direction:column;
             align-content:center;
             justify-content:center;
             background-color: red;
-            padding: 100px;
-            margin: 2vw;
+            padding: 10%;
+            margin: 2%;
             border-radius: 20px;
             text-align: center;
         }
 
         section #content{
             background-color: white;
-            margin:30%;
-            margin-top:0px;
-            margin-bottom:0px;
-            margin-bottom:10px;
             border-radius: 20px;
+            padding: 3%;
         }
+
         footer {
             background-color: #003664;
             color: #fff;
             text-align: center;
-            padding: 40px;
+            padding: 30px;
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -109,14 +107,8 @@
 
 <body>
     <header>
-        <table>
-            <tr><td><h1>Travel Together</h1></td>
-                <td style='text-align: right;'>return</td> <!--l'alignement à droite ne marche pas-->
-                <tr>
-                <tr><td><p>Connecting People to Travel Together</p></td>
-                <td></td>
-            </tr>
-        </table>
+        <h1>Travel Together</h1>
+        <p>Connecting People to Travel Together</p>
     </header>
     <nav>
         <a href="#">return</a>
@@ -134,7 +126,7 @@
             <input type="submit" value="Start to Surf">
         </form>
         
-        <p style='font-family: "Mansalva", sans-serif;'>Don't have an account? <br> <a href="registration.php">Create one</a></p>
+        <p style='font-family: "Mansalva", sans-serif;'>Don't have an account ? <br> <a href="registration.php">create one</a></p>
         </div>
     </section>
     <footer>
