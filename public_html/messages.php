@@ -72,7 +72,7 @@ try {
 <body>
     <header>
         <div class="title">Explore Together</div>
-        <button class="titleButton"><a href="welcome.php">Retour</a></button>
+        <button class="titleButton" onclick="window.location.href='welcome.php'">Retour</button>
     </header>
     <div class="container">
         <h1>Your Message Threads</h1>

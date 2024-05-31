@@ -16,42 +16,53 @@
     <title>Welcome to Travel Together</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="javascript/databaseRequest.js"></script>
-    <link href="./stylessheet/welcome.css" rel="stylesheet" type="text/css">
+    <script src="javascript/jsButton.js"></script>
 
+    <link href="./stylessheet/welcome.css" rel="stylesheet" type="text/css">
+    <audio id="hoverAudio" src="./audio/pedro.mp3"></audio>
 </head>
 <body>
     <header>
         <div class="title">Explore Together</div>
-        <button class="titleButton"><a href="messages.php">Messages</a></button>
+        <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
     </header>
-    <div class="container">
-        
+
+
+    <div class="containerMessage">
         <div class="thread-container" id="threadContainer"></div>
-        
-        
-        <h3>Create a New Thread:</h3>
-        <form id="createThreadForm" method="post">
-            <label for="title">Thread Title:</label><br>
-            <input type="text" id="title" name="title" required><br><br>
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
-            <input type="submit" value="Create Thread">
-        </form>
-        
-        <div id="searchContainer">
-            <h3>Search Users:</h3>
-            <form id="searchUsersForm">
-                <label for="search">Search:</label>
-                <input type="text" id="query" name="query" placeholder="Enter username">
-                <div id="suggestions"></div>
+        <div class="createThreadContainer">
+
+            <form id="createThreadForm" method="post" enctype="multipart/form-data">
+                <h3>Create a New Thread:</h3>
+                <label for="title">Thread Title:</label><br>
+                <input type="text" id="title" name="title" required><br><br>
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+                <div class="imageContainer">
+                    <input type="file" id="file" accept="image/*" hidden>
+                    <div class="img-area" data-img="">
+                        <i class='bx bxs-cloud-upload icon'></i>
+                        <h3>Upload Image</h3>
+                        <p>Image size must be less than <span>2MB</span></p>
+                    </div>
+                    <button class="select-image">Select Image</button>
+                </div>
+                <input type="submit" value="Create Thread">
             </form>
+
+            <div id="searchContainer">
+                <h3>Search Users:</h3>
+                <form id="searchUsersForm">
+                    <label for="search">Search:</label>
+                    <input type="text" id="query" name="query" placeholder="Enter username">
+                    <div id="suggestions"></div>
+                </form>
+            </div>
         </div>
-        
         <div>
             <h3>Disconnect:</h3>
             <button id="disconnectBtn">Disconnect</button>
         </div>
-        
     </div>
     <footer>
         &copy; 2024 Travel Together | All Rights Reserved
@@ -127,6 +138,21 @@
             alert('Failed to disconnect. Please try again.');
         }
 
+        function getPublicInfosuccessCallback(response, threadDiv) {
+            // This function will be called if the request is successful
+            console.log("Public info retrieved successfully:", response);
+            // Update the username in the threadDiv
+            const usernameElement = threadDiv.querySelector('.username');
+            if (usernameElement) {
+                usernameElement.textContent = response.data['name'];
+            }
+}
+
+        function getPublicInfoerrorCallback() {
+            // This function will be called if the request encounters an error
+            console.error("Error retrieving public info.");
+        }
+
 
         function renderThreadInfo(threadInfo, containerID) {
             // Create a container for the thread information
@@ -142,6 +168,17 @@
 
             // Loop through each thread in the threadInfo array
             threadInfo.forEach(thread => {
+
+                if (thread['ownerID'] !== null) {
+                    getPublicInfo(thread['ownerID'],
+                        function(response) {
+                            // Success callback function to update username
+                            getPublicInfosuccessCallback(response, threadDiv);
+                        },
+                        getPublicInfoerrorCallback
+                    );
+                }
+
                 // Create a div element to hold the thread information
                 const threadDiv = document.createElement('div');
                 threadDiv.classList.add('thread');
@@ -170,8 +207,10 @@
 
                 const lastMessageImgProfile = document.createElement('img');
                 lastMessageImgProfile.classList.add('imageProfile');
-                lastMessageImgProfile.src = './images/Png.png'; 
+                lastMessageImgProfile.setAttribute("id", "imageProfile");
+                lastMessageImgProfile.src = './images/Png.png';
                 
+
                 const lastMessageUserProfile = document.createElement('p');
                 lastMessageUserProfile.classList.add('username');
                 lastMessageUserProfile.textContent = `Username`;
@@ -207,8 +246,8 @@
         }
 
         function getThreadErrorCallback(xhr, status, error) {
-            console.error('Error:', error);
-            console.error('Error:', xhr);
+            console.log('Error:', error);
+            console.log('Error:', xhr);
             alert('Failed to get thread information. Please try again.');
         }
 
