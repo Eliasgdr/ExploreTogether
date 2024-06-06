@@ -1,111 +1,112 @@
-@import "./global.css";
+@import "./global.css?<?php echo time(); ?>";
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-    }
-    body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
-    header {
-        padding: 20px;
-        background-color: #fff;
-        margin-left: 30px;
-        color: #000000;
-        font-family: "Mansalva", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-        text-align: left;
-    }
-    main {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f8f9fa;
-    }
-    .form-container {
-        background-color: #fff;
-        padding: 20px;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 0px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 500px;
-    }
-    .form-container h2 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    form {
-        display: flex;
-        flex-direction: column;
-    }
-    tr {
-        text-align: right;
-    }
-    .lala {
-        text-align: left;
-        height: 45px;
-    }
-    label {
-        margin-bottom: 5px;
-        font-size: 14px;
-    }
-    input {
-        margin-bottom: 10px;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 20px;
-        font-size: 14px;
-    }
-    select {
-        margin-bottom: 10px;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 20px;
-        font-size: 14px;
-    }
-    p{
-        text-align: center;
-        margin-top: 10px;
-        font-size: 16px;
-        font-family: "Mansalva", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-    }
-    p a {
-        color: #007bff;
-        font-family: "Mansalva", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-    }
-    p a:hover {
-        text-decoration: underline;
-    }
-    footer {
-        background-color: #003366;
-        height: 30px;
-    }
 
-    input[type="submit"] {
-        width: 110px;
-        padding: 10px;
-        margin: auto;
-        border: 1px solid #ccc;
-        border-radius: 20px;
-        box-sizing: border-box;
-    }
-    input[type="submit"] {
+body{ 
+    background-color: #f4f4f4;
+    
+}
+    
+.titleButton{
+    color: white;
+    text-decoration: none;
+    
+}
+
+main {
+    margin-top: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+tr {
+    text-align: right;
+}
+
+.lala {
+    text-align: left;
+    height: 45px;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+select {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+p{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 16px;
+    font-family: "Mansalva", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+p a {
+    color: #007bff;
+    font-family: "Mansalva", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+p a:hover {
+     text-decoration: underline;
+}
+
+
+
+input[type="submit"] {
+    width: 110px;
+    padding: 10px;
+    margin: auto;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
         background-color: #333;
         color: #fff;
         cursor: pointer;
-    }
-    input[type="submit"]:hover {
+}
+
+input[type="submit"]:hover {
         background-color: #555;
-    }
+}
