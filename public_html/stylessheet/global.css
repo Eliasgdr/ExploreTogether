@@ -9,13 +9,14 @@
 
     --mainColor: rgba(0, 54, 100, 1);
     --greyColor:rgba(0, 0, 0, 0.233);
+    --heavyGreyColor:rgba(16, 3, 61, 0.531);
     --whiteColor:white;
     --blackColor:black;
 }
 
 header{
     display: grid;
-    grid-template-columns: 5% 33% 33% 10% 10% 5%;
+    grid-template-columns: 5% 33% 33% 20% 5%;
 
     margin: -8px;
 
@@ -36,16 +37,34 @@ header .title{
     
     background-color: var(--mainColor);
 }
-header .titleButton{
-    grid-column-start: 5;
 
+header .redirect {
+    grid-column-start: 4;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+
+header .redirect .titleButton{
+    display: inline-block; 
+    cursor: pointer;
+    user-select: none;
     display: flex;
     border-radius: 1vw;
+    padding-inline: 1vw;
     font-size: 1.75vw;
     align-items: center;
     justify-content: center;
 
     background-color: var(--greyColor);
+}
+
+header .redirect .titleButton:hover{
+    background-color: var(--heavyGreyColor);
+
 }
 
 footer{

@@ -22,9 +22,12 @@
     <audio id="hoverAudio" src="./audio/pedro.mp3"></audio>
 </head>
 <body>
-    <header>
+    <header> 
         <div class="title">Explore Together</div>
-        <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
+        <div class="redirect">
+            <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
+            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
+        </div>
     </header>
 
 

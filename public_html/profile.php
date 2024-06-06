@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Together</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="javascript/databaseRequest.js"></script>
-    <link href="./stylessheet/profile.css" rel="stylesheet" type="text/css">
+    <script src="javascript/databaseRequest.js?<?php echo time(); ?>"></script>
+    <link href="./stylessheet/profile.css?<?php echo time(); ?>" rel="stylesheet" type="text/css">
 </head>
 
 <body>
     <header>
         <div class="title">Explore Together</div>
-        <div class="titleButton">Retour</div>
+        <div class="redirect">
+            <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
+            <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">welcome</a>
+        </div>
     </header>
     <div class="content">
         <div class="card">
@@ -22,6 +25,13 @@
                     <h3 id="name">DAS Shawrov</h3>
                     <h3 id="userName">Shaw</h3>
                 </div>
+                <hr>
+
+                <div class="subscription">
+                    <h3>Exposant</h3>
+                    <a type="button" class="subscriptionButton" onclick="window.location.href='upgrade.php'">upgrade</a>
+                </div>
+
                 <hr>
                 <div class="userInfo">
                     <h5 id="userBirth">Birthay : unknow</h5>

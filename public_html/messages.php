@@ -1,4 +1,3 @@
-```php
 <?php
 // messages.php
 
@@ -66,13 +65,17 @@ try {
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="./stylessheet/messages.css" rel="stylesheet" type="text/css">
+    <link href="./stylessheet/messages.css?<?php echo time(); ?>" rel="stylesheet" type="text/css">
     <title>Message Threads</title>
 </head>
 <body>
     <header>
         <div class="title">Explore Together</div>
-        <button class="titleButton" onclick="window.location.href='welcome.php'">Retour</button>
+        
+        <div class="redirect">
+            <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">Messages</a>
+            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
+        </div>
     </header>
     <div class="container">
         <h1>Your Message Threads</h1>
@@ -95,4 +98,3 @@ try {
     </footer>
 </body>
 </html>
-```
