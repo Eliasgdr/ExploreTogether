@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 28 mai 2024 à 20:45
+-- Généré le : jeu. 06 juin 2024 à 22:38
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -369,23 +369,27 @@ CREATE TABLE IF NOT EXISTS `message` (
   PRIMARY KEY (`messageID`),
   KEY `authorID` (`authorID`),
   KEY `threadID` (`threadID`)
-) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `message`
 --
 
 INSERT INTO `message` (`messageID`, `Date`, `body`, `authorID`, `threadID`) VALUES
-(143, '2024-05-26 22:46:22', 'Hi, I just created a new Thread named test', 5, 41),
 (159, '2024-05-28 18:23:21', 'Hi, I just created a new Thread named test', 5, 52),
 (160, '2024-05-28 18:23:29', 'hi', 5, 52),
-(161, '2024-05-28 20:19:54', 'test', 5, 41),
-(163, '2024-05-28 20:20:31', 'test', 5, 41),
-(167, '2024-05-28 20:22:25', 'hi', 5, 41),
 (168, '2024-05-28 20:28:57', 'Hi, I just created a new Thread named test', 10, 57),
 (169, '2024-05-28 20:40:59', 'Hi, I just created a new Thread named test', 10, 58),
 (170, '2024-05-28 20:41:11', 'hi', 10, 56),
-(171, '2024-05-28 20:42:11', 'Hi, I just created a new Thread named test', 30, 59);
+(171, '2024-05-28 20:42:11', 'Hi, I just created a new Thread named test', 30, 59),
+(178, '2024-05-29 11:49:36', 'hi', 5, 52),
+(179, '2024-06-06 10:19:27', 'Hi, I just created a new Thread named test', 5, 60),
+(180, '2024-06-06 11:37:32', 'Hi, I just created a new Thread named test', 5, 61),
+(181, '2024-06-06 11:38:27', 'Hi, I just created a new Thread named test', 5, 62),
+(182, '2024-06-06 11:39:04', 'Hi, I just created a new Thread named a', 5, 63),
+(183, '2024-06-06 16:51:10', 'Hi, I just created a new Thread named afafaf', 5, 64),
+(185, '2024-06-06 22:25:27', 'hi', 47, 65),
+(186, '2024-06-06 22:25:31', 'test', 47, 65);
 
 -- --------------------------------------------------------
 
@@ -444,22 +448,29 @@ CREATE TABLE IF NOT EXISTS `threads` (
   `isDM` tinyint(1) NOT NULL DEFAULT '0',
   `ownerID` int DEFAULT NULL,
   `isPublic` tinyint(1) NOT NULL DEFAULT '0',
+  `threadImage` longblob NOT NULL,
   PRIMARY KEY (`threadID`),
   KEY `owner` (`ownerID`),
   KEY `lastMessage` (`lastMessageID`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `threads`
 --
 
-INSERT INTO `threads` (`threadID`, `lastMessageID`, `title`, `description`, `isDM`, `ownerID`, `isPublic`) VALUES
-(41, 167, 'test', 'test', 0, 5, 0),
-(52, 160, 'test', 'test', 0, 5, 0),
-(56, 170, 'test', 'test', 0, 10, 0),
-(57, 168, 'test', 'test', 0, 10, 0),
-(58, 169, 'test', 'test', 0, 10, 0),
-(59, 171, 'test', 'test', 0, 30, 0);
+INSERT INTO `threads` (`threadID`, `lastMessageID`, `title`, `description`, `isDM`, `ownerID`, `isPublic`, `threadImage`) VALUES
+(41, NULL, 'test', 'test', 0, 5, 0, ''),
+(52, 178, 'test', 'test', 0, 5, 0, ''),
+(56, 170, 'test', 'test', 0, 10, 0, ''),
+(57, 168, 'test', 'test', 0, 10, 0, ''),
+(58, 169, 'test', 'test', 0, 10, 0, ''),
+(59, 171, 'test', 'test', 0, 30, 0, ''),
+(60, 179, 'test', 'testetststets', 0, 5, 0, ''),
+(61, 180, 'test', 'test', 0, 5, 0, ''),
+(62, 181, 'test', 'test', 0, 5, 0, ''),
+(63, 182, 'a', 'a', 0, 5, 0, ''),
+(64, 183, 'afafaf', 'afafaf', 0, 5, 0, ''),
+(65, 186, 'test', 'test', 0, 47, 0, '');
 
 -- --------------------------------------------------------
 
@@ -475,7 +486,7 @@ CREATE TABLE IF NOT EXISTS `threadsubscriptions` (
   PRIMARY KEY (`threadSubscriptionID`),
   KEY `userID` (`userID`),
   KEY `threadID` (`threadID`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `threadsubscriptions`
@@ -487,7 +498,13 @@ INSERT INTO `threadsubscriptions` (`threadSubscriptionID`, `userID`, `threadID`)
 (39, 10, 56),
 (40, 10, 57),
 (41, 10, 58),
-(42, 30, 59);
+(42, 30, 59),
+(43, 5, 60),
+(44, 5, 61),
+(45, 5, 62),
+(46, 5, 63),
+(47, 5, 64),
+(48, 47, 65);
 
 -- --------------------------------------------------------
 
@@ -509,7 +526,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `isPrenium` tinyint(1) NOT NULL DEFAULT '0',
   `email` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `users`
@@ -555,7 +572,10 @@ INSERT INTO `users` (`ID`, `username`, `gender`, `birthdate`, `password`, `regis
 (42, 'testuser', 'M', '1990-01-01', '$2y$10$usux/DgmDJa7U2o484qTd.oSkSPW.y0wpuulqUjto6T2AMguipOna', '2024-05-17 18:48:08', '', '', 0, 0, ''),
 (43, 'testuser', 'M', '1990-01-01', '$2y$10$AcjusjVAuAQAqiIHk/Lm1uQdSdShLODMmmE5nLDzyG3QYSDJ4Oehm', '2024-05-17 18:49:20', '', '', 0, 0, ''),
 (44, 'testuser', 'M', '1990-01-01', '$2y$10$JuFvu4TJFuGVH1ZINK0ZB.6vO.eaaAIsSycn9TUZUYty5aojD8kN.', '2024-05-17 18:52:02', '', '', 0, 0, ''),
-(45, 'testuser', 'M', '1990-01-01', '$2y$10$2qO9ySL0X683/2iL5CD5BOULy1.xaeBDqvy0rUGS7mtE0jvg5yIJi', '2024-05-17 18:56:05', '', '', 0, 0, '');
+(45, 'testuser', 'M', '1990-01-01', '$2y$10$2qO9ySL0X683/2iL5CD5BOULy1.xaeBDqvy0rUGS7mtE0jvg5yIJi', '2024-05-17 18:56:05', '', '', 0, 0, ''),
+(46, 'ert', 'M', '0010-10-10', '$2y$10$hN/MaQj5bi2z3gy1l76FwOs6yS1mrIGwy5bBO9Kud0aBAXoVtwy.S', '2024-06-06 22:24:01', '', '', 0, 0, 'er@er'),
+(47, 'test12', 'F', '1010-10-10', '$2y$10$MVru3WfSuF6EyOiJjNFlHe6yxdiFohnZ94XKOvizrfCKeFDyKozIq', '2024-06-06 22:24:34', '', '', 0, 0, 'test12@12.12'),
+(48, 'ttest', 'M', '0101-02-10', '$2y$10$bS5aLUta.DGQtU715pPlI.RfxBdMuUwgGmm/8qRCo5Fc/oOO1Ubtm', '2024-06-06 22:31:20', '', '', 0, 0, 'test@ty');
 
 -- --------------------------------------------------------
 
