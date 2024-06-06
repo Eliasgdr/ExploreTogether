@@ -37,24 +37,19 @@ section {
     justify-content:center;
     padding: 7%;
     text-align: center;
-
 }
 section #content{
     background-color: white;
     border-radius: 20px;
     padding: 3%;
-
     border-width: 1px;
     border-color: black;
     border-style: solid;
-
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 footer{
     margin-top: 1.2vw;
 }
-
 form {
     text-align: center;
 }
