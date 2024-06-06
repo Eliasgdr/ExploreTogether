@@ -268,8 +268,10 @@ h3{
 
 
 
-
-
 body.no-scroll {
     overflow: hidden;
+}
+
+.thread-container[noClick]{
+    pointer-events: none;
 }

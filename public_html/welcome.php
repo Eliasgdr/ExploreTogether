@@ -15,8 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Travel Together</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="javascript/databaseRequest.js"></script>
-    <script src="javascript/jsButton.js"></script>
+    <script src="javascript/databaseRequest.js?<?php echo time(); ?>"></script>
+    <script src="javascript/jsButton.js?<?php echo time(); ?>"></script>
 
     <link href="./stylessheet/welcome.css?<?php echo time(); ?>" rel="stylesheet" type="text/css">
     <audio id="hoverAudio" src="./audio/pedro.mp3"></audio>
