@@ -1,0 +1,44 @@
+@import url('global.css?<?php echo time(); ?>');
+
+
+.container{
+
+    margin-top: 7vw;
+    display: grid;
+
+    grid-template-columns: 10% 25% 2.5% 25% 2.5% 25% 10%;
+    
+}
+
+.container .plan{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-inline:1vw;
+    margin-inline: 2vw;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 3vw;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+
+    background-color: rgb(247, 250, 235);
+}
+
+.container .plan img{
+    height: 13vw;
+    width:13vw;
+}
+
+.container #basic{
+    grid-column-start: 2;
+}
+
+.container #premium{
+    grid-column-start: 4;
+}
+
+.container #obsever{
+    grid-column-start: 6;
+}
