@@ -2,7 +2,7 @@
 include 'databaseConnection.php';
 
 // Start the session
-session_start();
+//session_start();
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
