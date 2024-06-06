@@ -262,22 +262,50 @@ if (!isset($_SESSION['userID'])) {
             });
         }
 
+        function createProfileDiv(user) {
+            const profileDiv = document.createElement('div');
+            profileDiv.className = 'threadProfile';
+
+            const usernameParagraph = document.createElement('p');
+            usernameParagraph.className = 'username';
+            usernameParagraph.textContent = `${user.username}`;
+
+            const profileImage = document.createElement('img');
+            profileImage.className = 'imageProfile';
+            profileImage.id = 'imageProfile';
+            profileImage.src = user.profileImage || './images/Png.png';
+
+            profileDiv.appendChild(usernameParagraph);
+            profileDiv.appendChild(profileImage);
+
+            return profileDiv;
+        }
+
 
         function searchUsersCallBackSuccess(response) {
             console.log(response);
+                  // Select the suggestions div
+            const suggestionsDiv = document.getElementById('suggestions');
+
+            suggestionsDiv.innerHTML = '';
+            // Loop through the data and append the created profile divs to the suggestions div
+            response['data'].forEach(user => {
+                const profileDiv = createProfileDiv(user);
+                suggestionsDiv.appendChild(profileDiv);
+            });
         }
 
         function searchUsersCallBackError(xhr, status, error) {
             // Alert error message
             console.log(xhr);
         }
-        document.getElementById('usernameInput').addEventListener('input', function(event) {
+        document.getElementById('SearchUserQuery').addEventListener('input', function(event) {
             var query = event.target.value;
-            if (query.length >= 2) {
+            //if (query.length >= 2) {
                 searchUsers(query, searchUsersCallBackSuccess, searchUsersCallBackError); // Call the searchUsers function with the query
-            } else {
+            //} else {
                 //hideSuggestions();
-            }
+            //}
         });
     </script>
 </body>
