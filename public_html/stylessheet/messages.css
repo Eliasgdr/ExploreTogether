@@ -1,4 +1,4 @@
-@import "./global.css";
+@import "./global.css?<?php echo time(); ?>";
 
 body {
 	font-family: Arial, sans-serif;
