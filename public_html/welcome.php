@@ -190,7 +190,11 @@
 
             if (!container.length) {
                 console.error('Container element not found.');
+                document.querySelector('footer').classList.add('addSize');
                 return;
+            }
+            else{
+                document.querySelector('footer').classList.remove('addSize');
             }
 
             // Loop through each thread in the threadInfo array
@@ -236,12 +240,18 @@
                 lastMessageImgProfile.classList.add('imageProfile');
                 lastMessageImgProfile.setAttribute("id", "imageProfile");
                 lastMessageImgProfile.src = './images/Png.png';
+
+                const lastMessageImgReport = document.createElement('img');
+                lastMessageImgReport.classList.add('imageReport');
+                lastMessageImgReport.src = './images/report.png';
+
                 
 
                 const lastMessageUserProfile = document.createElement('p');
                 lastMessageUserProfile.classList.add('username');
                 lastMessageUserProfile.textContent = `Username`;
                 threadProfileDiv.appendChild(lastMessageUserProfile);
+                threadProfileDiv.appendChild(lastMessageImgReport);
                 threadProfileDiv.appendChild(lastMessageImgProfile);
                 
 

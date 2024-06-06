@@ -64,6 +64,15 @@ h3{
     object-fit: cover;
 }
 
+.thread-container .thread .threadProfile .imageReport{
+    grid-column-start: 5;
+    grid-row-start: 1;
+    width: 50%;
+    height: 50%;
+    object-fit:contain;
+    z-index: 1000;
+}
+
 .thread-container .thread .threadProfile .username{
     font-family: "Mansalva", sans-serif;
     display: flex;

@@ -29,7 +29,7 @@
 
                 <div class="subscription">
                     <h3>Exposant</h3>
-                    <a type="button" class="subscriptionButton" onclick="window.location.href='upgrade.php'">upgrade</a>
+                    <a type="button" class="subscriptionButton" onclick="window.location.href='subscription.php'">upgrade</a>
                 </div>
 
                 <hr>
