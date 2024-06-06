@@ -34,7 +34,7 @@
 
                 <hr>
                 <div class="userInfo">
-                    <h5 id="userBirth">Birthay : unknow</h5>
+                    <h5 id="userBirth">Birthday : unknown</h5>
                     <div class="mainCountry">
                         <h4 id="country">Bangladesh</h4>
                     </div>
