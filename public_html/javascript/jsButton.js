@@ -78,3 +78,5 @@ document.addEventListener('DOMContentLoaded', () => {
     openDivButton.addEventListener('click', disableBodyScroll);
     closeDivButton.addEventListener('click', enableBodyScroll);
 });
+
+
