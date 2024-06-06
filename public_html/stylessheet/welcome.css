@@ -70,7 +70,7 @@ h3{
     width: 50%;
     height: 50%;
     object-fit:contain;
-    z-index: 1000;
+    
 }
 
 .thread-container .thread .threadProfile .username{
@@ -174,9 +174,9 @@ h3{
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s ease;
- }
+}
 
- .btn:hover{
+.btn:hover{
     background-color: #0d7581c1
 }
 
@@ -285,6 +285,8 @@ h3{
 
 
 
+
+
 body.no-scroll {
     overflow: hidden;
 }
@@ -292,3 +294,5 @@ body.no-scroll {
 .thread-container[noClick]{
     pointer-events: none;
 }
+
+

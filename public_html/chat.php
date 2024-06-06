@@ -47,7 +47,7 @@ if (!isset($_SESSION['userID'])) {
             <p class="message">ici on  quo eum iusto illum.</p>
         </div>
 
-
+        
 
         <div class="threadComment">
             <?php if (true or $thread && $messages) : ?>
@@ -57,14 +57,14 @@ if (!isset($_SESSION['userID'])) {
             <h3>Messages:</h3>
             <div id="messagesContainer" class="messages-container"></div>
 
-
+            
     
             <form id="messageForm">
                 <textarea id="message" name="message" rows="4" cols="50" required placeholder='Post a Message'></textarea><br>
                 <input type="hidden" id="threadID" name="thread_id" value="<?php echo $_GET['thread_id']; ?>">
                 <input class='btn' type="submit" value="Post Message">
             </form>
-
+            
             <!---<h3>Add User to Thread:</h3>
             <form id="addUserForm" class="search-container">
                 <input type="text" id="usernameInput" name="username" placeholder="Enter username" required>
@@ -78,8 +78,8 @@ if (!isset($_SESSION['userID'])) {
             <?php endif; ?>
 
             <div class="usrSearch">
-                <h3>Add User :</h3>
-                <button class='btn' id="searchUsr">wadawd</button>
+                <button class='btn' id="searchUsr">Add User</button> 
+                <button id='imgReport'><img src="./images/report.png"></button>
             </div>
         </div>
     
@@ -96,6 +96,17 @@ if (!isset($_SESSION['userID'])) {
             <div class="suggestions" id='suggestions'></div>
         </div>
 
+        
+
+    </div>
+
+
+    <div class="reportUsr">
+        <img id='close' src="./images/x.png">
+        <a href="">Spam</a>
+        <a href="">Violence</a>
+        <a href="">Nudity</a>
+        <a href="">Harrasment</a>
     </div>
 
     <footer>

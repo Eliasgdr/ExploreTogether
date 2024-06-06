@@ -67,9 +67,12 @@
             <div class="suggestions" id='suggestions'>
             </div>
         </div>
-        
-        
+
     </div>
+
+    
+
+
     <footer>
         &copy; 2024 Travel Together | All Rights Reserved
     </footer>
@@ -240,18 +243,12 @@
                 lastMessageImgProfile.classList.add('imageProfile');
                 lastMessageImgProfile.setAttribute("id", "imageProfile");
                 lastMessageImgProfile.src = './images/Png.png';
-
-                const lastMessageImgReport = document.createElement('img');
-                lastMessageImgReport.classList.add('imageReport');
-                lastMessageImgReport.src = './images/report.png';
-
                 
 
                 const lastMessageUserProfile = document.createElement('p');
                 lastMessageUserProfile.classList.add('username');
                 lastMessageUserProfile.textContent = `Username`;
                 threadProfileDiv.appendChild(lastMessageUserProfile);
-                threadProfileDiv.appendChild(lastMessageImgReport);
                 threadProfileDiv.appendChild(lastMessageImgProfile);
                 
 
