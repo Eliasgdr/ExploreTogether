@@ -26,6 +26,11 @@
                     <tr>
                         <td><label for="full-name">Your full name :</label></td>
                         <td class="lala"><input type="text" id="username" name="username" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Your e-mail :</label></td>
+                        <td class="lala"><input type="email" id="email" name="email" required></td>
+                    </tr>  
                     <tr>
                         <td><label for="gender">Your gender :</label></td>
                         <td class="lala"><select id="gender" name="gender" required>
