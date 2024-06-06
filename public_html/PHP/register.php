@@ -19,11 +19,12 @@ try {
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if all required fields are provided
-    if (isset($_POST["name"]) && isset($_POST["gender"]) && isset($_POST["birthdate"]) && isset($_POST["password"])) {
+    if (isset($_POST["name"]) && isset($_POST["gender"]) && isset($_POST["birthdate"]) && isset($_POST["password"]) && isset($_POST["email"])) {
         // Retrieve user data from the form
         $name = $_POST["name"];
         $gender = $_POST["gender"];
         $birthdate = $_POST["birthdate"];
+        $email = $_POST["email"];
         $password = $_POST["password"];
 
         // Check if the username is already in use
@@ -45,10 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             // Prepare a SQL query to insert user into the database
-            $stmt = $conn->prepare("INSERT INTO users (username, gender, birthdate, password) VALUES (:name, :gender, :birthdate, :password)");
+            $stmt = $conn->prepare("INSERT INTO users (username, gender, birthdate, password, email) VALUES (:name, :gender, :birthdate, :password, :email)");
             $stmt->bindParam(':name', $name);
             $stmt->bindParam(':gender', $gender);
             $stmt->bindParam(':birthdate', $birthdate);
+            $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $hashed_password);
             $stmt->execute();
 
