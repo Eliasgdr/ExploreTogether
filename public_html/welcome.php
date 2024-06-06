@@ -15,20 +15,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Travel Together</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="javascript/databaseRequest.js"></script>
-    <script src="javascript/jsButton.js"></script>
+    <script src="javascript/databaseRequest.js?<?php echo time(); ?>"></script>
+    <script src="javascript/jsButton.js?<?php echo time(); ?>"></script>
 
-    <link href="./stylessheet/welcome.css" rel="stylesheet" type="text/css">
+    <link href="./stylessheet/welcome.css?<?php echo time(); ?>" rel="stylesheet" type="text/css">
     <audio id="hoverAudio" src="./audio/pedro.mp3"></audio>
 </head>
 <body>
-    <header>
+    <header> 
         <div class="title">Explore Together</div>
-        <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
+        <div class="redirect">
+            <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
+            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
+        </div>
     </header>
 
 
-    <div class="containerMessage">
+    <div class="containerMessage" id='containerMessage'>
         <div class="thread-container" id="threadContainer"></div>
         <div class="createThreadContainer">
 
@@ -37,37 +40,63 @@
                 <label for="title">Thread Title:</label><br>
                 <input type="text" id="title" name="title" required><br><br>
                 <label for="description">Description:</label><br>
-                <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
-                <div class="imageContainer">
-                    <input type="file" id="file" accept="image/*" hidden>
-                    <div class="img-area" data-img="">
-                        <i class='bx bxs-cloud-upload icon'></i>
-                        <h3>Upload Image</h3>
-                        <p>Image size must be less than <span>2MB</span></p>
-                    </div>
-                    <button class="select-image">Select Image</button>
-                </div>
-                <input type="submit" value="Create Thread">
+                <textarea id="description" name="description" rows="8" cols="50" required ></textarea><br><br>
+                
+                <input class='btn' type="submit" value="Create Thread">
             </form>
 
-            <div id="searchContainer">
+            <div class="usrSearch">
+                <h3>Add User :</h3>
+                <button class='btn' id="searchUsr">wadawd</button>
+            </div>
+            
+            <div class='disconnectDiv'>
+                <button class='btn' id="disconnectBtn">Disconnect</button>
+            </div>
+        </div>
+
+        <div class="addUsrSearch">
+            <img class="close" src="./images/x.png">
+            <div class="searchContainer" id="searchContainer">
                 <h3>Search Users:</h3>
                 <form id="searchUsersForm">
                     <label for="search">Search:</label>
-                    <input type="text" id="query" name="query" placeholder="Enter username">
-                    <div id="suggestions"></div>
+                    <input type="text" id="SearchUserQuery" name="query" placeholder="Enter username">
                 </form>
             </div>
+            <div class="suggestions" id='suggestions'>
+            </div>
         </div>
-        <div>
-            <h3>Disconnect:</h3>
-            <button id="disconnectBtn">Disconnect</button>
-        </div>
+        
+        
     </div>
     <footer>
         &copy; 2024 Travel Together | All Rights Reserved
     </footer>
         <script>
+
+        function createProfileDiv(user) {
+            const profileDiv = document.createElement('div');
+            profileDiv.className = 'threadProfile';
+
+            const usernameParagraph = document.createElement('p');
+            usernameParagraph.className = 'username';
+            usernameParagraph.textContent = `${user.username}`;
+
+            const profileImage = document.createElement('img');
+            profileImage.className = 'imageProfile';
+            profileImage.id = 'imageProfile';
+            profileImage.src = user.profileImage || './images/Png.png';
+
+            profileDiv.appendChild(usernameParagraph);
+            profileDiv.appendChild(profileImage);
+
+            return profileDiv;
+        }
+
+  
+
+
         function createThreadCallBackSuccess(response){
             if (response.success) {
                 getThreads(getThreadSuccessCallback, getThreadErrorCallback);
@@ -106,28 +135,26 @@
             alert('Error'); // Display a generic error message
         }
         
-        function searchUsersA(query) {
-            // Encode the search query to ensure it's properly formatted for URL            
-            // Construct the URL with the search query parameter
-            searchUsers(query, function(response) {
-                if (response.success) {
-                    console.log(response.data);
-                } else {
-                    console.error("Error: " + response.status_text);
-                }
-            }, function(xhr, status, error) {
-                console.error("AJAX Error: " + status + " - " + error);
-                console.error(xhr);
+        function searchUsersCallBackSuccess(response) {
+            console.log(response);
+                  // Select the suggestions div
+            const suggestionsDiv = document.getElementById('suggestions');
+
+            suggestionsDiv.innerHTML = '';
+            // Loop through the data and append the created profile divs to the suggestions div
+            response['data'].forEach(user => {
+                const profileDiv = createProfileDiv(user);
+                suggestionsDiv.appendChild(profileDiv);
             });
         }
-        
-        document.getElementById('query').addEventListener('input', function(event) {
+
+        function searchUsersCallBackError(xhr, status, error) {
+            // Alert error message
+            console.log(xhr);
+        }
+        document.getElementById('SearchUserQuery').addEventListener('input', function(event) {
             var query = event.target.value;
-            if (query.length >= 2) {
-                searchUsersA(query); // Call the searchUsers function with the query
-            } else {
-                hideSuggestions();
-            }
+                searchUsers(query, searchUsersCallBackSuccess, searchUsersCallBackError); // Call the searchUsers function with the query
         });
         
         function disconnectSuccessCallback(response) {
