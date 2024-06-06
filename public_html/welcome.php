@@ -18,7 +18,7 @@
     <script src="javascript/databaseRequest.js"></script>
     <script src="javascript/jsButton.js"></script>
 
-    <link href="./stylessheet/welcome.css" rel="stylesheet" type="text/css">
+    <link href="./stylessheet/welcome.css?<?php echo time(); ?>" rel="stylesheet" type="text/css">
     <audio id="hoverAudio" src="./audio/pedro.mp3"></audio>
 </head>
 <body>
@@ -28,7 +28,7 @@
     </header>
 
 
-    <div class="containerMessage">
+    <div class="containerMessage" id='containerMessage'>
         <div class="thread-container" id="threadContainer"></div>
         <div class="createThreadContainer">
 
@@ -37,32 +37,80 @@
                 <label for="title">Thread Title:</label><br>
                 <input type="text" id="title" name="title" required><br><br>
                 <label for="description">Description:</label><br>
-                <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
-                <div class="imageContainer">
-                    <input type="file" id="file" accept="image/*" hidden>
-                    <div class="img-area" data-img="">
-                        <i class='bx bxs-cloud-upload icon'></i>
-                        <h3>Upload Image</h3>
-                        <p>Image size must be less than <span>2MB</span></p>
-                    </div>
-                    <button class="select-image">Select Image</button>
-                </div>
-                <input type="submit" value="Create Thread">
+                <textarea id="description" name="description" rows="8" cols="50" required ></textarea><br><br>
+                
+                <input class='btn' type="submit" value="Create Thread">
             </form>
 
-            <div id="searchContainer">
+            <div class="usrSearch">
+                <h3>Add User :</h3>
+                <button class='btn' id="searchUsr">wadawd</button>
+            </div>
+            
+            <div class='disconnectDiv'>
+                <button class='btn' id="disconnectBtn">Disconnect</button>
+            </div>
+        </div>
+
+        <div class="addUsrSearch">
+            <img class="close" src="./images/x.png">
+            <div class="searchContainer" id="searchContainer">
                 <h3>Search Users:</h3>
                 <form id="searchUsersForm">
                     <label for="search">Search:</label>
                     <input type="text" id="query" name="query" placeholder="Enter username">
-                    <div id="suggestions"></div>
                 </form>
             </div>
+            <div class="suggestions" id='suggestions'>
+                <div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div>
+                <div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div>
+                <div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div><div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div>
+                <div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div>
+                <div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div><div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div>
+                <div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div>
+                <div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div><div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div>
+                <div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div>
+                <div class="threadProfile">
+                    <p class="username"> moi mon nom c'est gros caca</p>
+                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
+                </div>
+            </div>
         </div>
-        <div>
-            <h3>Disconnect:</h3>
-            <button id="disconnectBtn">Disconnect</button>
-        </div>
+        
+        
     </div>
     <footer>
         &copy; 2024 Travel Together | All Rights Reserved

@@ -55,3 +55,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const yourDiv = document.getElementById('containerMessage');
+    const openDivButton = document.getElementById('searchUsr');
+    const closeDivButton = document.querySelector('.close'); // Utiliser querySelector pour obtenir le premier élément avec la classe 'close'
+    const addUsrSearch = document.querySelector('.addUsrSearch');
+
+    function disableBodyScroll() {
+        document.body.classList.add('no-scroll');
+        addUsrSearch.style.display = 'grid'; // Afficher la div
+    }
+
+    function enableBodyScroll() {
+        document.body.classList.remove('no-scroll');
+        addUsrSearch.style.display = 'none'; // Masquer la div
+    }
+
+    openDivButton.addEventListener('click', disableBodyScroll);
+    closeDivButton.addEventListener('click', enableBodyScroll);
+});
