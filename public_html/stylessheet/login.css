@@ -1,22 +1,14 @@
-@import "./global.css";
+@import "./global.css?<?php echo time(); ?>";
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-header {
-    margin-left: 30px;
-    color: #000000;
-    font-family: "Mansalva", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    text-align: left;
+body{
     background-color: #f4f4f4;
 }
 table {
     width: 100vw;
+}
+.titleButton{
+    color: white;
+    text-decoration: none;
 }
 nav {
     background-color: #f4f4f4;
@@ -32,10 +24,11 @@ nav a {
 }
 nav a:hover {
     color: #003664;
-    background-color: white;
+    background-color: rgb(234, 250, 255);
     border: 2px solid #003664;
 }
 section {
+
     display:flex;
     justify-content: space-around;
     align-items: center;
@@ -44,21 +37,24 @@ section {
     justify-content:center;
     padding: 7%;
     text-align: center;
+
 }
 section #content{
     background-color: white;
     border-radius: 20px;
     padding: 3%;
+
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-footer {
-    background-color: #003664;
-    color: #fff;
-    text-align: center;
-    padding: 30px;
-    bottom: 0;
-    width: 100%;
+footer{
+    margin-top: 1.2vw;
 }
+
 form {
     text-align: center;
 }

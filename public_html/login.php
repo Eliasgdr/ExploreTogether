@@ -37,32 +37,27 @@
 
     <link href="./stylessheet/login.css" rel="stylesheet" type="text/css">
 
-<body>
+<body>  
     <header>
-        <table>
-            <tr>
-                <td><h1>Explore Together</h1></td>
-                <td><nav>
-                    <a href="#">return</a>
-                </nav></td>
-            </tr>
-            <tr><td><p>Connecting People to Travel Together</p></td></tr>
-        </table>
+        <div class="title">Explore Together</div>
+        <div class="redirect">
+            <a type="button" class="titleButton" href="registration.php">Sign in</a>
+        </div>
     </header>
     <section>
         <div id="content">
-        <h2>Welcome to Travel Together!</h2>
-        <p>Find travel buddies and explore the world together.</p>
-        <p>Join our community and start planning your next adventure.</p>
-        <h3>Log in</h3>
-        <!-- Add an id to the form for easier selection -->
-        <form id="loginForm">
-            <input type="text" id="username" name="username" placeholder="Username" required><br>
-            <input type="password" id="password" name="password" placeholder="Password" required><br>
-            <input type="submit" value="Start to Surf">
-        </form>
-        
-        <p style='font-family: "Mansalva", sans-serif;'>Don't have an account ? <br> <a href="registration.php">create one</a></p>
+            <h2>Welcome to Travel Together!</h2>
+            <p>Find travel buddies and explore the world together.</p>
+            <p>Join our community and start planning your next adventure.</p>
+            <h3>Log in</h3>
+            <!-- Add an id to the form for easier selection -->
+            <form id="loginForm">
+                <input type="text" id="username" name="username" placeholder="Username" required><br>
+                <input type="password" id="password" name="password" placeholder="Password" required><br>
+                <input type="submit" value="Start to Surf">
+            </form>
+            
+            <p style='font-family: "Mansalva", sans-serif;'>Don't have an account ? <br> <a href="registration.php">create one</a></p>
         </div>
     </section>
     <footer>

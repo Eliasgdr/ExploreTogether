@@ -74,7 +74,10 @@
 </head>
 <body>
     <header>
-        <h1>Explore <br> Together</h1>
+        <div class="title">Explore Together</div>
+        <div class="redirect">
+            <a type="button" class="titleButton" href="login.php">Sign in</a>
+        </div>
     </header>
     <main>
         <div class="form-container">
@@ -109,7 +112,9 @@
             <a href="login.php">Log in</a></p>
         </div>
     </main>
-    <footer></footer>
+    <footer>
+        &copy; 2024 Travel Together | All Rights Reserved<br>
+    </footer>
 
 
 
