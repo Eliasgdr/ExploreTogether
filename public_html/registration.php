@@ -70,11 +70,18 @@
                 window.location.href = 'login.php';
             } else {
                 alert(response.message); // Display error message
+                console.log(response);
             }
         }
 
         function registrationErrorCallback(xhr, status, error) {
-            alert('An error occurred while processing your request. Please try again later.'); // Display error message
+            if(status==400) {
+                alert('The username or email is already used.'); // Display error message
+            } else {
+                alert('An error occurred while processing your request. Please try again later.'); // Display error message
+            }
+            
+            console.log(xhr);
         }
         $(document).ready(function() {
             $('#registrationForm').submit(function(e) {
@@ -83,12 +90,13 @@
                 // Serialize form data
                 var username = $("#username").val();
                 var password = $("#password").val();
+                var email = $("#email").val();
                 var birthdate = $("#birthdate").val();
                 var gender = $("#gender").val();
-                console.log(username);
+                console.log(email);
         
                 // Send AJAX request
-                registration(username, password, birthdate, gender, registrationSuccessCallback, registrationErrorCallback);
+                registration(username, password, birthdate, gender, email, registrationSuccessCallback, registrationErrorCallback);
             });
         });
     </script>

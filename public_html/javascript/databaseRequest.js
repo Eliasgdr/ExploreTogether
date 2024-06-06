@@ -23,11 +23,11 @@ function login(username, password, successCallback, errorCallback) {
     });
 }
 
-function registration(username, password, birthdate, gender, successCallback, errorCallback) {
+function registration(username, password, birthdate, gender, email, successCallback, errorCallback) {
     $.ajax({
         url: 'PHP/register.php', // Update with your PHP script's filename
         type: 'POST',
-        data: {name: username, gender:gender, birthdate:birthdate, password:password},
+        data: {name: username, gender:gender, birthdate:birthdate, password:password, email:email},
         dataType: 'json',
         success: function(response) {
                 /* 

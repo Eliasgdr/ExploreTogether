@@ -27,18 +27,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST["email"];
         $password = $_POST["password"];
 
+        // Check if the email is banned
+        $stmt = $conn->prepare("SELECT * FROM bannedemail WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $bannedEmail = $stmt->fetch();
+
+        if ($bannedEmail) {
+            // Return JSON response for banned email
+            http_response_code(400);
+            echo json_encode(array('success' => false, 'status_text' => "Email address is banned.", 'status_code' => 400));
+            exit;
+        }
+
         // Check if the username is already in use
         $stmt = $conn->prepare("SELECT * FROM users WHERE username = :name");
         $stmt->bindParam(':name', $name);
         $stmt->execute();
         $existingUser = $stmt->fetch();
 
-        /*if ($existingUser) {
+        if ($existingUser) {
             // Return JSON response for username already in use
             http_response_code(400);
             echo json_encode(array('success' => false, 'status_text' => "Username already in use.", 'status_code' => 400));
             exit;
-        }*/
+        }
 
         // Continue with user registration
         // Hash the password before storing it in the database
