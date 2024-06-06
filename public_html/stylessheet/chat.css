@@ -18,10 +18,10 @@ footer{
     border-width: 1px;
     border-color: black;
     border-style: solid;
-    height: 40vw;
+    height: auto;
     width: 40vw;
     display: grid;
-    grid-template-rows:5% 10% 5% 55% 2.5% 17.5%;
+    grid-template-rows:5% 10% 5% 65% 2.5% 7.5%;
     margin-bottom: -1px;
 }
 
@@ -78,6 +78,11 @@ footer{
 
 
 .threadComment{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+
     border-width: 1px;
     border-color: black;
     border-top-color: rgb(255, 255, 255);
@@ -94,16 +99,18 @@ footer{
     justify-content: center;
     flex-direction: column-reverse;
     background-color: rgba(137, 43, 226, 0);
+    
 
 }
 
-.threadComment .messages-container:hover{
+.threadComment .messages-container .message:hover{
     background-color: rgba(0, 0, 0, 0.128);
 }
 
 .threadComment .messages-container .message{
     width: 30vw;
     background-color: rgba(0, 0, 255, 0);
+    transition: background-color 0.3s ease;
 }
 .threadComment .messages-container .message .message-header{
     display: flex;
@@ -123,4 +130,136 @@ footer{
     padding: 1vw;
 }
 
+
+.threadComment .usrSearch,.threadComment #messageForm{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.addUsrSearch {
+    display: none;
+    grid-template-columns: 10% 80% 10% ;
+    grid-template-rows: 10% 20% 5% 55% 10% ;
+    
+    width: 35vw;
+    height: 50vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(90, 138, 151);
+    border-radius: 5px;
+}
+
+.addUsrSearch .close{
+    grid-column: 3; 
+    grid-row: 1;
+    width: 3vw;
+    height: 3vw;
+    cursor: pointer;
+}
+
+.addUsrSearch .searchContainer {
+    align-self: center;
+    grid-column: 2; 
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.addUsrSearch .suggestions{
+    grid-column: 2; 
+    grid-row: 4;
+    overflow-y: auto;
+    max-height: 100%;
+    background-color: rgb(100, 153, 168);
+    border-radius: 5px;
+}
+
+.addUsrSearch .suggestions .threadProfile{
+    display: grid;
+    grid-template-columns:5% 10% 5% 50% 5% 20% 5% ;
+    grid-template-rows:100% ;
+    grid-row-start: 2;
+}
+
+.addUsrSearch .suggestions .threadProfile .imageProfile{
+    grid-column-start: 2;
+    grid-row-start: 1;
+
+    width: 3vw;
+    height: 3vw;
+    background-color: black;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.addUsrSearch .suggestions .threadProfile #addFriendBtn{
+    grid-column-start: 6;
+    grid-row-start: 1;
+
+    width: 3vw;
+    height: 3vw;
+    background-color: black;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.btn{
+    background-color: #0d7681; 
+    border: none;
+    color: white;
+    padding: 0.5vw 1vw;
+    margin-top: -0.01vw;
+
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1vw;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+ }
+
+.btn:hover{
+    background-color: #0d7581c1
+}
+
+
+
+
+.addUsrSearch .suggestions .threadProfile .username{
+    margin-top: 5px;
+    font-family: "Mansalva", sans-serif;
+    display: flex;
+    align-self: center;
+    grid-row-start: 1;
+    grid-column-start: 4;
+    font-size: 1.3vw;
+}
+
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+.thread[noClick]{
+    pointer-events: none;
+}
+
+#message{
+    background-color: rgba(227, 245, 250, 0.749);
+    width: 18vw; 
+    margin-right: 1vw;
+    height: 4vw;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
 
