@@ -41,7 +41,7 @@ if (!isset($_SESSION['userID'])) {
 
             <!-- Elias integre les message pour les thread -->
             <img src="./images/landscape.jpg" alt="" class="imageTread">
-            <p class="message">ici on mets la description gu message donc elias il faut aue tu integre ca Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ratione est maiores aperiam officiis suscipit! Veniam, nemo? Ut non ad, nihil voluptatum mollitia quam molestiae provident! Dolores a optio atque consequuntur earum autem magnam possimus quam aut impedit facere laudantium, repellendus sit repudiandae? Aliquid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.
+            <p class="message" id="descThread">ici on mets la description gu message donc elias il faut aue tu integre ca Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ratione est maiores aperiam officiis suscipit! Veniam, nemo? Ut non ad, nihil voluptatum mollitia quam molestiae provident! Dolores a optio atque consequuntur earum autem magnam possimus quam aut impedit facere laudantium, repellendus sit repudiandae? Aliquid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.
 
             </p>
         </div>
@@ -208,7 +208,8 @@ if (!isset($_SESSION['userID'])) {
 
         function getThreadCallBackSuccess(response) {
             renderMessages(response['threadInfo']['messages']);
-            $('#threadOwnerName').text(response['threadInfo']['ownerUsername']);
+            $('#threadOwnerName').text(response['threadInfo']['description']);
+            $('#descThread').text(response['threadInfo']['ownerUsername']);
             console.log(response);
         }
 
