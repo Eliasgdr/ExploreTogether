@@ -146,10 +146,18 @@ h3{
 
     width: 100%;
     padding: 10px;
-    height: 5vw;
+
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: none;
+}
+
+#title{
+    height: 1vw;
+}
+
+#description{
+    height: 5vw;
 }
 
 .btn{

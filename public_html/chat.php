@@ -17,6 +17,8 @@ if (!isset($_SESSION['userID'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="javascript/databaseRequest.js?<?php echo time(); ?>"></script>
     <link href="./stylessheet/chat.css?<?php echo time(); ?>" rel="stylesheet" type="text/css">
+    <script src="javascript/chatAddUsr.js?<?php echo time(); ?>"></script>
+
 
     <title>Thread Discussion</title>
 
@@ -37,13 +39,12 @@ if (!isset($_SESSION['userID'])) {
                 <img src="./images/Png.png" alt="" class="imageProfile">
                 <p id="threadOwnerName" class="username">awdawd</p>
             </div>
-
-
             <!-- Elias integre les message pour les thread -->
             <img src="./images/landscape.jpg" alt="" class="imageTread">
             <p class="message" id="descThread">ici on mets la description gu message donc elias il faut aue tu integre ca Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ratione est maiores aperiam officiis suscipit! Veniam, nemo? Ut non ad, nihil voluptatum mollitia quam molestiae provident! Dolores a optio atque consequuntur earum autem magnam possimus quam aut impedit facere laudantium, repellendus sit repudiandae? Aliquid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.
 
             </p>
+            <p class="message">ici on  quo eum iusto illum.</p>
         </div>
 
 
@@ -54,33 +55,47 @@ if (!isset($_SESSION['userID'])) {
                 <!-- <p><?php echo htmlspecialchars($_GET['thread_id']); ?></p>-->
 
             <h3>Messages:</h3>
-            <div id="messagesContainer" class="messages-container">
-                <!-- Messages will be appended here -->
-            </div>
+            <div id="messagesContainer" class="messages-container"></div>
 
 
-            <h3>Post a Message:</h3>
+    
             <form id="messageForm">
-                <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
+                <textarea id="message" name="message" rows="4" cols="50" required placeholder='Post a Message'></textarea><br>
                 <input type="hidden" id="threadID" name="thread_id" value="<?php echo $_GET['thread_id']; ?>">
-                <input  type="submit" value="Post Message">
+                <input class='btn' type="submit" value="Post Message">
             </form>
 
-
-
-
-
-            <h3>Add User to Thread:</h3>
+            <!---<h3>Add User to Thread:</h3>
             <form id="addUserForm" class="search-container">
                 <input type="text" id="usernameInput" name="username" placeholder="Enter username" required>
                 <input type="hidden" name="threadID" value="<?php echo $_GET['thread_id']; ?>">
                 <input type="submit" value="Add User">
                 <div id="userSuggestions"></div>
-            </form>
+            </form>/--->
+
             <?php else : ?>
-            <p>No thread or messages found.</p>
+                <p>No thread or messages found.</p>
             <?php endif; ?>
+
+            <div class="usrSearch">
+                <h3>Add User :</h3>
+                <button class='btn' id="searchUsr">wadawd</button>
+            </div>
         </div>
+    
+        
+        <div class="addUsrSearch">
+            <img class="close" src="./images/x.png">
+            <div class="searchContainer" id="searchContainer">
+                <h3>Search Users:</h3>
+                <form id="searchUsersForm">
+                    <label for="search">Search:</label>
+                    <input type="text" id="SearchUserQuery" name="query" placeholder="Enter username">
+                </form>
+            </div>
+            <div class="suggestions" id='suggestions'></div>
+        </div>
+
     </div>
 
     <footer>

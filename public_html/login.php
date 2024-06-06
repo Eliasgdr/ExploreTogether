@@ -46,7 +46,7 @@
     </header>
     <section>
         <div id="content">
-            <h2>Welcome to Travel Together!</h2>
+            <h2>Welcome to Eplore Together!</h2>
             <p>Find travel buddies and explore the world together.</p>
             <p>Join our community and start planning your next adventure.</p>
             <h3>Log in</h3>
