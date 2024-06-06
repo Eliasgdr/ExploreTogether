@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    const selectImage = document.querySelector('.select-image');
+    const selectImage = document.querySelector('.imageProfile');
     const inputFile = document.querySelector('#file');
     const imgArea = document.querySelector('.img-area');
 
