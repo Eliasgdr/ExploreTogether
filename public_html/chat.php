@@ -19,15 +19,15 @@ if (!isset($_SESSION['userID'])) {
     <link href="./stylessheet/chat.css" rel="stylesheet" type="text/css">
 
     <title>Thread Discussion</title>
-    
+
 </head>
 
 <body>
     <header>
         <div class="title">Explore Together</div>
-    
+
         <div class="navbar">
-            <button class="navbar-btn" onclick="window.location.href='welcome.php'">Return to Welcome Page</button>
+            <button class="navbar-btn" onclick="window.location.href='messages.php'">Return to messages Page</button>
             <button class="navbar-btn" onclick="quitThread(<?php echo $_GET['thread_id']?>, quiThreadCallBackSuccess, quiThreadCallBackError)">Leave Chat</button>
         </div>
     </header>
@@ -57,7 +57,7 @@ if (!isset($_SESSION['userID'])) {
             <div id="messagesContainer" class="messages-container">
                 <!-- Messages will be appended here -->
             </div>
-            
+
 
             <h3>Post a Message:</h3>
             <form id="messageForm">
@@ -88,7 +88,7 @@ if (!isset($_SESSION['userID'])) {
     </footer>
 
     <script>
-    
+
         function quiThreadCallBackSuccess(response) {
             if (response.success) {
                 alert(response.message);
@@ -97,11 +97,11 @@ if (!isset($_SESSION['userID'])) {
                 alert(response.message);
             }
         }
-        
+
         function quiThreadCallBackError(xhr, status, error) {
-            
+
         }
-        
+
         function postMessageCallBackSuccess(response) {
             if (response.success) {
                 //alert(response.message);
@@ -111,27 +111,27 @@ if (!isset($_SESSION['userID'])) {
                 alert(response.message);
             }
         }
-        
+
         function postMessageCallBackError(xhr, status, error) {
             alert('Error');
         }
-        
+
         $(document).ready(function() {
             // Intercept form submission
             $('#messageForm').submit(function(e) {
                 e.preventDefault(); // Prevent default form submission
-        
+
                 // Serialize form data
                 //var formData = $(this).serialize();
-                
+
                 var message = $("#message").val();
                 var threadID = $("#threadID").val();
-        
+
                 // Send AJAX request
                 postMessage(message, threadID, postMessageCallBackSuccess, postMessageCallBackError);
             });
         });
-        
+
         function renderMessages(messages) {
             // Clear existing messages
             $('#messagesContainer').empty();
@@ -140,7 +140,7 @@ if (!isset($_SESSION['userID'])) {
             messages.forEach(function(message) {
                 // Create HTML elements for each message
                 var messageElement = createMessageElement(message);
-                
+
                 // Append the message HTML to the messages container
                 $('#messagesContainer').append(messageElement);
             });
@@ -149,7 +149,7 @@ if (!isset($_SESSION['userID'])) {
         function deleteMessageCallBackSuccess(response) {
             getThread(<?php echo $_GET['thread_id']; ?>, getThreadCallBackSuccess, getThreadCallBackError);
         }
-        
+
         function deleteMessageCallBackError(xhr, status, error) {
             alert('Error');
         }
@@ -157,7 +157,7 @@ if (!isset($_SESSION['userID'])) {
         function editMessageCallBackSuccess(response) {
                 console.log(response.message);
         }
-        
+
         function editMessageCallBackError(xhr, status, error) {
             alert('Error');
         }
@@ -165,7 +165,7 @@ if (!isset($_SESSION['userID'])) {
         function createMessageElement(message) {
             // Create the message container
             var messageContainer = $('<div class="message"></div>');
-            
+
             // Create the message header
             var header = $('<div class="message-header"></div>');
             header.append('<strong class="message-author">' + message.authorUsername + '</strong>');
@@ -179,28 +179,28 @@ if (!isset($_SESSION['userID'])) {
 
             // Append the header to the message container
             messageContainer.append(header);
-            
+
             // Create the message body
             var body = $('<div class="message-body">' + message.body + '</div>');
-            
+
             // Append the body to the message container
             messageContainer.append(body);
-            
+
             // Return the complete message element
             return messageContainer;
         }
-        
+
         // Helper function to format message time
         function formatMessageTime(time) {
             var formattedTime = new Date(time).toLocaleString(); // Convert time to local string format
             return formattedTime;
         }
-        
+
         function getMessageCallBackSuccess(response) {
             renderMessages(response['messages']);
             console.log(response);
         }
-        
+
         function getMessageCallBackError(xhr, status, error) {
             // Alert error message
             console.log(xhr);
@@ -211,7 +211,7 @@ if (!isset($_SESSION['userID'])) {
             $('#threadOwnerName').text(response['threadInfo']['ownerUsername']);
             console.log(response);
         }
-        
+
         function getThreadCallBackError(xhr, status, error) {
             // Alert error message
             console.log(xhr);
@@ -221,9 +221,9 @@ if (!isset($_SESSION['userID'])) {
         $(document).ready(function() {
             //getMessages(<?php echo $_GET['thread_id']; ?>, getMessageCallBackSuccess, getMessageCallBackError);
             getThread(<?php echo $_GET['thread_id']; ?>, getThreadCallBackSuccess, getThreadCallBackError);
-            
+
         });
-    
+
         // Function to handle form submission using AJAX
         // Get form data
         function addToThread(user, thread) {
@@ -245,12 +245,12 @@ if (!isset($_SESSION['userID'])) {
                 }
             });
         }
-    
-        
+
+
         function searchUsersCallBackSuccess(response) {
             console.log(response);
         }
-        
+
         function searchUsersCallBackError(xhr, status, error) {
             // Alert error message
             console.log(xhr);

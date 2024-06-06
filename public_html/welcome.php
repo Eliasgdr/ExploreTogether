@@ -22,17 +22,16 @@
     <audio id="hoverAudio" src="./audio/pedro.mp3"></audio>
 </head>
 <body>
-
     <header>
         <div class="title">Explore Together</div>
         <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
     </header>
 
-    
+
     <div class="containerMessage">
         <div class="thread-container" id="threadContainer"></div>
         <div class="createThreadContainer">
-            
+
             <form id="createThreadForm" method="post" enctype="multipart/form-data">
                 <h3>Create a New Thread:</h3>
                 <label for="title">Thread Title:</label><br>
@@ -50,7 +49,7 @@
                 </div>
                 <input type="submit" value="Create Thread">
             </form>
-            
+
             <div id="searchContainer">
                 <h3>Search Users:</h3>
                 <form id="searchUsersForm">
@@ -65,7 +64,6 @@
             <button id="disconnectBtn">Disconnect</button>
         </div>
     </div>
-
     <footer>
         &copy; 2024 Travel Together | All Rights Reserved
     </footer>
@@ -128,7 +126,7 @@
             if (query.length >= 2) {
                 searchUsersA(query); // Call the searchUsers function with the query
             } else {
-                //hideSuggestions();
+                hideSuggestions();
             }
         });
         
@@ -172,11 +170,11 @@
             threadInfo.forEach(thread => {
 
                 if (thread['ownerID'] !== null) {
-                    getPublicInfo(thread['ownerID'], 
+                    getPublicInfo(thread['ownerID'],
                         function(response) {
                             // Success callback function to update username
                             getPublicInfosuccessCallback(response, threadDiv);
-                        }, 
+                        },
                         getPublicInfoerrorCallback
                     );
                 }
@@ -210,9 +208,9 @@
                 const lastMessageImgProfile = document.createElement('img');
                 lastMessageImgProfile.classList.add('imageProfile');
                 lastMessageImgProfile.setAttribute("id", "imageProfile");
-                lastMessageImgProfile.src = './images/Png.png'; 
+                lastMessageImgProfile.src = './images/Png.png';
                 
-                
+
                 const lastMessageUserProfile = document.createElement('p');
                 lastMessageUserProfile.classList.add('username');
                 lastMessageUserProfile.textContent = `Username`;

@@ -1,5 +1,5 @@
 function redirectMessages() {
-    window.location.replace('./chat.php');
+    window.location.replace('./messages.php');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
