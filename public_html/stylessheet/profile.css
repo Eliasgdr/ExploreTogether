@@ -11,7 +11,9 @@
     font-family: "Numans", sans-serif;
 
     border-color:var(--blackColor);
-    border-width: 0.2vw;
+    border-width: 0.1vw;
+    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     border-style: solid;
     border-radius: 2vw;
 
