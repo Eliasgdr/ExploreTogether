@@ -15,22 +15,22 @@ if (!isset($_SESSION['userID'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="javascript/databaseRequest.js"></script>
-    <link href="./stylessheet/chat.css" rel="stylesheet" type="text/css">
+    <script src="javascript/databaseRequest.js?<?php echo time(); ?>"></script>
+    <link href="./stylessheet/chat.css?<?php echo time(); ?>" rel="stylesheet" type="text/css">
 
     <title>Thread Discussion</title>
 
 </head>
 
 <body>
-    <header>
+    <header> 
         <div class="title">Explore Together</div>
-
-        <div class="navbar">
-            <button class="navbar-btn" onclick="window.location.href='messages.php'">Return to messages Page</button>
-            <button class="navbar-btn" onclick="quitThread(<?php echo $_GET['thread_id']?>, quiThreadCallBackSuccess, quiThreadCallBackError)">Leave Chat</button>
+        <div class="redirect">
+            <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
+            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
         </div>
     </header>
+
     <div class="container">
         <div class="thread">
             <div class="threadProfile">

@@ -14,7 +14,7 @@
         <div class="title">Explore Together</div>
         <div class="redirect">
             <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
-            <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">welcome</a>
+            <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">Welcome</a>
         </div>
     </header>
     <div class="content">

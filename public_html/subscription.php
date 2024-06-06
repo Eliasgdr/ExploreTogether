@@ -17,18 +17,11 @@
         </div>
     </header>
     <div class="container">
-        <div class='plan' id="basic">
-            <h1>Basic plan</h1>
-            <img src=".\images\usine.png">
-            <p>You can access to message add friends and follow threads</p>
-            <h2>Only for 1€/month</h2>
-        </div>
         <div class='plan' id="premium">
             <h1>Premium plan</h1>
             <img src=".\images\fleurs.png">
             <p>You can access to message add friends, follow threads and thread creation</p>
             <h2>Only for 5€/month</h2>
-
         </div>
         <div class='plan' id="obsever">
             <h1>Obsever plan</h1>

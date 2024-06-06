@@ -6,7 +6,7 @@
     margin-top: 7vw;
     display: grid;
 
-    grid-template-columns: 10% 25% 2.5% 25% 2.5% 25% 10%;
+    grid-template-columns: 20% 25% 10% 25% 20%;
     
 }
 
@@ -31,14 +31,11 @@
     width:13vw;
 }
 
-.container #basic{
+
+.container #premium{
     grid-column-start: 2;
 }
 
-.container #premium{
-    grid-column-start: 4;
-}
-
 .container #obsever{
-    grid-column-start: 6;
+    grid-column-start: 4;
 }

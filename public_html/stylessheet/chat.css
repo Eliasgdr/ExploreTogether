@@ -1,4 +1,4 @@
-@import url('global.css');
+@import url('global.css?<?php echo time(); ?>');
 
 .container{
     margin-top: 1vw;
@@ -93,12 +93,17 @@ footer{
     align-items: center;
     justify-content: center;
     flex-direction: column-reverse;
-    background-color: blueviolet;
+    background-color: rgba(137, 43, 226, 0);
+
+}
+
+.threadComment .messages-container:hover{
+    background-color: rgba(0, 0, 0, 0.128);
 }
 
 .threadComment .messages-container .message{
     width: 30vw;
-    background-color: blue;
+    background-color: rgba(0, 0, 255, 0);
 }
 .threadComment .messages-container .message .message-header{
     display: flex;
@@ -113,7 +118,7 @@ footer{
     display: flex;
     align-items: center;
     flex-direction: row;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
 
     padding: 1vw;
 }

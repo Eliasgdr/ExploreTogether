@@ -14,9 +14,7 @@
     --blackColor:black;
 }
 
-body{
-    min-height: 200vh;
-}
+
 
 .titleButton{
     color: var(--whiteColor);
