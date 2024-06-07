@@ -6,65 +6,63 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="javascript/databaseRequest.js"></script>
     <title>Travel Together - Create Account</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        form {
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        input[type="text"],
-        input[type="password"],
-        select,
-        input[type="date"],
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #333;
-            color: #fff;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #555;
-        }
-    </style>
+    <link href="./stylessheet/registration.css" rel="stylesheet" type="text/css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <header>
-        <h1>Create an Account</h1>
+        <div class="title">Explore Together</div>
+        <div class="redirect">
+            <a type="button" class="titleButton" href="login.php">Sign in</a>
+        </div>
     </header>
-    <form id="registrationForm">
-        <input type="text" id="username" name="username" placeholder="Full Name" required><br>
-        <select id="gender" name="gender" required>
-            <option value="">Select Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
-        </select><br>
-        <input type="date" id="birthdate" name="birthdate" required><br>
-        <input type="password" id="password" name="password" placeholder="Password" required><br>
-        <input type="submit" value="Create Account">
-    </form>
+    <main>
+        <div class="form-container">
+            <h2>Create your account</h2>
+            <form id="registrationForm">
+                <table>
+                    <tr>
+                        <td><label for="full-name">Your full name :</label></td>
+                        <td class="lala"><input type="text" id="username" name="username" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Your e-mail :</label></td>
+                        <td class="lala"><input type="email" id="email" name="email" required></td>
+                    </tr>  
+                    <tr>
+                        <td><label for="gender">Your gender :</label></td>
+                        <td class="lala"><select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                                <option value="O">Other</option>
+                            </select><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="birthday">Your birthday :</label></td>
+                        <td class="lala"><input type="date" id="birthdate" name="birthdate" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Password :</label></td>
+                        <td class="lala"><input type="password" id="password" name="password" required></td>
+                    </tr>
+                </table>
+
+                <input type="submit" value="Start to Surf">
+            </form>
+            <p>Already have an account ?<br>
+            <a href="login.php">Log in</a></p>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Travel Together | All Rights Reserved<br>
+    </footer>
+
+
+
+
     <script>
     
         function registrationSuccessCallback(response) {
@@ -72,11 +70,18 @@
                 window.location.href = 'login.php';
             } else {
                 alert(response.message); // Display error message
+                console.log(response);
             }
         }
 
         function registrationErrorCallback(xhr, status, error) {
-            alert('An error occurred while processing your request. Please try again later.'); // Display error message
+            if(status==400) {
+                alert('The username or email is already used.'); // Display error message
+            } else {
+                alert('An error occurred while processing your request. Please try again later.'); // Display error message
+            }
+            
+            console.log(xhr);
         }
         $(document).ready(function() {
             $('#registrationForm').submit(function(e) {
@@ -85,12 +90,13 @@
                 // Serialize form data
                 var username = $("#username").val();
                 var password = $("#password").val();
+                var email = $("#email").val();
                 var birthdate = $("#birthdate").val();
                 var gender = $("#gender").val();
-                console.log(username);
+                console.log(email);
         
                 // Send AJAX request
-                registration(username, password, birthdate, gender, registrationSuccessCallback, registrationErrorCallback);
+                registration(username, password, birthdate, gender, email, registrationSuccessCallback, registrationErrorCallback);
             });
         });
     </script>

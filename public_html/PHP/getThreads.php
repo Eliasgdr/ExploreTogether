@@ -46,6 +46,8 @@ try {
             // Store thread information in an array
             $threadData = array(
                 'threadID' => $thread['threadID'],
+                'isDM' => $thread['isDM'],
+                'title' => $thread['title'],
                 'lastMessage' => $message['body'],
                 'lastMessageDate' => $message['Date'],
                 'lastAuthorID' => $message['authorID'],
@@ -58,6 +60,8 @@ try {
             // Handle case where last message does not exist
             $threadData = array(
                 'threadID' => $thread['threadID'],
+                'title' => $thread['title'],
+                'isDM' => $thread['isDM'],
                 'lastMessage' => null,
                 'lastMessageDate' => null,
                 'lastAuthorID' => null,

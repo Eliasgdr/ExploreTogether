@@ -15,16 +15,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Travel Together</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="javascript/databaseRequest.js"></script>
-    <script src="javascript/jsButton.js"></script>
+    <script src="javascript/databaseRequest.js?<?php echo time(); ?>"></script>
+    <script src="javascript/jsButton.js?<?php echo time(); ?>"></script>
 
     <link href="./stylessheet/welcome.css?<?php echo time(); ?>" rel="stylesheet" type="text/css">
     <audio id="hoverAudio" src="./audio/pedro.mp3"></audio>
 </head>
 <body>
-    <header>
+    <header> 
         <div class="title">Explore Together</div>
-        <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
+        <div class="redirect">
+            <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
+            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
+        </div>
     </header>
 
 
@@ -58,64 +61,52 @@
                 <h3>Search Users:</h3>
                 <form id="searchUsersForm">
                     <label for="search">Search:</label>
-                    <input type="text" id="query" name="query" placeholder="Enter username">
+                    <input type="text" id="SearchUserQuery" name="query" placeholder="Enter username">
                 </form>
             </div>
             <div class="suggestions" id='suggestions'>
-                <div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div>
-                <div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div>
-                <div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div><div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div>
-                <div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div>
-                <div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div><div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div>
-                <div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div>
-                <div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div><div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div>
-                <div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div>
-                <div class="threadProfile">
-                    <p class="username"> moi mon nom c'est gros caca</p>
-                    <img src="./images/Png.png" class="imageProfile" id="imageProfile">
-                </div>
             </div>
         </div>
-        
-        
+
     </div>
+
+    
+
+
     <footer>
         &copy; 2024 Travel Together | All Rights Reserved
     </footer>
         <script>
+
+        function createProfileDiv(user) {
+            const profileDiv = document.createElement('div');
+            profileDiv.className = 'threadProfile';
+            profileDiv.onclick = function() {
+                addFriend(user.ID, function() {
+                    alert('Ami ajouté avec succès');
+                }, function() {
+                    alert('Échec de l\'ajout de l\'ami');
+                });
+            };
+
+            const usernameParagraph = document.createElement('p');
+            usernameParagraph.className = 'username';
+            usernameParagraph.textContent = `${user.username}`;
+
+            const profileImage = document.createElement('img');
+            profileImage.className = 'imageProfile';
+            profileImage.id = 'imageProfile';
+            profileImage.src = user.profileImage || './images/Png.png';
+
+            profileDiv.appendChild(usernameParagraph);
+            profileDiv.appendChild(profileImage);
+
+            return profileDiv;
+        }
+
+  
+
+
         function createThreadCallBackSuccess(response){
             if (response.success) {
                 getThreads(getThreadSuccessCallback, getThreadErrorCallback);
@@ -154,28 +145,26 @@
             alert('Error'); // Display a generic error message
         }
         
-        function searchUsersA(query) {
-            // Encode the search query to ensure it's properly formatted for URL            
-            // Construct the URL with the search query parameter
-            searchUsers(query, function(response) {
-                if (response.success) {
-                    console.log(response.data);
-                } else {
-                    console.error("Error: " + response.status_text);
-                }
-            }, function(xhr, status, error) {
-                console.error("AJAX Error: " + status + " - " + error);
-                console.error(xhr);
+        function searchUsersCallBackSuccess(response) {
+            console.log(response);
+                  // Select the suggestions div
+            const suggestionsDiv = document.getElementById('suggestions');
+
+            suggestionsDiv.innerHTML = '';
+            // Loop through the data and append the created profile divs to the suggestions div
+            response['data'].forEach(user => {
+                const profileDiv = createProfileDiv(user);
+                suggestionsDiv.appendChild(profileDiv);
             });
         }
-        
-        document.getElementById('query').addEventListener('input', function(event) {
+
+        function searchUsersCallBackError(xhr, status, error) {
+            // Alert error message
+            console.log(xhr);
+        }
+        document.getElementById('SearchUserQuery').addEventListener('input', function(event) {
             var query = event.target.value;
-            if (query.length >= 2) {
-                searchUsersA(query); // Call the searchUsers function with the query
-            } else {
-                hideSuggestions();
-            }
+                searchUsers(query, searchUsersCallBackSuccess, searchUsersCallBackError); // Call the searchUsers function with the query
         });
         
         function disconnectSuccessCallback(response) {
@@ -211,7 +200,11 @@
 
             if (!container.length) {
                 console.error('Container element not found.');
+                document.querySelector('footer').classList.add('addSize');
                 return;
+            }
+            else{
+                document.querySelector('footer').classList.remove('addSize');
             }
 
             // Loop through each thread in the threadInfo array

@@ -1,0 +1,72 @@
+@import "./global.css?<?php echo time(); ?>";
+
+body{
+    background-color: #f4f4f4;
+}
+table {
+    width: 100vw;
+}
+.titleButton{
+    color: white;
+    text-decoration: none;
+}
+nav {
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: right;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #003664;
+    border-radius: 20px;
+}
+nav a:hover {
+    color: #003664;
+    background-color: rgb(234, 250, 255);
+    border: 2px solid #003664;
+}
+section {
+
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction:column;
+    align-content:center;
+    justify-content:center;
+    padding: 7%;
+    text-align: center;
+}
+section #content{
+    background-color: white;
+    border-radius: 20px;
+    padding: 3%;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+footer{
+    margin-top: 1.2vw;
+}
+form {
+    text-align: center;
+}
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #555;
+}

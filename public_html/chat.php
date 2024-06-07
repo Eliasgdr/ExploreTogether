@@ -1,10 +1,10 @@
 <?php
-// Start the session
+
 session_start();
 
-// Check if the user is logged in
+
 if (!isset($_SESSION['userID'])) {
-    header("Location: login.php"); // Redirect to login page if not logged in
+    header("Location: login.php"); 
     exit;
 }
 ?>
@@ -15,38 +15,37 @@ if (!isset($_SESSION['userID'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="javascript/databaseRequest.js"></script>
-    <link href="./stylessheet/chat.css" rel="stylesheet" type="text/css">
+    <script src="javascript/databaseRequest.js?<?php echo time(); ?>"></script>
+    <link href="./stylessheet/chat.css?<?php echo time(); ?>" rel="stylesheet" type="text/css">
+    <script src="javascript/chatAddUsr.js?<?php echo time(); ?>"></script>
+
 
     <title>Thread Discussion</title>
 
 </head>
 
 <body>
-    <header>
+    <header> 
         <div class="title">Explore Together</div>
-
-        <div class="navbar">
-            <button class="navbar-btn" onclick="window.location.href='messages.php'">Return to messages Page</button>
-            <button class="navbar-btn" onclick="quitThread(<?php echo $_GET['thread_id']?>, quiThreadCallBackSuccess, quiThreadCallBackError)">Leave Chat</button>
+        <div class="redirect">
+            <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
+            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
         </div>
     </header>
+
     <div class="container">
         <div class="thread">
             <div class="threadProfile">
                 <img src="./images/Png.png" alt="" class="imageProfile">
                 <p id="threadOwnerName" class="username">awdawd</p>
             </div>
-
-
             <!-- Elias integre les message pour les thread -->
             <img src="./images/landscape.jpg" alt="" class="imageTread">
-            <p class="message">ici on mets la description gu message donc elias il faut aue tu integre ca Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ratione est maiores aperiam officiis suscipit! Veniam, nemo? Ut non ad, nihil voluptatum mollitia quam molestiae provident! Dolores a optio atque consequuntur earum autem magnam possimus quam aut impedit facere laudantium, repellendus sit repudiandae? Aliquid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.
-
-            </p>
+            <p class="message" id="descThread"></p>
+            
         </div>
 
-
+        
 
         <div class="threadComment">
             <?php if (true or $thread && $messages) : ?>
@@ -54,33 +53,58 @@ if (!isset($_SESSION['userID'])) {
                 <!-- <p><?php echo htmlspecialchars($_GET['thread_id']); ?></p>-->
 
             <h3>Messages:</h3>
-            <div id="messagesContainer" class="messages-container">
-                <!-- Messages will be appended here -->
-            </div>
+            <div id="messagesContainer" class="messages-container"></div>
 
-
-            <h3>Post a Message:</h3>
+            
+    
             <form id="messageForm">
-                <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
+                <textarea id="message" name="message" rows="4" cols="50" required placeholder='Post a Message'></textarea><br>
                 <input type="hidden" id="threadID" name="thread_id" value="<?php echo $_GET['thread_id']; ?>">
-                <input  type="submit" value="Post Message">
+                <input class='btn' type="submit" value="Post Message">
             </form>
-
-
-
-
-
-            <h3>Add User to Thread:</h3>
+            
+            <!---<h3>Add User to Thread:</h3>
             <form id="addUserForm" class="search-container">
                 <input type="text" id="usernameInput" name="username" placeholder="Enter username" required>
                 <input type="hidden" name="threadID" value="<?php echo $_GET['thread_id']; ?>">
                 <input type="submit" value="Add User">
                 <div id="userSuggestions"></div>
-            </form>
+            </form>/--->
+
             <?php else : ?>
-            <p>No thread or messages found.</p>
+                <p>No thread or messages found.</p>
             <?php endif; ?>
+
+            <div class="usrSearch">
+                <button class='btn' id="searchUsr">Add User</button> 
+                <button id='imgReport'><img src="./images/report.png"></button>
+            </div>
         </div>
+    
+        
+        <div class="addUsrSearch">
+            <img class="close" src="./images/x.png">
+            <div class="searchContainer" id="searchContainer">
+                <h3>Search Users:</h3>
+                <form id="searchUsersForm">
+                    <label for="search">Search:</label>
+                    <input type="text" id="SearchUserQuery" name="query" placeholder="Enter username">
+                </form>
+            </div>
+            <div class="suggestions" id='suggestions'></div>
+        </div>
+
+        
+
+    </div>
+
+
+    <div class="reportUsr">
+        <img id='close' src="./images/x.png">
+        <a href="">Spam</a>
+        <a href="">Violence</a>
+        <a href="">Nudity</a>
+        <a href="">Harrasment</a>
     </div>
 
     <footer>
@@ -208,7 +232,8 @@ if (!isset($_SESSION['userID'])) {
 
         function getThreadCallBackSuccess(response) {
             renderMessages(response['threadInfo']['messages']);
-            $('#threadOwnerName').text(response['threadInfo']['ownerUsername']);
+            $('#threadOwnerName').text(response['threadInfo']['description']);
+            $('#descThread').text(response['threadInfo']['ownerUsername']);
             console.log(response);
         }
 
@@ -246,22 +271,58 @@ if (!isset($_SESSION['userID'])) {
             });
         }
 
+        function createProfileDiv(user) {
+            const profileDiv = document.createElement('div');
+            profileDiv.className = 'threadProfile';
+            profileDiv.onclick = function() {
+                addUserToThread(user.ID, function() {
+                    alert('Ami ajouté au thread avec succès');
+                }, function() {
+                    alert('Échec de l\'ajout du thread');
+                });
+            };
+
+            const usernameParagraph = document.createElement('p');
+            usernameParagraph.className = 'username';
+            usernameParagraph.textContent = `${user.username}`;
+
+
+            const profileImage = document.createElement('img');
+            profileImage.className = 'imageProfile';
+            profileImage.id = 'imageProfile';
+            profileImage.src = user.profileImage || './images/Png.png';
+
+            profileDiv.appendChild(usernameParagraph);
+            profileDiv.appendChild(profileImage);
+
+            return profileDiv;
+        }
+
 
         function searchUsersCallBackSuccess(response) {
             console.log(response);
+                  // Select the suggestions div
+            const suggestionsDiv = document.getElementById('suggestions');
+
+            suggestionsDiv.innerHTML = '';
+            // Loop through the data and append the created profile divs to the suggestions div
+            response['data'].forEach(user => {
+                const profileDiv = createProfileDiv(user);
+                suggestionsDiv.appendChild(profileDiv);
+            });
         }
 
         function searchUsersCallBackError(xhr, status, error) {
             // Alert error message
             console.log(xhr);
         }
-        document.getElementById('usernameInput').addEventListener('input', function(event) {
+        document.getElementById('SearchUserQuery').addEventListener('input', function(event) {
             var query = event.target.value;
-            if (query.length >= 2) {
+            //if (query.length >= 2) {
                 searchUsers(query, searchUsersCallBackSuccess, searchUsersCallBackError); // Call the searchUsers function with the query
-            } else {
+            //} else {
                 //hideSuggestions();
-            }
+            //}
         });
     </script>
 </body>

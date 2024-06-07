@@ -1,4 +1,4 @@
-@import url('global.css');
+@import url('global.css?<?php echo time(); ?>');
 
 
 
@@ -62,6 +62,15 @@ h3{
     background-color: black;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.thread-container .thread .threadProfile .imageReport{
+    grid-column-start: 5;
+    grid-row-start: 1;
+    width: 50%;
+    height: 50%;
+    object-fit:contain;
+    
 }
 
 .thread-container .thread .threadProfile .username{
@@ -137,10 +146,18 @@ h3{
 
     width: 100%;
     padding: 10px;
-    height: 5vw;
+
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: none;
+}
+
+#title{
+    height: 1vw;
+}
+
+#description{
+    height: 5vw;
 }
 
 .btn{
@@ -157,9 +174,9 @@ h3{
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s ease;
- }
+}
 
- .btn:hover{
+.btn:hover{
     background-color: #0d7581c1
 }
 
@@ -273,3 +290,9 @@ h3{
 body.no-scroll {
     overflow: hidden;
 }
+
+.thread-container[noClick]{
+    pointer-events: none;
+}
+
+

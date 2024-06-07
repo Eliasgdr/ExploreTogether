@@ -1,4 +1,4 @@
-@import "./global.css";
+@import "./global.css?<?php echo time(); ?>";
 
 .content{
     margin: -8px;
@@ -11,7 +11,9 @@
     font-family: "Numans", sans-serif;
 
     border-color:var(--blackColor);
-    border-width: 0.2vw;
+    border-width: 0.1vw;
+    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     border-style: solid;
     border-radius: 2vw;
 
@@ -22,7 +24,7 @@
     padding-right: 80vw;
 
     grid-template-columns: 7vw 45vw 5vw 30vw 10vw;
-    grid-template-rows: 5vh auto auto 5vh;
+    grid-template-rows: 5vw 2.5vw 15vw 5vw ;
 }
 
 .content .card .cardPicture{
@@ -32,10 +34,10 @@
     justify-self: center;
     
     grid-column-end: 5;
-    grid-row-start: 2;
+    grid-row-start: 3;
 
     width: 20vw;
-    height: 40vh;
+    height: 20vw;
     border-radius: 5%;
 
     background-color: var(--blackColor);
@@ -65,7 +67,7 @@
 }
 
 .content .card .cardInfo .userInfo{
-    grid-row-start: 2;
+    grid-row-start:3 ;
 }
 
 .content .card .cardInfo .userInfo .userDescript {
@@ -110,3 +112,31 @@
     font-family: "Special Elite", system-ui;
 
 }
+
+.content .card .subscription{
+    grid-row-start: 2;
+    padding-block: 1vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content .card .subscription .subscriptionButton{
+    display: inline-block; 
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    border-radius: 1vw;
+    padding-inline: 1vw;
+    font-size: 1vw;
+    align-items: center;
+    justify-content: center;
+    background-color:rgb(131, 131, 185)
+}
+
+
+.content .card .subscription .subscriptionButton:hover{
+    background-color: rgba(131, 131, 185, 0.788);
+}
+

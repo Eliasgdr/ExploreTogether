@@ -37,10 +37,10 @@ if ($result && mysqli_num_rows($result) > 0) {
         <?php
         // Check if the profile being viewed is the profile of the logged-in user
         if ($_SESSION['userID'] == $userID) {
-            echo '<a href="editProfile.php" class="titleButton">Edit Profile</a>';
+            echo '<a type="button" class="titleButton" onclick="window.location.href=\'editProfile.php\'">Edit Profile</a>';
 
         ?>
-        <a href="welcome.php" class="titleButton">Retour</a>
+        <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">Retour</a>
     </header>
     <div class="content">
         <div class="card">
@@ -55,6 +55,13 @@ if ($result && mysqli_num_rows($result) > 0) {
                     <!-- Display username -->
                     <h3 id="name"><?php echo $user['username']; ?></h3>
                 </div>
+                <hr>
+
+                <div class="subscription">
+                    <h3>Exposant</h3>
+                    <a type="button" class="subscriptionButton" onclick="window.location.href='subscription.php'">upgrade</a>
+                </div>
+
                 <hr>
                 <div class="userInfo">
                     <!-- Display user information -->

@@ -19,12 +19,26 @@ try {
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if all required fields are provided
-    if (isset($_POST["name"]) && isset($_POST["gender"]) && isset($_POST["birthdate"]) && isset($_POST["password"])) {
+    if (isset($_POST["name"]) && isset($_POST["gender"]) && isset($_POST["birthdate"]) && isset($_POST["password"]) && isset($_POST["email"])) {
         // Retrieve user data from the form
         $name = $_POST["name"];
         $gender = $_POST["gender"];
         $birthdate = $_POST["birthdate"];
+        $email = $_POST["email"];
         $password = $_POST["password"];
+
+        // Check if the email is banned
+        $stmt = $conn->prepare("SELECT * FROM bannedemail WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $bannedEmail = $stmt->fetch();
+
+        if ($bannedEmail) {
+            // Return JSON response for banned email
+            http_response_code(400);
+            echo json_encode(array('success' => false, 'status_text' => "Email address is banned.", 'status_code' => 400));
+            exit;
+        }
 
         // Check if the username is already in use
         $stmt = $conn->prepare("SELECT * FROM users WHERE username = :name");
@@ -32,12 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $existingUser = $stmt->fetch();
 
-        /*if ($existingUser) {
+        if ($existingUser) {
             // Return JSON response for username already in use
             http_response_code(400);
             echo json_encode(array('success' => false, 'status_text' => "Username already in use.", 'status_code' => 400));
             exit;
-        }*/
+        }
 
         // Continue with user registration
         // Hash the password before storing it in the database
@@ -45,10 +59,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             // Prepare a SQL query to insert user into the database
-            $stmt = $conn->prepare("INSERT INTO users (username, gender, birthdate, password) VALUES (:name, :gender, :birthdate, :password)");
+            $stmt = $conn->prepare("INSERT INTO users (username, gender, birthdate, password, email) VALUES (:name, :gender, :birthdate, :password, :email)");
             $stmt->bindParam(':name', $name);
             $stmt->bindParam(':gender', $gender);
             $stmt->bindParam(':birthdate', $birthdate);
+            $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $hashed_password);
             $stmt->execute();
 

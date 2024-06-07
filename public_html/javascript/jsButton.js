@@ -26,14 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    const selectImage = document.querySelector('.select-image');
+/*document.addEventListener('DOMContentLoaded', (event) => {
+    const selectImage = document.querySelector('.imageProfile');
     const inputFile = document.querySelector('#file');
     const imgArea = document.querySelector('.img-area');
 
-    selectImage.addEventListener('click', function () {
-        inputFile.click();
-    });
+    if(selectImage!=null){
+        selectImage.addEventListener('click', function () {
+            inputFile.click();
+        });
+    }
+    
 
     inputFile.addEventListener('change', function () {
         const image = this.files[0];
@@ -54,25 +57,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
             alert("Image size more than 2MB");
         }
     });
-});
+});*/
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    const yourDiv = document.getElementById('containerMessage');
     const openDivButton = document.getElementById('searchUsr');
-    const closeDivButton = document.querySelector('.close'); // Utiliser querySelector pour obtenir le premier élément avec la classe 'close'
+    const closeDivButton = document.querySelector('.close'); 
+    const threadContainer = document.querySelector('.thread-container');
     const addUsrSearch = document.querySelector('.addUsrSearch');
 
     function disableBodyScroll() {
         document.body.classList.add('no-scroll');
-        addUsrSearch.style.display = 'grid'; // Afficher la div
+        threadContainer.setAttribute('noClick', '');
+        addUsrSearch.style.display = 'grid'; 
     }
 
     function enableBodyScroll() {
         document.body.classList.remove('no-scroll');
-        addUsrSearch.style.display = 'none'; // Masquer la div
+        threadContainer.removeAttribute('noClick', '');
+        addUsrSearch.style.display = 'none'; 
     }
 
     openDivButton.addEventListener('click', disableBodyScroll);
     closeDivButton.addEventListener('click', enableBodyScroll);
 });
+
+
