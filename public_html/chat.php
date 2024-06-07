@@ -28,8 +28,8 @@ if (!isset($_SESSION['userID'])) {
     <header> 
         <div class="title">Explore Together</div>
         <div class="redirect">
-            <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
-            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
+            <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">Retour</a>
+            <?php echo '<a type="button" class="titleButton" onclick="window.location.href=\'profile.php?userID=' . $user_id . '\'">Profile</a>'; ?>
         </div>
     </header>
 

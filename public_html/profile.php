@@ -29,6 +29,13 @@ if ($result && mysqli_num_rows($result) > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Together</title>
     <link href="./stylessheet/profile.css" rel="stylesheet" type="text/css">
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -80,9 +87,10 @@ if ($result && mysqli_num_rows($result) > 0) {
                     </div>
                 </div>
             </div>
-            <div class="userMap"></div>
         </div>
     </div>
+    <div id="chartdiv"></div>
+    <script src="javascript/carte.js"></script>
     <footer>
         <h5>&copy; 2024 Travel Together | All Rights Reserved<br></h5>
     </footer>
