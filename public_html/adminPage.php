@@ -28,6 +28,7 @@ $result = $conn->query($sql);
 <html>
 <head>
     <title>Admin Page</title>
+    <link href="./stylessheet/adminPage.css?<?php echo time(); ?>" rel="stylesheet" type="text/css">
     <style>
         table {
             width: 100%;
@@ -41,6 +42,14 @@ $result = $conn->query($sql);
     </style>
 </head>
 <body>
+
+<header> 
+        <div class="title">Explore Together</div>
+        <div class="redirect">
+            <a type="button" class="titleButton" onclick="redirectMessages()">Welcome</a>
+            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
+        </div>
+</header>
 
 <h2>Reports</h2>
 
@@ -92,6 +101,9 @@ $result = $conn->query($sql);
     }
     ?>
 </table>
+<footer>
+        &copy; 2024 Travel Together | All Rights Reserved
+    </footer>
 
 <?php
 // Close connection
