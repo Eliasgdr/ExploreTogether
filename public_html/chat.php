@@ -2,12 +2,11 @@
 include 'php/databaseConnection.php';
 session_start();
 
-
+// Check if the user is logged in
 if (!isset($_SESSION['userID'])) {
-    header("Location: login.php"); 
+    header("Location: login.php"); // Redirect to login page if not logged in
     exit;
 }
-
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -18,14 +17,15 @@ if ($conn->connect_error) {
 }
 
 // Prepare and execute the query
+$user_id = $_SESSION['userID']; // Fetch user ID from session
 $stmt = $conn->prepare("SELECT isPrenium FROM users WHERE ID = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
-$stmt->bind_result($isPremium);
+$stmt->bind_result($isPrenium);
 $stmt->fetch();
 
 // Check if the user is not premium
-if (!$isPremium) {
+if (!$isPrenium) {
     header("Location: subscription.php"); // Redirect to subscription page if not premium
     exit;
 }
@@ -34,6 +34,7 @@ if (!$isPremium) {
 $stmt->close();
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -243,7 +244,7 @@ $conn->close();
             // Check if the author of the message is the current user
             if (message.authorID == <?php echo $_SESSION['userID'] ?> || admin) {
                 // Add buttons for deleting and editing messages
-                header.append('<div class="message-actions"><button class="delete-message-btn" onclick="deleteMessage(' + message.messageID + ', deleteMessageCallBackSuccess, deleteMessageCallBackError)">Delete</button></div>');
+                header.append('<div class="message-actions"><button class="btn" onclick="deleteMessage(' + message.messageID + ', deleteMessageCallBackSuccess, deleteMessageCallBackError)">Delete</button></div>');
             }
 
             // Append the header to the message container
