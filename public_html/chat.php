@@ -101,10 +101,10 @@ if (!isset($_SESSION['userID'])) {
 
     <div class="reportUsr">
         <img id='close' src="./images/x.png">
-        <a href="">Spam</a>
-        <a href="">Violence</a>
-        <a href="">Nudity</a>
-        <a href="">Harrasment</a>
+        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Spam', tt, t)">Spam</a>
+        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Violence')">Violence</a>
+        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Nudity')">Nudity</a>
+        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Harrasment')">Harrasment</a>
     </div>
 
     <footer>
@@ -113,6 +113,11 @@ if (!isset($_SESSION['userID'])) {
 
     <script>
 
+        function tt(response) {};
+        function t(xhr, status, error) {
+            console.log(xhr);
+
+        }
         function quiThreadCallBackSuccess(response) {
             if (response.success) {
                 alert(response.message);
