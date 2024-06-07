@@ -33,7 +33,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 <body>
     <header>
-        <div class="title">Explore Together</div>
+        <div class="title" onclick="window.location.href='welcome.php'">Explore Together</div>
         <div class="redirect">
             <?php
             // Check if the profile being viewed is the profile of the logged-in user

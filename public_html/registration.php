@@ -13,7 +13,7 @@
 </head>
 <body>
     <header>
-        <div class="title">Explore Together</div>
+        <div class="title" onclick="window.location.href='welcome.php'">Explore Together</div>
         <div class="redirect">
             <a type="button" class="titleButton" href="login.php">Sign in</a>
         </div>
