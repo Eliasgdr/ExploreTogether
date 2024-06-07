@@ -27,19 +27,18 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Update the user's prenium status
-    $stmt = $conn->prepare("UPDATE users SET isPrenium = :isPrenium WHERE ID = :userID"); // Corrected column name
+    $stmt = $conn->prepare("UPDATE users SET isPrenium = :isPrenium WHERE ID = :userID");
     $stmt->bindParam(':isPrenium', $isPrenium, PDO::PARAM_BOOL);
     $stmt->bindParam(':userID', $_SESSION['userID'], PDO::PARAM_INT);
     $stmt->execute();
 
-    // Check if the update was successful
-    $rowCount = $stmt->rowCount();
-    if ($rowCount > 0) {
+    // Check if any rows were affected by the update
+    if ($stmt->rowCount() > 0) {
         $response['success'] = true;
         $response['message'] = "User prenium status updated successfully";
     } else {
         $response['success'] = false;
-        $response['message'] = "User not found"; // Removed unnecessary concatenation
+        $response['message'] = "User not found or already has the same prenium status";
         http_response_code(404); // Not Found status code
     }
 
