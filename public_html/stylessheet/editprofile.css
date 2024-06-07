@@ -5,6 +5,10 @@ h1{
     font-size: 2vw;
 }
 
+#imgPreview{
+    width: 15vw;
+    height: 15vw;
+}
 
 .container{
     display:flex;
@@ -23,6 +27,7 @@ h1{
     border-width: 1px;
     border-color: black;
     border-style: solid;
+    padding: 3vw;
 }
 
 .container .formContainer #username{
@@ -32,7 +37,6 @@ h1{
     border: 2px solid #ccc; 
     border-radius: 5px; 
     outline: none; 
-    
 }
 
 .container .formContainer #description{
@@ -43,5 +47,14 @@ h1{
     border-radius: 5px; 
     outline: none; 
     resize: none;
+}
 
+.container .formContainer #email{
+    width: 15vw; 
+    height: 1vw; 
+    font-size: 0.75vw; 
+    border: 2px solid #ccc; 
+    border-radius: 5px; 
+    outline: none; 
+    resize: none;
 }

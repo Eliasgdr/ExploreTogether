@@ -88,9 +88,9 @@ $conn->close();
         <h1>Edit Profile</h1>
         <?php if (isset($error_message)) echo "<p>$error_message</p>"; ?>
 
-        <h1>Display Profile Image</h1>
+        
         <?php if ($profileImage) { ?>
-        <img src="data:image/jpeg;base64,<?php echo $profileImage; ?>" alt="Profile Image">
+        <img id='imgPreview' src="data:image/jpeg;base64,<?php echo $profileImage; ?>" alt="Profile Image">
     <?php } else { ?>
         <img src="default-profile.png" alt="Default Profile Image">
     <?php } ?>
