@@ -28,7 +28,7 @@ if (!isset($_SESSION['userID'])) {
     <header> 
         <div class="title">Explore Together</div>
         <div class="redirect">
-            <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
+            <a type="button" class="titleButton" onclick="redirectMessages()">Welcome</a>
             <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
         </div>
     </header>
@@ -80,24 +80,28 @@ if (!isset($_SESSION['userID'])) {
                 <button id='imgReport'><img src="./images/report.png"></button>
             </div>
         </div>
-    
-        
-        <div class="addUsrSearch">
-            <img class="close" src="./images/x.png">
-            <div class="searchContainer" id="searchContainer">
-                <h3>Search Users:</h3>
-                <form id="searchUsersForm">
-                    <label for="search">Search:</label>
-                    <input type="text" id="SearchUserQuery" name="query" placeholder="Enter username">
-                </form>
-            </div>
-            <div class="suggestions" id='suggestions'></div>
-        </div>
-
-        
 
     </div>
 
+    <div class="addUsrSearch">
+        <img class="close" src="./images/x.png">
+        <div class="searchContainer" id="searchContainer">
+            <h3>Search Users:</h3>
+            <form id="searchUsersForm">
+                <label for="search">Search:</label>
+                <input type="text" id="SearchUserQuery" name="query" placeholder="Enter username">
+            </form>
+        </div>
+        <div class="suggestions" id='suggestions'></div>
+    </div>
+
+    <div class="editMsg">
+        <form id="editMsg">
+                <textarea id="message" name="message" rows="4" cols="50" required placeholder='Edit a Message'></textarea><br>
+                <input type="hidden" id="threadID" name="thread_id" value="<?php echo $_GET['thread_id']; ?>">
+                <input class='btn' type="submit" value="Post Message">
+        </form>
+    </div>
 
     <div class="reportUsr">
         <img id='close' src="./images/x.png">
@@ -203,7 +207,7 @@ if (!isset($_SESSION['userID'])) {
             // Check if the author of the message is the current user
             if (message.authorID == <?php echo $_SESSION['userID'] ?>) {
                 // Add buttons for deleting and editing messages
-                header.append('<div class="message-actions"><button class="delete-message-btn" onclick="deleteMessage(' + message.messageID + ', deleteMessageCallBackSuccess, deleteMessageCallBackError)">Delete</button><button class="edit-message-btn" onclick="alert(\'WIP\')">Edit</button></div>');
+                header.append('<div class="message-actions"><button class="delete-message-btn" onclick="deleteMessage(' + message.messageID + ', deleteMessageCallBackSuccess, deleteMessageCallBackError)">Delete</button></div>');
             }
 
             // Append the header to the message container
