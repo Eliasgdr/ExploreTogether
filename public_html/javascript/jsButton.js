@@ -26,14 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-document.addEventListener('DOMContentLoaded', (event) => {
+/*document.addEventListener('DOMContentLoaded', (event) => {
     const selectImage = document.querySelector('.imageProfile');
     const inputFile = document.querySelector('#file');
     const imgArea = document.querySelector('.img-area');
 
-    selectImage.addEventListener('click', function () {
-        inputFile.click();
-    });
+    if(selectImage!=null){
+        selectImage.addEventListener('click', function () {
+            inputFile.click();
+        });
+    }
+    
 
     inputFile.addEventListener('change', function () {
         const image = this.files[0];
@@ -54,7 +57,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             alert("Image size more than 2MB");
         }
     });
-});
+});*/
 
 
 document.addEventListener('DOMContentLoaded', () => {

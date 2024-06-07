@@ -14,14 +14,14 @@ footer{
 
 
 
- .thread{
+.thread{
     border-width: 1px;
     border-color: black;
     border-style: solid;
     height: auto;
     width: 40vw;
     display: grid;
-    grid-template-rows:5% 10% 5% 65% 2.5% 7.5%;
+    grid-template-rows:5% 10% 5% 55% 15% 5% ;
     margin-bottom: -1px;
 }
 

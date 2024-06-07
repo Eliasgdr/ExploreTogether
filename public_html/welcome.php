@@ -81,6 +81,13 @@
         function createProfileDiv(user) {
             const profileDiv = document.createElement('div');
             profileDiv.className = 'threadProfile';
+            profileDiv.onclick = function() {
+                addFriend(user.ID, function() {
+                    alert('Ami ajouté avec succès');
+                }, function() {
+                    alert('Échec de l\'ajout de l\'ami');
+                });
+            };
 
             const usernameParagraph = document.createElement('p');
             usernameParagraph.className = 'username';

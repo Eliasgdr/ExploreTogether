@@ -41,10 +41,8 @@ if (!isset($_SESSION['userID'])) {
             </div>
             <!-- Elias integre les message pour les thread -->
             <img src="./images/landscape.jpg" alt="" class="imageTread">
-            <p class="message" id="descThread">ici on mets la description gu message donc elias il faut aue tu integre ca Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ratione est maiores aperiam officiis suscipit! Veniam, nemo? Ut non ad, nihil voluptatum mollitia quam molestiae provident! Dolores a optio atque consequuntur earum autem magnam possimus quam aut impedit facere laudantium, repellendus sit repudiandae? Aliquid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.quid natus obcaecati quo eum iusto illum.
-
-            </p>
-            <p class="message">ici on  quo eum iusto illum.</p>
+            <p class="message" id="descThread"></p>
+            
         </div>
 
         
@@ -276,10 +274,18 @@ if (!isset($_SESSION['userID'])) {
         function createProfileDiv(user) {
             const profileDiv = document.createElement('div');
             profileDiv.className = 'threadProfile';
+            profileDiv.onclick = function() {
+                addUserToThread(user.ID, function() {
+                    alert('Ami ajouté au thread avec succès');
+                }, function() {
+                    alert('Échec de l\'ajout du thread');
+                });
+            };
 
             const usernameParagraph = document.createElement('p');
             usernameParagraph.className = 'username';
             usernameParagraph.textContent = `${user.username}`;
+
 
             const profileImage = document.createElement('img');
             profileImage.className = 'imageProfile';
