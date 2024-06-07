@@ -50,7 +50,7 @@ $user_id = $_SESSION['userID'];
 
             <div class="usrSearch">
                 <h3>Add User :</h3>
-                <button class='btn' id="searchUsr">wadawd</button>
+                <button class='btn' id="searchUsr">Search</button>
             </div>
             
             <div class='disconnectDiv'>
