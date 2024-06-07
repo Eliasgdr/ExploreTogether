@@ -1,7 +1,7 @@
 <?php
 
 // Database connection parameters
-include 'databaseConnection.php';
+include '../databaseConnection.php';
 include 'adminlib.php';
 
 session_start();
