@@ -113,6 +113,13 @@ if (!isset($_SESSION['userID'])) {
 
     <script>
 
+            var admin;
+            function sucesscalb(response) {
+                console.log(response);
+                admin = response['isAdmin'];
+            }
+            isAdmin(sucesscalb);
+
         function tt(response) {};
         function t(xhr, status, error) {
             console.log(xhr);
@@ -199,9 +206,11 @@ if (!isset($_SESSION['userID'])) {
             var header = $('<div class="message-header"></div>');
             header.append('<strong class="message-author">' + message.authorUsername + '</strong>');
             header.append('<span class="message-time">' + formatMessageTime(message.Date) + '</span>');
+            
+
 
             // Check if the author of the message is the current user
-            if (message.authorID == <?php echo $_SESSION['userID'] ?>) {
+            if (message.authorID == <?php echo $_SESSION['userID'] ?> || admin) {
                 // Add buttons for deleting and editing messages
                 header.append('<div class="message-actions"><button class="delete-message-btn" onclick="deleteMessage(' + message.messageID + ', deleteMessageCallBackSuccess, deleteMessageCallBackError)">Delete</button><button class="edit-message-btn" onclick="alert(\'WIP\')">Edit</button></div>');
             }

@@ -23,17 +23,10 @@ if (isset($_POST['reportID']) && is_numeric($_POST['reportID'])) {
     $reportID = (int)$_POST['reportID'];
 
     try {
-        // Create a new PDO connection
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $conn->prepare("SELECT isAdmin FROM users WHERE ID = :userID");
-        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Check if the user is an admin
-        if (!(bool)$result['isAdmin']) {
+        if (!isAdmin($_SESSION['userID'], $conn)) {
             http_response_code(401); // Unauthorized
             echo json_encode(array('success' => false, 'status_text' => "User is not an Admin" . $result['isAdmin'], 'status_code' => 401));
             exit;
