@@ -1,40 +1,73 @@
+<?php
+include 'php/databaseConnection.php';
+
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['userID'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+// Fetch user info based on user ID (you need to get the user ID somehow, perhaps through a GET parameter or session)
+$userID = $_GET['userID']; // Assuming you get the user ID from the URL parameter
+$query = "SELECT * FROM users WHERE ID = $userID";
+$result = mysqli_query($conn, $query);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $user = mysqli_fetch_assoc($result);
+    }
+    // Now, you have user information in the $user variable
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Together</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="javascript/databaseRequest.js"></script>
     <link href="./stylessheet/profile.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
     <header>
         <div class="title">Explore Together</div>
-        <div class="titleButton">Retour</div>
+        <?php
+        // Check if the profile being viewed is the profile of the logged-in user
+        if ($_SESSION['userID'] == $userID) {
+            echo '<a href="editProfile.php" class="titleButton">Edit Profile</a>';
+
+        ?>
+        <a href="welcome.php" class="titleButton">Retour</a>
     </header>
     <div class="content">
         <div class="card">
-            <div class="cardPicture"></div>
+            <div class="cardPicture">
+                <!-- Display profile image if available -->
+                <?php if (!empty($user['profileImage'])): ?>
+                    <img src="php/displayImage.php" alt="Profile Image">
+                <?php endif; ?>
+            </div>
             <div class="cardInfo">
                 <div class="nameInfo">
-                    <h3 id="name">DAS Shawrov</h3>
-                    <h3 id="userName">Shaw</h3>
+                    <!-- Display username -->
+                    <h3 id="name"><?php echo $user['username']; ?></h3>
                 </div>
                 <hr>
                 <div class="userInfo">
-                    <h5 id="userBirth">Birthay : unknow</h5>
+                    <!-- Display user information -->
+                    <h5 id="userBirth">Birthday : <?php echo $user['birthdate']; ?></h5>
                     <div class="mainCountry">
-                        <h4 id="country">Bangladesh</h4>
+                        <!-- Display other user info like country and email -->
+                        <h4 id="country">pays</h4>
                     </div>
-                    <h5 id="userEmail">E-mail : bo.antonin@gmail.com</h5>
+                    <h5 id="userEmail">E-mail : <?php echo $user['email']; ?></h5>
                     <div class="userDescript">
                         <h5>Description : </h5>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet praesentium similique qui nihil quasi atque! Adipisci distinctio ratione quo nesciunt quibusdam doloribus corporis. Consectetur earum similique dolorum sapiente. Dolorem facere molestias ullam ducimus non voluptatem fugiat? Nobis consequatur explicabo dolorem! Autem consequuntur adipisci, natus quas aliquid illo magnam. Sapiente reiciendis nobis quaerat mollitia impedit, cumque aspernatur nisi magni dolores dolore labore amet commodi voluptatibus doloribus sequi et incidunt, veritatis nulla! Ab hic quis odit neque enim, ipsum qui earum dicta nostrum, omnis mollitia, libero vel voluptatem sint nam facere maiores odio obcaecati nulla dolor. Aperiam enim, cum dolorem qui illo minima. Harum, commodi? Accusamus optio quaerat expedita fugiat reiciendis voluptatibus possimus, iure dolores hic, nihil eaque nulla quo fugit minima illum. Maxime commodi nobis, aspernatur consequatur vel in. Qui eum perspiciatis, facilis perferendis optio nisi aliquid accusantium eos quasi, atque alias repellat, quisquam fuga deleniti vero. Maiores voluptatum amet ea!
-                        </p>
+                        <p><?php echo $user['description']; ?></p>
                     </div>
-                    
                 </div>
             </div>
             <div class="userMap"></div>
@@ -44,3 +77,11 @@
         <h5>&copy; 2024 Travel Together | All Rights Reserved<br></h5>
     </footer>
 </body>
+</html>
+
+<?php
+} else {
+    // Handle the case where no user with the given ID was found
+    echo "User not found.";
+}
+?>

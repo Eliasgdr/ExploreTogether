@@ -37,8 +37,8 @@
     width: 20vw;
     height: 40vh;
     border-radius: 5%;
-    
-    background-image: url("../images/shaw.jpeg");
+
+    background-color: var(--blackColor);
     background-size: cover; 
     background-position: center; 
 
