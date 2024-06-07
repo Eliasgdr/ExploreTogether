@@ -13,7 +13,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 // Fetch user info based on user ID (you need to get the user ID somehow, perhaps through a GET parameter or session)
 $userID = $_GET['userID']; // Assuming you get the user ID from the URL parameter
-$query = "SELECT * FROM users WHERE ID = $userID";
+$query = "SELECT username, gender, birthdate, description, email, profileImage FROM users WHERE ID = $userID";
 $result = mysqli_query($conn, $query);
 
 if ($result && mysqli_num_rows($result) > 0) {
@@ -34,13 +34,16 @@ if ($result && mysqli_num_rows($result) > 0) {
 <body>
     <header>
         <div class="title">Explore Together</div>
-        <?php
-        // Check if the profile being viewed is the profile of the logged-in user
-        if ($_SESSION['userID'] == $userID) {
-            echo '<a type="button" class="titleButton" onclick="window.location.href=\'editProfile.php\'">Edit Profile</a>';
+        <div class="redirect">
+            <?php
+            // Check if the profile being viewed is the profile of the logged-in user
+        
+            if ($_SESSION['userID'] == $userID) {
+                echo '<a type="button" class="titleButton" onclick="window.location.href=\'editProfile.php\'">Edit Profile</a>';
 
-        ?>
-        <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">Retour</a>
+            ?>
+            <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">Retour</a>
+        </div>
     </header>
     <div class="content">
         <div class="card">

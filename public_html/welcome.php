@@ -7,6 +7,8 @@
         header("Location: login.php"); // Redirect to login page if not logged in
         exit;
     }
+$user_id = $_SESSION['userID'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +28,8 @@
         <div class="title">Explore Together</div>
         <div class="redirect">
             <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
-            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
+            <?php echo '<a type="button" class="titleButton" onclick="window.location.href=\'profile.php?userID=' . $user_id . '\'">Profile</a>'; ?>
+
         </div>
     </header>
 
@@ -56,7 +59,7 @@
         </div>
 
         <div class="addUsrSearch">
-            <img class="close" src="./images/x.png">
+            <img class="close" src="./Fs/x.png">
             <div class="searchContainer" id="searchContainer">
                 <h3>Search Users:</h3>
                 <form id="searchUsersForm">
