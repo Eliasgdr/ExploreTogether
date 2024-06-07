@@ -75,10 +75,11 @@
         }
 
         function registrationErrorCallback(xhr, status, error) {
-            if(status==400) {
+            if(status===400) {
                 alert('The username or email is already used.'); // Display error message
             } else {
-                alert('An error occurred while processing your request. Please try again later.'); // Display error message
+                alert('The username or email is already used.');
+                //alert('An error occurred while processing your request. Please try again later.'); // Display error message
             }
             
             console.log(xhr);
