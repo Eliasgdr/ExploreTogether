@@ -71,6 +71,30 @@ function disconnect(successCallback, errorCallback) {
     });
 }
 
+function updatePrenium(isPrenium, successCallback, errorCallback) {
+    $.ajax({
+        url: 'PHP/updatePrenium.php', // Path to your disconnect PHP script
+        type: 'POST', // Use POST method
+        data :{isPrenium:isPrenium},
+        success: function(response) {
+                /* 
+                Format of response :
+                
+                $response['success'] = true/false;
+                $response['message'] = "Details about what happens"
+                */
+            if (successCallback && typeof successCallback === 'function') {
+                successCallback(response);
+            }
+        },
+        error: function(xhr, status, error) {
+            if (errorCallback && typeof errorCallback === 'function') {
+                errorCallback(xhr, status, error);
+            }
+        }
+    });
+}
+
 function postMessage(message, threadID, successCallback, errorCallback) {
     $.ajax({
         url: 'PHP/postMessage.php',
