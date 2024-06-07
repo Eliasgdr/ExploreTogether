@@ -78,8 +78,8 @@ $conn->close();
     <header>
         <div class="title" onclick="window.location.href='welcome.php'">Explore Together</div>
         <div class="redirect">
-            <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">Messages</a>
-            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
+            <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
+            <?php echo '<a type="button" class="titleButton" onclick="window.location.href=\'profile.php?userID=' . $user_id . '\'">Profile</a>'; ?>
         </div>
     </header>
 
