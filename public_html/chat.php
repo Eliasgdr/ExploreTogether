@@ -101,10 +101,10 @@ if (!isset($_SESSION['userID'])) {
 
     <div class="reportUsr">
         <img id='close' src="./images/x.png">
-        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Spam', tt, t)">Spam</a>
-        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Violence')">Violence</a>
-        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Nudity')">Nudity</a>
-        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Harrasment')">Harrasment</a>
+        <a id='reportBtn1' onclick="report(<?php echo $_GET['thread_id']; ?>, 'Spam', tt, t)">Spam</a>
+        <a id='reportBtn2' onclick="report(<?php echo $_GET['thread_id']; ?>, 'Violence')">Violence</a>
+        <a id='reportBtn3' onclick="report(<?php echo $_GET['thread_id']; ?>, 'Nudity')">Nudity</a>
+        <a id='reportBtn4' onclick="report(<?php echo $_GET['thread_id']; ?>, 'Harrasment')">Harrasment</a>
     </div>
 
     <footer>

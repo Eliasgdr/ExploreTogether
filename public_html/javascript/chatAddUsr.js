@@ -27,6 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const openDivButton = document.getElementById('imgReport');
     const closeDivButton = document.getElementById('close'); 
+    const closeReportBtn1 = document.getElementById('reportBtn1'); 
+    const closeReportBtn2 = document.getElementById('reportBtn2'); 
+    const closeReportBtn3 = document.getElementById('reportBtn3'); 
+    const closeReportBtn4 = document.getElementById('reportBtn4'); 
+
+
+
     const threadContainer = document.querySelector('.container');
     const addUsrSearch = document.querySelector('.reportUsr');
 
@@ -44,4 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     openDivButton.addEventListener('click', disableBodyScroll);
     closeDivButton.addEventListener('click', enableBodyScroll);
+
+    closeReportBtn1.addEventListener('click', enableBodyScroll);
+    closeReportBtn2.addEventListener('click', enableBodyScroll); 
+    closeReportBtn3.addEventListener('click', enableBodyScroll);
+    closeReportBtn4.addEventListener('click', enableBodyScroll);
+
 });

@@ -59,7 +59,7 @@ $user_id = $_SESSION['userID'];
         </div>
 
         <div class="addUsrSearch">
-            <img class="close" src="./Fs/x.png">
+            <img class="close" src="./images/x.png">
             <div class="searchContainer" id="searchContainer">
                 <h3>Search Users:</h3>
                 <form id="searchUsersForm">
