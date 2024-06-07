@@ -2,7 +2,9 @@
 include 'databaseConnection.php';
 
 // Start the session
-//session_start();
+if(session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
@@ -24,8 +26,6 @@ if(isset($_POST['submit'])) {
     $sql = "UPDATE users SET profileImage = '$image' WHERE ID = '$userID'";
     mysqli_query($conn, $sql);
 
-    // Redirect back to the frontend page
-    header("Location: ../testPP.php");
     exit();
 }
 ?>

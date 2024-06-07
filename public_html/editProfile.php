@@ -1,7 +1,9 @@
 <?php
 include 'php/databaseConnection.php';
 
-session_start();
+if(session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
 // Check if user is logged in
 if (!isset($_SESSION['userID'])) {
@@ -11,15 +13,13 @@ if (!isset($_SESSION['userID'])) {
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-include('php/uploadImage.php');
-
 // Fetch current user data
 $user_id = $_SESSION['userID'];
-$sql = "SELECT username, gender, birthdate, description, email FROM users WHERE ID = ?";
+$sql = "SELECT username, gender, birthdate, description, email, profileImage FROM users WHERE ID = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
-$stmt->bind_result($username, $gender, $birthdate, $description, $email);
+$stmt->bind_result($username, $gender, $birthdate, $description, $email, $profileImage);
 $stmt->fetch();
 $stmt->close();
 
@@ -30,9 +30,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_description = $_POST['description'];
     $new_email = $_POST['email'];
 
-    $update_sql = "UPDATE users SET username = ?, gender = ?, birthdate = ?, description = ?, email = ? WHERE ID = ?";
-    $update_stmt = $conn->prepare($update_sql);
-    $update_stmt->bind_param("sssssi", $new_username, $new_gender, $new_birthdate, $new_description, $new_email, $user_id);
+    // Handle image upload
+    if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
+        $image = $_FILES['profileImage']['tmp_name'];
+        $image = file_get_contents($image);
+        $image = base64_encode($image);
+
+        $update_sql = "UPDATE users SET username = ?, gender = ?, birthdate = ?, description = ?, email = ?, profileImage = ? WHERE ID = ?";
+        $update_stmt = $conn->prepare($update_sql);
+        $update_stmt->bind_param("ssssssi", $new_username, $new_gender, $new_birthdate, $new_description, $new_email, $image, $user_id);
+    } else {
+        $update_sql = "UPDATE users SET username = ?, gender = ?, birthdate = ?, description = ?, email = ? WHERE ID = ?";
+        $update_stmt = $conn->prepare($update_sql);
+        $update_stmt->bind_param("sssssi", $new_username, $new_gender, $new_birthdate, $new_description, $new_email, $user_id);
+    }
 
     if ($update_stmt->execute()) {
         // Refresh user data after update
@@ -43,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $new_email;
 
         // Redirect to profile page
-        header("Location: profile.php");
+        header("Location: profile.php?userID=" . $user_id);
         exit();
     } else {
         $error_message = "Error updating profile: " . $conn->error;
@@ -65,10 +76,14 @@ $conn->close();
     <?php if (isset($error_message)) echo "<p>$error_message</p>"; ?>
 
     <h1>Display Profile Image</h1>
-    <img src="php/displayImage.php" alt="Profile Image">
-    <form method="POST" action="editProfile.php">
+    <?php if ($profileImage) { ?>
+        <img src="data:image/jpeg;base64,<?php echo $profileImage; ?>" alt="Profile Image">
+    <?php } else { ?>
+        <img src="default-profile.png" alt="Default Profile Image">
+    <?php } ?>
+    <form id="profileForm" method="POST" enctype="multipart/form-data" action="editProfile.php">
         <label for="profileImage">Choose Image:</label>
-        <input type="file" id="profileImage" name="profileImage" accept="image/*" required><br><br>
+        <input type="file" id="profileImage" name="profileImage" accept="image/*"><br><br>
 
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" required><br><br>
