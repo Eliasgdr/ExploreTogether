@@ -1,4 +1,5 @@
 <?php
+include 'php/databaseConnection.php';
     session_start();
     //print_r($_SESSION);
 
@@ -7,8 +8,35 @@
         header("Location: login.php"); // Redirect to login page if not logged in
         exit;
     }
-$user_id = $_SESSION['userID'];
+
+
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Prepare and execute the query
+$stmt = $conn->prepare("SELECT isPrenium FROM users WHERE ID = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($isPremium);
+$stmt->fetch();
+
+// Check if the user is not premium
+if (!$isPremium) {
+    header("Location: subscription.php"); // Redirect to subscription page if not premium
+    exit;
+}
+
+// Close the connection
+$stmt->close();
+$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html>
