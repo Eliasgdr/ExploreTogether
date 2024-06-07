@@ -257,6 +257,37 @@ function getThreads(successCallback, errorCallback) {
     });
 }
 
+function deleteThread(threadID, successCallback, errorCallback) {
+    $.ajax({
+        url: 'PHP/getThreads.php', // Path to your disconnect PHP script
+        type: 'POST', // Use POST method
+        dataType: 'json',
+        data: {threadID:threadID},
+        success: function(response) {
+                /* 
+                Format of response :
+                
+                $response['success'],       true/false;
+                $response['message'],       "Details about what happens"
+                $response['threadInfo'] = {
+                    'threadID',             "int"
+                    'lastMessage',          "Text"
+                    'lastMessageDate'       "timestamp"
+                }
+                */
+            if (successCallback && typeof successCallback === 'function') {
+                successCallback(response);
+            }
+        },
+        error: function(xhr, status, error) {
+            if (errorCallback && typeof errorCallback === 'function') {
+                errorCallback(xhr, status, error);
+            }
+        }
+    });
+}
+
+
 function getThread(threadID, successCallback, errorCallback) {
     $.ajax({
         url: 'PHP/getThread.php', // Path to your disconnect PHP script

@@ -24,7 +24,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Check if the user has admin access
-    $stmt = $conn->prepare("SELECT isAdmin FROM users WHERE userID = :userID");
+    $stmt = $conn->prepare("SELECT isAdmin FROM users WHERE ID = :userID");
     $stmt->bindParam(':userID', $_SESSION['userID'], PDO::PARAM_INT);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
