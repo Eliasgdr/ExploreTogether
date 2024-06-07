@@ -32,6 +32,7 @@ $threadID = $_POST['threadID'];
 
 // Database connection parameters
 include 'databaseConnection.php';
+include 'admin/adminlib.php';
 
 try {
     // Create a PDO connection
@@ -39,17 +40,32 @@ try {
     // Set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Retrieve the specific thread and its owner the user is following from the database
-    $stmt = $conn->prepare("
-        SELECT t.*, u.username AS ownerUsername, u.profileImage AS ownerProfileImage 
-        FROM threads t
-        JOIN users u ON t.ownerID = u.ID
-        WHERE t.threadID = :thread_id AND t.threadID IN (SELECT threadID FROM threadSubscriptions WHERE userID = :user_id)
-    ");
-    $stmt->bindParam(':thread_id', $threadID);
-    $stmt->bindParam(':user_id', $_SESSION['userID']);
-    $stmt->execute();
-    $thread = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    if(isAdmin($_SESSION['userID'], $conn)) {
+            $stmt = $conn->prepare("
+            SELECT t.*, u.username AS ownerUsername, u.profileImage AS ownerProfileImage 
+            FROM threads t
+            JOIN users u ON t.ownerID = u.ID
+            WHERE t.threadID = :thread_id
+        "); 
+        $stmt->bindParam(':thread_id', $threadID);
+        $stmt->execute();
+        $thread = $stmt->fetch(PDO::FETCH_ASSOC);
+    } else {
+        // Retrieve the specific thread and its owner the user is following from the database
+        $stmt = $conn->prepare("
+            SELECT t.*, u.username AS ownerUsername, u.profileImage AS ownerProfileImage 
+            FROM threads t
+            JOIN users u ON t.ownerID = u.ID
+            WHERE t.threadID = :thread_id AND t.threadID IN (SELECT threadID FROM threadSubscriptions WHERE userID = :user_id)
+        ");
+        $stmt->bindParam(':thread_id', $threadID);
+        $stmt->bindParam(':user_id', $_SESSION['userID']);
+        $stmt->execute();
+        $thread = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    }
 
     if ($thread) {
         // Retrieve all messages of the thread along with author username and profile image
@@ -91,7 +107,7 @@ try {
     } else {
         // Set error response if the thread is not found or not subscribed to
         $response['success'] = false;
-        $response['message'] = "Thread not found or not subscribed to";
+        $response['message'] = "Thread not found or not subscribed to f  " . isAdmin($_SESSION['userID'], $conn);
         // Return JSON response with 404 status code (Not Found)
         http_response_code(404);
         echo json_encode($response);

@@ -23,15 +23,15 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Check if the user has admin access
-    $stmt = $conn->prepare("SELECT isAdmin FROM users WHERE ID = :userID");
+    // Check if the user is a premium user
+    $stmt = $conn->prepare("SELECT isPremium FROM users WHERE ID = :userID");
     $stmt->bindParam(':userID', $_SESSION['userID'], PDO::PARAM_INT);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($result) {
         $response['success'] = true;
-        $response['isAdmin'] = (bool)$result['isAdmin']; // Cast to boolean
+        $response['isPremium'] = (bool)$result['isPremium']; // Cast to boolean
         $response['message'] = "success";
     } else {
         $response['success'] = false;

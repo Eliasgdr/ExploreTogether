@@ -49,11 +49,8 @@ $result = $conn->query($sql);
     <tr>
         <th>Report ID</th>
         <th>From User ID</th>
-        <th>About User ID</th>
         <th>Thread ID</th>
-        <th>Message ID</th>
         <th>Content</th>
-        <th>Is Done</th>
     </tr>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src='javascript/adminDatabaseRequest.js'></script>
@@ -61,6 +58,7 @@ $result = $conn->query($sql);
         function successCallback(response) {
             // Handle success here, for example, show a success message
             console.log("Request successful:", response);
+            window.location.href="adminPage.php";
         }
 
         function errorCallback(error) {
@@ -75,16 +73,17 @@ $result = $conn->query($sql);
             echo "<tr>";
             echo "<td>" . $row["reportID"] . "</td>";
             echo "<td>" . $row["fromUserID"] . "</td>";
-            echo "<td>" . $row["aboutUserID"] . "</td>";
+            //echo "<td>" . $row["aboutUserID"] . "</td>";
             echo "<td>" . $row["threadID"] . "</td>";
-            echo "<td>" . $row["messageID"] . "</td>";
+            //echo "<td>" . $row["messageID"] . "</td>";
             echo "<td>" . $row["content"] . "</td>";
-            echo "<td>" . $row["isDone"] . "</td>";
+            //echo "<td>" . $row["isDone"] . "</td>";
             // Add buttons for each action
             echo "<td>";
             echo "<button onclick=\"deleteReport(" . $row["reportID"] . ", successCallback, errorCallback)\">Delete Report</button>";
-            echo "<button onclick=\"deleteMessageAdmin(" . $row["messageID"] . ", successCallback, errorCallback)\">Delete Message</button>";
-            echo "<button onclick=\"AdmindeleteAccount(" . $row["aboutUserID"] . ", successCallback, errorCallback)\">Delete Account</button>";
+            echo "<button onclick=\"window.location.href='chat.php?thread_id=". $row["threadID"] ."'\">See thread</button>";
+            //echo "<button onclick=\"deleteMessageAdmin(" . $row["messageID"] . ", successCallback, errorCallback)\">Delete Message</button>";
+            //echo "<button onclick=\"AdmindeleteAccount(" . $row["aboutUserID"] . ", successCallback, errorCallback)\">Delete Account</button>";
             echo "</td>";
             echo "</tr>";
         }

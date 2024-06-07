@@ -23,14 +23,12 @@ if (isset($_POST['reportID']) && is_numeric($_POST['reportID'])) {
     $reportID = (int)$_POST['reportID'];
 
     try {
-        // Create a new PDO connection
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Check if the user is an admin
-        if (!isAdmin($userID, $conn)) {
+        if (!isAdmin($_SESSION['userID'], $conn)) {
             http_response_code(401); // Unauthorized
-            echo json_encode(array('success' => false, 'status_text' => "User is not an Admin", 'status_code' => 401));
+            echo json_encode(array('success' => false, 'status_text' => "User is not an Admin" . $result['isAdmin'], 'status_code' => 401));
             exit;
         }
 
@@ -55,7 +53,7 @@ if (isset($_POST['reportID']) && is_numeric($_POST['reportID'])) {
         error_log("Error deleting report: " . $e->getMessage());
         // Return a generic error message
         http_response_code(500); // Internal Server Error
-        echo json_encode(array("success" => false, "status_text" => "An error occurred while processing your request. Please try again later.", 'status_code' => 500));
+        echo json_encode(array("success" => false, "status_text" => "An error occurred while processing your request. Please try again later." .  $e->getMessage(), 'status_code' => 500));
         exit;
     }
 } else {

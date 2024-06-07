@@ -25,13 +25,20 @@ $user_id = $_SESSION['userID'];
                     const threadContainer = $('.thread-container');
                     if (threads.length > 0) {
                         threads.forEach(thread => {
-                            const threadHTML = `
+                            let threadHTML = `
                                 <div class="thread">
                                     <h2><a href="chat.php?thread_id=${thread.threadID}">${thread.title}</a></h2>
                                     <p><strong>Last Message:</strong> ${thread.lastMessage ? thread.lastMessage : 'No message available'}</p>
                                     <p><strong>Date:</strong> ${thread.lastMessageDate ? thread.lastMessageDate : 'No date available'}</p>
-                                </div>
+                                
                             `;
+
+                            if(isAdmin()){
+                                threadHTML = threadHTML + `<a onclick=deleteMessage(${thread.threadID})>Delete msg</a>`
+                            }
+                            
+                            threadHTML = threadHTML +` </div>`
+    
                             threadContainer.append(threadHTML);
                         });
                     } else {

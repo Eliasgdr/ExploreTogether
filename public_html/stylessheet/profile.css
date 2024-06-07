@@ -122,7 +122,7 @@
     justify-content: space-between;
 }
 
-.content .card .subscription .subscriptionButton{
+.content .card .subscription .subscriptionButton {
     display: inline-block; 
     cursor: pointer;
     user-select: none;
@@ -132,7 +132,7 @@
     font-size: 1vw;
     align-items: center;
     justify-content: center;
-    background-color:rgb(131, 131, 185)
+    background-color:rgb(160, 160, 222)
 }
 
 

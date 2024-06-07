@@ -80,31 +80,35 @@ if (!isset($_SESSION['userID'])) {
                 <button id='imgReport'><img src="./images/report.png"></button>
             </div>
         </div>
-    
-        
-        <div class="addUsrSearch">
-            <img class="close" src="./images/x.png">
-            <div class="searchContainer" id="searchContainer">
-                <h3>Search Users:</h3>
-                <form id="searchUsersForm">
-                    <label for="search">Search:</label>
-                    <input type="text" id="SearchUserQuery" name="query" placeholder="Enter username">
-                </form>
-            </div>
-            <div class="suggestions" id='suggestions'></div>
-        </div>
-
-        
 
     </div>
 
+    <div class="addUsrSearch">
+        <img class="close" src="./images/x.png">
+        <div class="searchContainer" id="searchContainer">
+            <h3>Search Users:</h3>
+            <form id="searchUsersForm">
+                <label for="search">Search:</label>
+                <input type="text" id="SearchUserQuery" name="query" placeholder="Enter username">
+            </form>
+        </div>
+        <div class="suggestions" id='suggestions'></div>
+    </div>
+
+    <div class="editMsg">
+        <form id="editMsg">
+                <textarea id="message" name="message" rows="4" cols="50" required placeholder='Edit a Message'></textarea><br>
+                <input type="hidden" id="threadID" name="thread_id" value="<?php echo $_GET['thread_id']; ?>">
+                <input class='btn' type="submit" value="Post Message">
+        </form>
+    </div>
 
     <div class="reportUsr">
         <img id='close' src="./images/x.png">
-        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Spam', tt, t)">Spam</a>
-        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Violence')">Violence</a>
-        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Nudity')">Nudity</a>
-        <a onclick="report(<?php echo $_GET['thread_id']; ?>, 'Harrasment')">Harrasment</a>
+        <a id='reportBtn1' onclick="report(<?php echo $_GET['thread_id']; ?>, 'Spam', tt, t)">Spam</a>
+        <a id='reportBtn2' onclick="report(<?php echo $_GET['thread_id']; ?>, 'Violence')">Violence</a>
+        <a id='reportBtn3' onclick="report(<?php echo $_GET['thread_id']; ?>, 'Nudity')">Nudity</a>
+        <a id='reportBtn4' onclick="report(<?php echo $_GET['thread_id']; ?>, 'Harrasment')">Harrasment</a>
     </div>
 
     <footer>
@@ -112,6 +116,13 @@ if (!isset($_SESSION['userID'])) {
     </footer>
 
     <script>
+
+            var admin;
+            function sucesscalb(response) {
+                console.log(response);
+                admin = response['isAdmin'];
+            }
+            isAdmin(sucesscalb);
 
         function tt(response) {};
         function t(xhr, status, error) {
@@ -200,10 +211,12 @@ if (!isset($_SESSION['userID'])) {
             header.append('<strong class="message-author">' + message.authorUsername + '</strong>');
             header.append('<span class="message-time">' + formatMessageTime(message.Date) + '</span>');
 
+
+
             // Check if the author of the message is the current user
-            if (message.authorID == <?php echo $_SESSION['userID'] ?>) {
+            if (message.authorID == <?php echo $_SESSION['userID'] ?> || admin) {
                 // Add buttons for deleting and editing messages
-                header.append('<div class="message-actions"><button class="delete-message-btn" onclick="deleteMessage(' + message.messageID + ', deleteMessageCallBackSuccess, deleteMessageCallBackError)">Delete</button><button class="edit-message-btn" onclick="alert(\'WIP\')">Edit</button></div>');
+                header.append('<div class="message-actions"><button class="delete-message-btn" onclick="deleteMessage(' + message.messageID + ', deleteMessageCallBackSuccess, deleteMessageCallBackError)">Delete</button></div>');
             }
 
             // Append the header to the message container
