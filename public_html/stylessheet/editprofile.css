@@ -1,0 +1,47 @@
+@import "./global.css?<?php echo time(); ?>";
+
+h1{
+    font-family: "Mansalva", sans-serif;
+    font-size: 2vw;
+}
+
+
+.container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.container .formContainer{
+    background-color: rgba(4, 4, 59, 0.269);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+
+.container .formContainer #username{
+    width: 10vw; 
+    height: 1vw; 
+    font-size: 1vw; 
+    border: 2px solid #ccc; 
+    border-radius: 5px; 
+    outline: none; 
+    
+}
+
+.container .formContainer #description{
+    width: 20vw; 
+    height: 4vw; 
+    font-size: 1vw; 
+    border: 2px solid #ccc; 
+    border-radius: 5px; 
+    outline: none; 
+    resize: none;
+
+}

@@ -13,6 +13,8 @@ if (!isset($_SESSION['userID'])) {
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
+include('php/uploadImage.php');
+
 // Fetch current user data
 $user_id = $_SESSION['userID'];
 $sql = "SELECT username, gender, birthdate, description, email, profileImage FROM users WHERE ID = ?";
@@ -70,41 +72,57 @@ $conn->close();
 <html>
 <head>
     <title>Edit Profile</title>
+    <link href="./stylessheet/editprofile.css?<?php echo time(); ?>" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <h1>Edit Profile</h1>
-    <?php if (isset($error_message)) echo "<p>$error_message</p>"; ?>
+    <header>
+        <div class="title">Explore Together</div>
+        <div class="redirect">
+            <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">Messages</a>
+            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
+        </div>
+    </header>
 
-    <h1>Display Profile Image</h1>
-    <?php if ($profileImage) { ?>
+    <div class="container">
+
+        <h1>Edit Profile</h1>
+        <?php if (isset($error_message)) echo "<p>$error_message</p>"; ?>
+
+        <h1>Display Profile Image</h1>
+        <?php if ($profileImage) { ?>
         <img src="data:image/jpeg;base64,<?php echo $profileImage; ?>" alt="Profile Image">
     <?php } else { ?>
         <img src="default-profile.png" alt="Default Profile Image">
     <?php } ?>
-    <form id="profileForm" method="POST" enctype="multipart/form-data" action="editProfile.php">
-        <label for="profileImage">Choose Image:</label>
-        <input type="file" id="profileImage" name="profileImage" accept="image/*"><br><br>
+        <form id="profileForm" method="POST" enctype="multipart/form-data" action="editProfile.php" class='formContainer'>
+            <label for="profileImage">Choose Image:</label>
+            <input type="file" id="profileImage" name="profileImage" accept="image/*"><br><br>
 
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" required><br><br>
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" required><br><br>
 
-        <label for="gender">Gender:</label><br>
-        <select id="gender" name="gender" required>
-            <option value="M" <?php if ($gender === 'M') echo 'selected'; ?>>Male</option>
-            <option value="F" <?php if ($gender === 'F') echo 'selected'; ?>>Female</option>
-            <option value="O" <?php if ($gender === 'O') echo 'selected'; ?>>Other</option>
-        </select><br><br>
+            <label for="gender">Gender:</label><br>
+            <select id="gender" name="gender" required>
+                <option value="M" <?php if ($gender === 'M') echo 'selected'; ?>>Male</option>
+                <option value="F" <?php if ($gender === 'F') echo 'selected'; ?>>Female</option>
+                <option value="O" <?php if ($gender === 'O') echo 'selected'; ?>>Other</option>
+            </select><br><br>
 
-        <label for="birthdate">Birthdate:</label><br>
-        <input type="date" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($birthdate); ?>" required><br><br>
+            <label for="birthdate">Birthdate:</label><br>
+            <input type="date" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($birthdate); ?>" required><br><br>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" required><?php echo htmlspecialchars($description); ?></textarea><br><br>
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="8" cols="50" required><?php echo htmlspecialchars($description); ?></textarea><br><br>
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required><br><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required><br><br>
 
-        <input type="submit" value="Update Profile">
-    </form>
+            <input type="submit" value="Update Profile">
+        </form>
+    </div>
+
+    <footer>
+        <h5>&copy; 2024 Travel Together | All Rights Reserved<br></h5>
+    </footer>
 </body>
 </html>

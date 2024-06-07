@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 06 juin 2024 à 22:38
+-- Généré le : ven. 07 juin 2024 à 05:55
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -369,7 +369,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   PRIMARY KEY (`messageID`),
   KEY `authorID` (`authorID`),
   KEY `threadID` (`threadID`)
-) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `message`
@@ -389,7 +389,8 @@ INSERT INTO `message` (`messageID`, `Date`, `body`, `authorID`, `threadID`) VALU
 (182, '2024-06-06 11:39:04', 'Hi, I just created a new Thread named a', 5, 63),
 (183, '2024-06-06 16:51:10', 'Hi, I just created a new Thread named afafaf', 5, 64),
 (185, '2024-06-06 22:25:27', 'hi', 47, 65),
-(186, '2024-06-06 22:25:31', 'test', 47, 65);
+(186, '2024-06-06 22:25:31', 'test', 47, 65),
+(187, '2024-06-07 05:28:34', 'test', 5, 41);
 
 -- --------------------------------------------------------
 
@@ -427,11 +428,41 @@ CREATE TABLE IF NOT EXISTS `reports` (
   `content` varchar(535) COLLATE utf8mb3_unicode_ci NOT NULL,
   `isDone` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`reportID`),
-  UNIQUE KEY `messageID` (`messageID`),
-  UNIQUE KEY `threadID` (`threadID`),
-  UNIQUE KEY `aboutUserID` (`aboutUserID`),
-  UNIQUE KEY `from` (`fromUserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  KEY `threadID` (`threadID`) USING BTREE,
+  KEY `aboutUserID` (`aboutUserID`) USING BTREE,
+  KEY `messageID` (`messageID`) USING BTREE,
+  KEY `from` (`fromUserID`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Déchargement des données de la table `reports`
+--
+
+INSERT INTO `reports` (`reportID`, `fromUserID`, `aboutUserID`, `threadID`, `messageID`, `content`, `isDone`) VALUES
+(1, 5, NULL, 41, NULL, 'Spam', 0),
+(17, 5, NULL, 41, NULL, 'Spam', 0),
+(18, 5, NULL, 41, NULL, 'Spam', 0),
+(19, 5, NULL, 41, NULL, 'Spam', 0),
+(20, 5, NULL, 41, NULL, 'Spam', 0),
+(21, 5, NULL, 41, NULL, 'Spam', 0),
+(22, 5, NULL, 41, NULL, 'Spam', 0),
+(23, 5, NULL, 41, NULL, 'Spam', 0),
+(24, 5, NULL, 41, NULL, 'Spam', 0),
+(25, 5, NULL, 41, NULL, 'Spam', 0),
+(26, 5, NULL, 41, NULL, 'Spam', 0),
+(27, 5, NULL, 41, NULL, 'Spam', 0),
+(28, 5, NULL, 41, NULL, 'Spam', 0),
+(29, 5, NULL, 41, NULL, 'Violence', 0),
+(30, 5, NULL, 41, NULL, 'Violence', 0),
+(31, 5, NULL, 41, NULL, 'Violence', 0),
+(32, 5, NULL, 41, NULL, 'Violence', 0),
+(33, 5, NULL, 41, NULL, 'Nudity', 0),
+(34, 5, NULL, 41, NULL, 'Nudity', 0),
+(35, 5, NULL, 41, NULL, 'Nudity', 0),
+(36, 5, NULL, 41, NULL, 'Harrasment', 0),
+(37, 5, NULL, 41, NULL, 'Harrasment', 0),
+(38, 5, NULL, 41, NULL, 'Harrasment', 0),
+(39, 5, NULL, 41, NULL, 'Harrasment', 0);
 
 -- --------------------------------------------------------
 
@@ -459,7 +490,7 @@ CREATE TABLE IF NOT EXISTS `threads` (
 --
 
 INSERT INTO `threads` (`threadID`, `lastMessageID`, `title`, `description`, `isDM`, `ownerID`, `isPublic`, `threadImage`) VALUES
-(41, NULL, 'test', 'test', 0, 5, 0, ''),
+(41, 187, 'test', 'test', 0, 5, 0, ''),
 (52, 178, 'test', 'test', 0, 5, 0, ''),
 (56, 170, 'test', 'test', 0, 10, 0, ''),
 (57, 168, 'test', 'test', 0, 10, 0, ''),
@@ -533,7 +564,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`ID`, `username`, `gender`, `birthdate`, `password`, `registrationDate`, `profileImage`, `description`, `isAdmin`, `isPrenium`, `email`) VALUES
-(5, 'test', 'M', '0020-02-20', '$2y$10$6P/U0CbFg9LQ7k4LSAddEet2D7N7sSwJXslH3EC2y9eBd634QI7f.', '2024-05-02 00:00:00', '', '', 0, 0, ''),
+(5, 'test', 'M', '0020-02-20', '$2y$10$6P/U0CbFg9LQ7k4LSAddEet2D7N7sSwJXslH3EC2y9eBd634QI7f.', '2024-05-02 00:00:00', '', 'test', 0, 0, 'do@do'),
 (7, 'D', 'M', '2020-02-20', '$2y$10$BwSjlb9F33n7HA7Wg5byGe5VU.7J2ysPgmPPtwkghDtgsgPJ4rpfW', '2024-05-02 00:00:00', '', '', 0, 0, ''),
 (8, 'John Wick', 'F', '1978-04-01', '$2y$10$It6iujIe7d.m7z/Pgl3v4eUNhzvVjpQCsfaT0kloQTVrFRYL8hWFm', '2024-05-03 00:00:00', '', '', 0, 0, ''),
 (9, 'Toto', 'M', '2001-01-01', '$2y$10$tlstgkkQQeaXs4rX3ht3SeUWeh.gMjzhoWCG8y64mM.jd9DtyTOpS', '2024-05-03 00:00:00', '', '', 0, 0, ''),

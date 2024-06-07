@@ -34,13 +34,16 @@ if ($result && mysqli_num_rows($result) > 0) {
 <body>
     <header>
         <div class="title">Explore Together</div>
-        <?php
-        // Check if the profile being viewed is the profile of the logged-in user
-        if ($_SESSION['userID'] == $userID) {
-            echo '<a type="button" class="titleButton" onclick="window.location.href=\'editProfile.php\'">Edit Profile</a>';
+        <div class="redirect">
+            <?php
+            // Check if the profile being viewed is the profile of the logged-in user
+        
+            if ($_SESSION['userID'] == $userID) {
+                echo '<a type="button" class="titleButton" onclick="window.location.href=\'editProfile.php\'">Edit Profile</a>';
 
-        ?>
-        <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">Retour</a>
+            ?>
+            <a type="button" class="titleButton" onclick="window.location.href='welcome.php'">Retour</a>
+        </div>
     </header>
     <div class="content">
         <div class="card">
