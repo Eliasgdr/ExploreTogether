@@ -1,3 +1,15 @@
+<?php
+    session_start();
+    //print_r($_SESSION);
+
+    // Check if the user is logged in
+    if (!isset($_SESSION['userID'])) {
+        header("Location: login.php"); // Redirect to login page if not logged in
+        exit;
+    }
+$user_id = $_SESSION['userID'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +22,10 @@
 </head>
 <body>
 <header> 
-    <div class="title">Explore Together</div>
+    <div class="title" onclick="window.location.href='welcome.php'">Explore Together</div>
         <div class="redirect">
-            <a type="button" class="titleButton" onclick="redirectMessages()">Messages</a>
-            <a type="button" class="titleButton" onclick="window.location.href='profile.php'">Profil</a>
+            <a type="button" class="titleButton"  onclick="window.location.href='messages.php'">Messages</a>
+            <?php echo '<a type="button" class="titleButton" onclick="window.location.href=\'profile.php?userID=' . $user_id . '\'">Profile</a>'; ?>
         </div>
     </header>
     <div class="container">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Together</title>
+    <title>Explore Together</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="javascript/databaseRequest.js"></script>
     <script>
@@ -39,14 +39,14 @@
 
 <body>  
     <header>
-        <div class="title">Explore Together</div>
+        <div class="title" onclick="window.location.href='welcome.php'">Explore Together</div>
         <div class="redirect">
             <a type="button" class="titleButton" href="registration.php">Sign in</a>
         </div>
     </header>
     <section>
         <div id="content">
-            <h2>Welcome to Eplore Together!</h2>
+            <h2>Welcome to Explore Together!</h2>
             <p>Find travel buddies and explore the world together.</p>
             <p>Join our community and start planning your next adventure.</p>
             <h3>Log in</h3>
